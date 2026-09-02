@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Martín Contreras — SAP Basis y Plataformas</title>
+<meta name="description" content="Administrador SAP Basis y de plataformas. Buenos Aires, Argentina. S/4HANA, BusinessObjects, OpenShift, Active Directory, seguridad y acceso privilegiado.">
+<meta property="og:title" content="Martín Contreras — SAP Basis y Plataformas">
+<meta property="og:description" content="Más de 6 años en IT, 4 sobre SAP S/4HANA en producción bajo compliance bancario.">
+<meta property="og:type" content="profile">
+<style>
+:root{
+  --bg:#0e1014; --surface:#161a21; --surface2:#1c212a; --line:#262d3a;
+  --tx:#e8eaef; --tx-dim:#98a2b3; --tx-faint:#6b7686;
+  --accent:#d9a441; --accent-dim:#8a6a2c;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --maxw:860px;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#faf9f7; --surface:#fff; --surface2:#f3f1ee; --line:#e2ded8;
+    --tx:#1a1d23; --tx-dim:#525b6b; --tx-faint:#7c8698;
+    --accent:#9a6f18; --accent-dim:#c9a45a;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--tx);
+  font-family:var(--sans); font-size:16px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px}
+
+/* ---------- barra de idioma ---------- */
+.langbar{
+  position:sticky; top:0; z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.langbar .wrap{display:flex; justify-content:flex-end; gap:6px; padding-top:10px; padding-bottom:10px}
+.langbtn{
+  font:600 12px/1 var(--mono); letter-spacing:.06em;
+  color:var(--tx-dim); background:transparent;
+  border:1px solid var(--line); border-radius:999px;
+  padding:7px 14px; cursor:pointer; transition:.15s;
+}
+.langbtn:hover{color:var(--tx); border-color:var(--accent-dim)}
+.langbtn[aria-pressed="true"]{color:var(--bg); background:var(--accent); border-color:var(--accent)}
+
+/* ---------- hero ---------- */
+header.hero{padding:68px 0 44px; border-bottom:1px solid var(--line)}
+.eyebrow{
+  font:600 11px/1 var(--mono); letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); margin:0 0 16px;
+}
+h1{font-size:clamp(2.1rem,6vw,3.1rem); line-height:1.08; margin:0 0 10px; letter-spacing:-.02em; font-weight:700}
+.role{font-size:clamp(1.05rem,2.6vw,1.3rem); color:var(--tx); margin:0 0 4px; font-weight:600}
+.place{font:500 13px/1.5 var(--mono); color:var(--tx-faint); margin:0 0 26px}
+.lede{font-size:1.06rem; color:var(--tx-dim); max-width:64ch; margin:0 0 18px}
+.path{
+  font-size:.95rem; color:var(--tx-faint); max-width:64ch; margin:0 0 30px;
+  padding-left:16px; border-left:2px solid var(--line);
+}
+.seeking{
+  display:inline-flex; align-items:center; gap:9px;
+  background:var(--surface); border:1px solid var(--accent-dim); border-radius:8px;
+  padding:11px 16px; font-size:.94rem; color:var(--tx);
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;
+  box-shadow:0 0 0 0 var(--accent); animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent)}
+  70%{box-shadow:0 0 0 8px transparent} 100%{box-shadow:0 0 0 0 transparent}
+}
+
+/* ---------- secciones ---------- */
+section{padding:46px 0; border-bottom:1px solid var(--line)}
+h2{
+  font:600 11px/1 var(--mono); letter-spacing:.16em; text-transform:uppercase;
+  color:var(--tx-faint); margin:0 0 26px;
+}
+h3{font-size:1.02rem; margin:0 0 7px; font-weight:650; letter-spacing:-.01em}
+
+.stack{display:grid; gap:18px}
+.block{
+  background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:20px 22px;
+}
+.block h3{color:var(--accent)}
+.block p{margin:0; color:var(--tx-dim); font-size:.94rem; line-height:1.7}
+.block .kw{color:var(--tx); font-weight:600}
+
+/* proyecto */
+.project{
+  background:linear-gradient(180deg, var(--surface2), var(--surface));
+  border:1px solid var(--line); border-left:3px solid var(--accent);
+  border-radius:10px; padding:26px 24px;
+}
+.project h3{font-size:1.35rem; margin-bottom:4px}
+.project .sub{color:var(--tx-dim); font-size:.96rem; margin:0 0 20px}
+.project ul{margin:0 0 20px; padding-left:0; list-style:none}
+.project li{
+  position:relative; padding-left:20px; margin-bottom:11px;
+  color:var(--tx-dim); font-size:.94rem; line-height:1.65;
+}
+.project li::before{
+  content:"▸"; position:absolute; left:0; top:0; color:var(--accent); font-size:.9em;
+}
+.project li b{color:var(--tx); font-weight:650}
+.tags{display:flex; flex-wrap:wrap; gap:7px; margin:0 0 20px}
+.tag{
+  font:500 12px/1 var(--mono); color:var(--tx-dim);
+  background:var(--bg); border:1px solid var(--line);
+  border-radius:5px; padding:6px 10px;
+}
+.note{font-size:.85rem; color:var(--tx-faint); margin:14px 0 0}
+
+/* método */
+.method{display:grid; gap:16px}
+.mitem{padding-left:18px; border-left:2px solid var(--accent-dim)}
+.mitem h3{color:var(--tx)}
+.mitem p{margin:0; color:var(--tx-dim); font-size:.93rem}
+.intro{color:var(--tx-dim); max-width:64ch; margin:0 0 26px}
+.intro b{color:var(--tx)}
+.closing{
+  margin:26px 0 0; padding:16px 18px; background:var(--surface);
+  border-radius:8px; border:1px solid var(--line);
+  color:var(--tx-dim); font-size:.94rem;
+}
+.closing b{color:var(--accent)}
+
+/* dos columnas */
+.two{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+@media (max-width:660px){ .two{grid-template-columns:1fr} }
+.two .block p{margin-bottom:9px}
+.two .block p:last-child{margin-bottom:0}
+
+/* contacto */
+footer{padding:48px 0 62px}
+.links{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 22px}
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.94rem; font-weight:600; text-decoration:none;
+  color:var(--tx); background:var(--surface);
+  border:1px solid var(--line); border-radius:8px; padding:12px 18px;
+  transition:.15s;
+}
+.btn:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-1px)}
+.btn.primary{background:var(--accent); color:#0e1014; border-color:var(--accent)}
+.btn.primary:hover{color:#0e1014; filter:brightness(1.08)}
+.colofon{font:500 12px/1.7 var(--mono); color:var(--tx-faint)}
+
+a{color:var(--accent)}
+[hidden]{display:none !important}
+
+@media print{
+  :root{--bg:#fff;--surface:#fff;--surface2:#fff;--line:#ccc;--tx:#000;--tx-dim:#333;--tx-faint:#666;--accent:#000;--accent-dim:#999}
+  .langbar,.dot{display:none}
+  section,header.hero{page-break-inside:avoid; padding:22px 0}
+  .btn{border:1px solid #ccc}
+}
+</style>
+</head>
+<body>
+
+<nav class="langbar">
+  <div class="wrap">
+    <button class="langbtn" data-set="es" aria-pressed="true">ES</button>
+    <button class="langbtn" data-set="en" aria-pressed="false">EN</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <p class="eyebrow" data-es="Portfolio" data-en="Portfolio">Portfolio</p>
+  <h1>Martín Contreras</h1>
+  <p class="role" data-es="Administrador SAP Basis y de plataformas"
+                  data-en="SAP Basis and platform administrator">Administrador SAP Basis y de plataformas</p>
+  <p class="place">Buenos Aires, Argentina</p>
+
+  <p class="lede" data-es="Más de 6 años en IT, 4 de ellos sobre SAP S/4HANA en producción bajo compliance bancario. Última barrera de control de cambios antes de producción, y autoridad de acceso privilegiado para el soporte internacional de SAP."
+                  data-en="Over 6 years in IT, 4 of them on SAP S/4HANA in production under banking compliance. I was the last control before production, and the access authority for SAP international support.">Más de 6 años en IT, 4 de ellos sobre SAP S/4HANA en producción bajo compliance bancario. Última barrera de control de cambios antes de producción, y autoridad de acceso privilegiado para el soporte internacional de SAP.</p>
+
+  <p class="path" data-es="Vengo del hardware y subí por infraestructura: técnico de campo en sucursales bancarias → responsable único de IT de un edificio → Active Directory a escala → SAP Basis → plataformas y seguridad."
+                  data-en="I came up through hardware and infrastructure: field technician in bank branches → sole IT owner of a site → Active Directory at scale → SAP Basis → platforms and security.">Vengo del hardware y subí por infraestructura: técnico de campo en sucursales bancarias → responsable único de IT de un edificio → Active Directory a escala → SAP Basis → plataformas y seguridad.</p>
+
+  <div class="seeking">
+    <span class="dot"></span>
+    <span data-es="Buscando roles de SAP Basis · Seguridad SAP · Plataformas e Infraestructura"
+          data-en="Open to SAP Basis · SAP Security · Platforms and Infrastructure roles">Buscando roles de SAP Basis · Seguridad SAP · Plataformas e Infraestructura</span>
+  </div>
+</header>
+
+<!-- ============ LO QUE ADMINISTRO ============ -->
+<section>
+  <h2 data-es="Lo que administro" data-en="What I administer">Lo que administro</h2>
+  <div class="stack">
+
+    <div class="block">
+      <h3>SAP Basis</h3>
+      <p data-es="S/4HANA · HANA DB · STMS y ciclo de transportes · <span class='kw'>control de cambios sobre producción</span> · PFCG / SU01 / SU10 · SPAM / SNOTE · SM36 / SM37 · SAP OSS y SAP for Me · <span class='kw'>gestión de acceso privilegiado</span>"
+         data-en="S/4HANA · HANA DB · STMS and transport cycle · <span class='kw'>production change control</span> · PFCG / SU01 / SU10 · SPAM / SNOTE · SM36 / SM37 · SAP OSS and SAP for Me · <span class='kw'>privileged access management</span>">S/4HANA · HANA DB · STMS y ciclo de transportes · <span class='kw'>control de cambios sobre producción</span> · PFCG / SU01 / SU10 · SPAM / SNOTE · SM36 / SM37 · SAP OSS y SAP for Me · <span class='kw'>gestión de acceso privilegiado</span></p>
+    </div>
+
+    <div class="block">
+      <h3>SAP BusinessObjects</h3>
+      <p data-es="Instalación y despliegue de BO 4.3 sobre RHEL 9 en tres ambientes, <span class='kw'>íntegramente por consola, en red segmentada sin salida a internet</span> · CMC · autenticación LDAP / Active Directory · repositorio Oracle · Tomcat y keystore Java · arquitectura de nodo APS · diagnóstico en producción"
+         data-en="Installed and deployed BO 4.3 on RHEL 9 across three environments, <span class='kw'>entirely from the console, in a segmented network with no internet access</span> · CMC · LDAP / Active Directory authentication · Oracle repository · Tomcat and Java keystore · APS node architecture · production troubleshooting">Instalación y despliegue de BO 4.3 sobre RHEL 9 en tres ambientes, <span class='kw'>íntegramente por consola, en red segmentada sin salida a internet</span> · CMC · autenticación LDAP / Active Directory · repositorio Oracle · Tomcat y keystore Java · arquitectura de nodo APS · diagnóstico en producción</p>
+    </div>
+
+    <div class="block">
+      <h3 data-es="Infraestructura" data-en="Infrastructure">Infraestructura</h3>
+      <p data-es="RHEL / Linux · Red Hat OpenShift · <span class='kw'>Active Directory y migración de dominio completa</span> · GPOs · diseño de reglas de firewall · balanceo F5 · certificados TLS · MDM sobre 140 dispositivos · operación de Data Center · redes LAN"
+         data-en="RHEL / Linux · Red Hat OpenShift · <span class='kw'>Active Directory and full domain migration</span> · GPOs · firewall rule design · F5 load balancing · TLS certificates · MDM across 140 devices · data center operations · LAN">RHEL / Linux · Red Hat OpenShift · <span class='kw'>Active Directory y migración de dominio completa</span> · GPOs · diseño de reglas de firewall · balanceo F5 · certificados TLS · MDM sobre 140 dispositivos · operación de Data Center · redes LAN</p>
+    </div>
+
+    <div class="block">
+      <h3 data-es="Operación y seguridad" data-en="Operations and security">Operación y seguridad</h3>
+      <p data-es="Circuito formal de service desk · ventanas de mantenimiento coordinadas · on-call sobre HANA · definición de política de backup · monitoreo SNMP · <span class='kw'>respuesta a incidente de ransomware</span> · compliance bancario"
+         data-en="Formal service desk process · coordinated maintenance windows · HANA on-call · backup policy definition · SNMP monitoring · <span class='kw'>ransomware incident response</span> · banking compliance">Circuito formal de service desk · ventanas de mantenimiento coordinadas · on-call sobre HANA · definición de política de backup · monitoreo SNMP · <span class='kw'>respuesta a incidente de ransomware</span> · compliance bancario</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ PROYECTO ============ -->
+<section>
+  <h2 data-es="Proyecto propio" data-en="My own product">Proyecto propio</h2>
+  <div class="project">
+    <h3>GAUCHO Aves</h3>
+    <p class="sub" data-es="Software de gestión avícola para granjas de gallinas ponedoras en Argentina."
+                   data-en="Farm management software for laying-hen poultry farms in Argentina.">Software de gestión avícola para granjas de gallinas ponedoras en Argentina.</p>
+
+    <ul>
+      <li data-es="Corre <b>offline</b> en la PC del campo. Los empleados cargan desde el celular por WiFi local. Las granjas no tienen conectividad: el sistema no puede depender de ella."
+          data-en="Runs <b>offline</b> on the farm's own PC. Staff enter data from their phones over the local WiFi. Farms have no connectivity, so the system cannot depend on it.">Corre <b>offline</b> en la PC del campo. Los empleados cargan desde el celular por WiFi local. Las granjas no tienen conectividad: el sistema no puede depender de ella.</li>
+      <li data-es="Resuelve el cumplimiento <b>DT-e / SENASA</b>, que ningún competidor local cubre."
+          data-en="Solves <b>DT-e / SENASA</b> government traceability compliance, which no local competitor covers.">Resuelve el cumplimiento <b>DT-e / SENASA</b>, que ningún competidor local cubre.</li>
+      <li data-es="Inventario por lote, producción, sanidad y alertas INTA."
+          data-en="Flock inventory, production, animal health, and INTA-based alerts.">Inventario por lote, producción, sanidad y alertas INTA.</li>
+      <li data-es="<b>Instalador todo-en-uno de Windows</b>: Python embebido + PostgreSQL portable + Inno Setup. El productor hace doble clic y anda. Sin dependencias, sin internet."
+          data-en="<b>Self-contained Windows installer</b>: embedded Python + portable PostgreSQL + Inno Setup. The farmer double-clicks and it runs. No dependencies, no internet."><b>Instalador todo-en-uno de Windows</b>: Python embebido + PostgreSQL portable + Inno Setup. El productor hace doble clic y anda. Sin dependencias, sin internet.</li>
+      <li data-es="<b>109 archivos de test automatizados</b> en el backend."
+          data-en="<b>109 automated test files</b> in the backend."><b>109 archivos de test automatizados</b> en el backend.</li>
+    </ul>
+
+    <div class="tags">
+      <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span>
+      <span class="tag">React</span><span class="tag">Inno Setup</span>
+    </div>
+
+    <a class="btn" href="https://gauchoagro.com" target="_blank" rel="noopener">gauchoagro.com →</a>
+    <p class="note" data-es="El repositorio es privado por ser un producto comercial."
+                    data-en="The repository is private, as it is a commercial product.">El repositorio es privado por ser un producto comercial.</p>
+  </div>
+</section>
+
+<!-- ============ MÉTODO ============ -->
+<section>
+  <h2 data-es="Cómo trabajo" data-en="How I work">Cómo trabajo</h2>
+
+  <p class="intro" data-es="Construí GAUCHO solo y de forma autodidacta, y para lograrlo tuve que resolver un problema aparte: <b>cómo sostener un proyecto largo sin depender de mi memoria.</b> Terminé diseñando el andamiaje antes que el código."
+                   data-en="I built GAUCHO alone and self-taught, and to get there I had to solve a separate problem first: <b>how to sustain a long project without relying on my own memory.</b> I ended up designing the scaffolding before the code.">Construí GAUCHO solo y de forma autodidacta, y para lograrlo tuve que resolver un problema aparte: <b>cómo sostener un proyecto largo sin depender de mi memoria.</b> Terminé diseñando el andamiaje antes que el código.</p>
+
+  <div class="method">
+    <div class="mitem">
+      <h3 data-es="Protocolo de orquestación de IAs" data-en="An AI orchestration protocol">Protocolo de orquestación de IAs</h3>
+      <p data-es="Varias asistentes proponen, una sola escribe. Reglas por escrito, no improvisación."
+         data-en="Several assistants propose, only one writes. Written rules, not improvisation.">Varias asistentes proponen, una sola escribe. Reglas por escrito, no improvisación.</p>
+    </div>
+    <div class="mitem">
+      <h3 data-es="Memoria en archivos versionados" data-en="Memory in version-controlled files">Memoria en archivos versionados</h3>
+      <p data-es="El contexto vive en el repositorio, no en una conversación. Cualquiera, persona o IA, puede arrancar en frío sin preguntar nada."
+         data-en="Context lives in the repository, not in a chat. Anyone, human or AI, can start cold without asking a single question.">El contexto vive en el repositorio, no en una conversación. Cualquiera, persona o IA, puede arrancar en frío sin preguntar nada.</p>
+    </div>
+    <div class="mitem">
+      <h3 data-es="Disciplina de handover" data-en="Handover discipline">Disciplina de handover</h3>
+      <p data-es="Los documentos se marcan como caducos cuando dejan de ser ciertos. Un documento desactualizado traiciona al que lo lee."
+         data-en="Documents are marked stale the moment they stop being true. A document that lies betrays whoever reads it.">Los documentos se marcan como caducos cuando dejan de ser ciertos. Un documento desactualizado traiciona al que lo lee.</p>
+    </div>
+  </div>
+
+  <p class="closing" data-es="Es la misma lógica que aplico en infraestructura: <b>que cada cambio tenga dueño, registro y forma de volver atrás.</b>"
+                     data-en="It is the same logic I apply to infrastructure: <b>every change should have an owner, a record, and a way back.</b>">Es la misma lógica que aplico en infraestructura: <b>que cada cambio tenga dueño, registro y forma de volver atrás.</b></p>
+</section>
+
+<!-- ============ DOCENCIA + FORMACIÓN ============ -->
+<section>
+  <h2 data-es="Docencia y formación" data-en="Teaching and education">Docencia y formación</h2>
+  <div class="two">
+    <div class="block">
+      <h3 data-es="Docencia" data-en="Teaching">Docencia</h3>
+      <p data-es="Profesor de secundaria — sistemas, 4to año. Binario, electricidad, resistencias, estructuras de control y robótica."
+         data-en="Secondary school teacher — systems, 4th year. Binary, electricity, resistors, control structures and robotics.">Profesor de secundaria — sistemas, 4to año. Binario, electricidad, resistencias, estructuras de control y robótica.</p>
+      <p data-es="Enseñar me obliga a entender de verdad, y a explicar claro bajo presión."
+         data-en="Teaching forces me to actually understand, and to explain clearly under pressure.">Enseñar me obliga a entender de verdad, y a explicar claro bajo presión.</p>
+    </div>
+    <div class="block">
+      <h3 data-es="Formación" data-en="Education">Formación</h3>
+      <p data-es="<span class='kw'>SAP TADM10 y TADM12</span> — capacitación (Buffa Sistemas, 2024)"
+         data-en="<span class='kw'>SAP TADM10 and TADM12</span> — training (Buffa Sistemas, 2024)"><span class='kw'>SAP TADM10 y TADM12</span> — capacitación (Buffa Sistemas, 2024)</p>
+      <p data-es="<span class='kw'>Google IT Support Professional</span> — sistemas e infraestructura"
+         data-en="<span class='kw'>Google IT Support Professional Certificate</span> — systems and infrastructure"><span class='kw'>Google IT Support Professional</span> — sistemas e infraestructura</p>
+      <p data-es="<span class='kw'>Licenciatura en Gestión de TI</span> — UADE (en curso)"
+         data-en="<span class='kw'>BSc in Information Technology Management</span> — UADE (in progress)"><span class='kw'>Licenciatura en Gestión de TI</span> — UADE (en curso)</p>
+      <p data-es="Inglés: escrito fluido · oral funcional. Uso diario de documentación y soporte internacional de SAP."
+         data-en="English: fluent written · functional spoken. Daily use of SAP documentation and international support.">Inglés: escrito fluido · oral funcional. Uso diario de documentación y soporte internacional de SAP.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<footer>
+  <h2 data-es="Contacto" data-en="Contact">Contacto</h2>
+  <div class="links">
+    <a class="btn primary" href="https://linkedin.com/in/martinalejandrocontereras" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn" href="mailto:martinalejandrocontreras@outlook.es">martinalejandrocontreras@outlook.es</a>
+    <a class="btn" href="https://github.com/confederador" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <p class="colofon">Buenos Aires, Argentina · <span data-es="Hecho a mano, sin frameworks." data-en="Hand-written, no frameworks.">Hecho a mano, sin frameworks.</span></p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var nodes = document.querySelectorAll('[data-es],[data-en]');
+  var btns  = document.querySelectorAll('.langbtn');
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    nodes.forEach(function(n){
+      var v = n.getAttribute('data-' + lang);
+      if (v !== null) n.innerHTML = v;
+    });
+    btns.forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.set === lang));
+    });
+    try { localStorage.setItem('lang', lang); } catch(e){}
+  }
+
+  var start = 'es';
+  try { start = localStorage.getItem('lang') || ((navigator.language||'es').slice(0,2) === 'en' ? 'en' : 'es'); } catch(e){}
+  apply(start);
+
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.set); });
+  });
+})();
+</script>
+
+</body>
+</html>
