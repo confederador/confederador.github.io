@@ -3,356 +3,649 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Martín Contreras — SAP Basis y Plataformas</title>
-<meta name="description" content="Administrador SAP Basis y de plataformas. Buenos Aires, Argentina. S/4HANA, BusinessObjects, OpenShift, Active Directory, seguridad y acceso privilegiado.">
-<meta property="og:title" content="Martín Contreras — SAP Basis y Plataformas">
-<meta property="og:description" content="Más de 6 años en IT, 4 sobre SAP S/4HANA en producción bajo compliance bancario.">
+<title>Martín Contreras — SAP Basis &amp; IT Platform Administrator</title>
+<meta name="description" content="Administrador SAP Basis y de plataformas IT en Buenos Aires. S/4HANA, BusinessObjects, Red Hat, OpenShift, Active Directory, control de cambios y acceso privilegiado.">
+<meta property="og:title" content="Martín Contreras — SAP Basis &amp; IT Platform Administrator">
+<meta property="og:description" content="Más de 6 años en IT. SAP Basis sobre S/4HANA, plataformas Red Hat y acceso privilegiado a producción.">
 <meta property="og:type" content="profile">
+<meta property="og:url" content="https://confederador.github.io/">
+<meta property="og:image" content="https://confederador.github.io/img/martin.jpg">
+<meta name="theme-color" content="#0e1014">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d9a441'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='ui-monospace,Menlo,Consolas,monospace' font-weight='800' font-size='26' fill='%230e1014'%3EMC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap">
+<link rel="preconnect" href="https://cdn.simpleicons.org" crossorigin>
 <style>
 :root{
   --bg:#0e1014; --surface:#161a21; --surface2:#1c212a; --line:#262d3a;
-  --tx:#e8eaef; --tx-dim:#98a2b3; --tx-faint:#6b7686;
+  --tx:#e8eaef; --tx-dim:#a3acbb; --tx-faint:#6f7a8b;
   --accent:#d9a441; --accent-dim:#8a6a2c;
+  --paper:#f6f3ec; --paper-ink:#23262d;
+  --tape:rgba(232,208,150,.58);
+  --dotgrid:rgba(255,255,255,.045);
+  --shadow:0 1px 1px rgba(0,0,0,.25), 0 14px 30px rgba(0,0,0,.5);
+  --cv-infra:#46b27b; --cv-sap:#5f9fdc;
   --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
-  --maxw:860px;
+  --hand:"Caveat","Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  --maxw:1140px;
 }
 @media (prefers-color-scheme: light){
   :root{
-    --bg:#faf9f7; --surface:#fff; --surface2:#f3f1ee; --line:#e2ded8;
-    --tx:#1a1d23; --tx-dim:#525b6b; --tx-faint:#7c8698;
+    --bg:#f3f0e9; --surface:#fff; --surface2:#faf8f3; --line:#e1dbcf;
+    --tx:#1a1d23; --tx-dim:#4f5868; --tx-faint:#737d8e;
     --accent:#9a6f18; --accent-dim:#c9a45a;
+    --paper:#fffdf8; --tape:rgba(214,170,80,.42);
+    --dotgrid:rgba(0,0,0,.06);
+    --shadow:0 1px 1px rgba(0,0,0,.12), 0 12px 26px rgba(60,45,20,.2);
+    --cv-infra:#1a7a4a; --cv-sap:#1f5c99;
   }
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:76px}
 body{
-  margin:0; background:var(--bg); color:var(--tx);
-  font-family:var(--sans); font-size:16px; line-height:1.65;
+  margin:0; color:var(--tx); font-family:var(--sans); font-size:16px; line-height:1.65;
   -webkit-font-smoothing:antialiased;
+  background:radial-gradient(circle at 1px 1px, var(--dotgrid) 1px, transparent 0) 0 0/24px 24px, var(--bg);
 }
-.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px}
+a{color:var(--accent)}
+[hidden]{display:none !important}
 
-/* ---------- barra de idioma ---------- */
-.langbar{
-  position:sticky; top:0; z-index:20;
-  background:color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter:blur(10px);
+/* ---------- barra de arriba ---------- */
+.top{
+  position:sticky; top:0; z-index:30;
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
-.langbar .wrap{display:flex; justify-content:flex-end; gap:6px; padding-top:10px; padding-bottom:10px}
-.langbtn{
-  font:600 12px/1 var(--mono); letter-spacing:.06em;
-  color:var(--tx-dim); background:transparent;
-  border:1px solid var(--line); border-radius:999px;
-  padding:7px 14px; cursor:pointer; transition:.15s;
+.top-in{max-width:var(--maxw); margin:0 auto; padding:11px 24px; display:flex; align-items:center; gap:24px}
+.brand{display:flex; align-items:center; gap:10px; color:var(--tx); text-decoration:none; font-weight:700; letter-spacing:-.01em; white-space:nowrap}
+.brand-mark{width:27px; height:27px; border-radius:7px; display:grid; place-items:center; background:var(--accent); color:#0e1014; font:800 11px/1 var(--mono)}
+.nav{display:flex; gap:22px; margin-left:auto}
+.nav a{color:var(--tx-dim); text-decoration:none; font-size:.93rem; transition:color .15s}
+.nav a:hover{color:var(--tx)}
+.lang{display:flex; gap:3px; padding:3px; border:1px solid var(--line); border-radius:999px}
+.langbtn{font:600 11px/1 var(--mono); letter-spacing:.06em; color:var(--tx-dim); background:transparent; border:0; border-radius:999px; padding:7px 11px; cursor:pointer}
+.langbtn:hover{color:var(--tx)}
+.langbtn[aria-pressed="true"]{background:var(--accent); color:#0e1014}
+@media (max-width:760px){ .nav{display:none} .lang{margin-left:auto} }
+
+/* ---------- grilla: tablero a la izquierda, contenido a la derecha ---------- */
+.page{max-width:var(--maxw); margin:0 auto; padding:0 24px; display:grid; grid-template-columns:250px minmax(0,1fr); gap:72px}
+.board{position:sticky; top:66px; align-self:start; padding:58px 0 40px; display:flex; flex-direction:column; align-items:center; gap:44px}
+main{min-width:0; padding-bottom:30px}
+
+/* la foto, pegada con cinta */
+.polaroid{
+  position:relative; margin:0; width:230px; padding:11px 11px 0; background:#fffefa;
+  box-shadow:var(--shadow); transform:rotate(-3.5deg);
+  transition:transform .45s cubic-bezier(.3,1.5,.5,1);
 }
-.langbtn:hover{color:var(--tx); border-color:var(--accent-dim)}
-.langbtn[aria-pressed="true"]{color:var(--bg); background:var(--accent); border-color:var(--accent)}
+.polaroid:hover{transform:rotate(-1deg) translateY(-3px)}
+.polaroid img{display:block; width:100%; height:auto; aspect-ratio:1/1; object-fit:cover; background:#ddd}
+.polaroid figcaption{font:700 25px/1 var(--hand); color:#2c3038; text-align:center; padding:13px 4px 16px}
+
+.tape{
+  position:absolute; z-index:2; width:92px; height:28px; pointer-events:none;
+  background:repeating-linear-gradient(90deg, rgba(255,255,255,.16) 0 5px, transparent 5px 11px), var(--tape);
+  box-shadow:0 1px 2px rgba(0,0,0,.14);
+  clip-path:polygon(0 0,100% 0,96% 25%,100% 50%,96% 75%,100% 100%,0 100%,4% 75%,0 50%,4% 25%);
+}
+.tape-l{top:-11px; left:-27px; transform:rotate(-38deg)}
+.tape-r{top:-11px; right:-27px; transform:rotate(36deg)}
+.tape-c{top:-13px; left:50%; width:84px; transform:translateX(-50%) rotate(-3deg)}
+
+/* el CV, pegado al lado */
+.cvwrap{display:flex; flex-direction:column; align-items:center; gap:16px}
+.cvsheet{
+  position:relative; display:block; width:172px; aspect-ratio:1/1.414; container-type:inline-size;
+  background:#fbfaf6; color:#2b2f36; text-decoration:none; padding:0;
+  box-shadow:var(--shadow); transform:rotate(2.8deg);
+  transition:transform .45s cubic-bezier(.3,1.5,.5,1);
+}
+.cvsheet:hover,.cvsheet:focus-visible{transform:rotate(.6deg) translateY(-4px)}
+.cv-in{display:block; padding:10cqw 9cqw}
+.cv-name{display:block; font:800 5.6cqw/1.15 var(--sans); letter-spacing:.06em}
+.cv-role{display:block; font:600 3.7cqw/1.3 var(--mono); color:#9a6f18; letter-spacing:.04em; margin:1.6cqw 0 4cqw; text-transform:uppercase}
+.cv-h{display:block; font:800 3.2cqw/1 var(--sans); letter-spacing:.14em; margin:4.6cqw 0 2cqw; padding-bottom:1.2cqw; border-bottom:1px solid #d8d2c4}
+.ln{display:block; height:2.1cqw; border-radius:1cqw; background:#e3ded2; margin:2cqw 0}
+.cv-note{font:700 22px/1 var(--hand); color:var(--accent); text-decoration:none; transform:rotate(-2deg)}
+.cv-note:hover{text-decoration:underline}
+
+@media (max-width:900px){
+  .page{grid-template-columns:1fr; gap:0}
+  .board{position:static; flex-direction:row; justify-content:center; align-items:flex-start; gap:34px; padding:40px 0 8px}
+  .polaroid{width:188px}
+  .cvsheet{width:138px}
+}
+@media (max-width:430px){
+  .board{gap:20px}
+  .polaroid{width:156px} .polaroid figcaption{font-size:21px}
+  .cvsheet{width:112px}
+  .tape{width:70px; height:22px}
+  .tape-l{left:-20px} .tape-r{right:-20px}
+}
 
 /* ---------- hero ---------- */
-header.hero{padding:68px 0 44px; border-bottom:1px solid var(--line)}
-.eyebrow{
-  font:600 11px/1 var(--mono); letter-spacing:.16em; text-transform:uppercase;
-  color:var(--accent); margin:0 0 16px;
-}
-h1{font-size:clamp(2.1rem,6vw,3.1rem); line-height:1.08; margin:0 0 10px; letter-spacing:-.02em; font-weight:700}
-.role{font-size:clamp(1.05rem,2.6vw,1.3rem); color:var(--tx); margin:0 0 4px; font-weight:600}
-.place{font:500 13px/1.5 var(--mono); color:var(--tx-faint); margin:0 0 26px}
-.lede{font-size:1.06rem; color:var(--tx-dim); max-width:64ch; margin:0 0 18px}
-.path{
-  font-size:.95rem; color:var(--tx-faint); max-width:64ch; margin:0 0 30px;
-  padding-left:16px; border-left:2px solid var(--line);
-}
-.seeking{
-  display:inline-flex; align-items:center; gap:9px;
-  background:var(--surface); border:1px solid var(--accent-dim); border-radius:8px;
-  padding:11px 16px; font-size:.94rem; color:var(--tx);
-}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;
-  box-shadow:0 0 0 0 var(--accent); animation:pulse 2.4s infinite}
+.hero{padding:60px 0 46px}
+.eyebrow{font:600 11px/1 var(--mono); letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin:0 0 18px}
+h1{font-size:clamp(2.3rem,5.4vw,3.6rem); line-height:1.04; letter-spacing:-.03em; margin:0 0 14px; font-weight:750}
+.typer{font:600 clamp(1.02rem,2.3vw,1.3rem)/1.35 var(--mono); color:var(--accent); margin:0 0 28px; min-height:1.35em; white-space:nowrap}
+.typer .pr{color:var(--tx-faint); margin-right:1ch}
+.caret{display:inline-block; width:.6ch; height:1.05em; margin-left:2px; background:var(--accent); vertical-align:-.16em; animation:blink 1.05s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lede{font-size:1.08rem; color:var(--tx-dim); max-width:62ch; margin:0 0 18px; line-height:1.8}
+.lede b{color:var(--tx); font-weight:650}
+.path{font-size:.95rem; color:var(--tx-faint); max-width:62ch; margin:0 0 30px; padding-left:16px; border-left:2px solid var(--line)}
+.seeking{display:inline-flex; align-items:center; gap:9px; background:var(--surface); border:1px solid var(--accent-dim); border-radius:8px; padding:11px 16px; font-size:.94rem; color:var(--tx)}
+.dot{width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none; animation:pulse 2.4s infinite}
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent)}
   70%{box-shadow:0 0 0 8px transparent} 100%{box-shadow:0 0 0 0 transparent}
 }
 
 /* ---------- secciones ---------- */
-section{padding:46px 0; border-bottom:1px solid var(--line)}
-h2{
-  font:600 11px/1 var(--mono); letter-spacing:.16em; text-transform:uppercase;
-  color:var(--tx-faint); margin:0 0 26px;
-}
+section{padding:52px 0; border-top:1px solid var(--line)}
+h2{font:600 11px/1 var(--mono); letter-spacing:.18em; text-transform:uppercase; color:var(--tx-faint); margin:0 0 28px}
 h3{font-size:1.02rem; margin:0 0 7px; font-weight:650; letter-spacing:-.01em}
 
-.stack{display:grid; gap:18px}
-.block{
-  background:var(--surface); border:1px solid var(--line); border-radius:10px;
-  padding:20px 22px;
+/* ---------- los botoncitos de herramientas ---------- */
+.chip{
+  --r:-1.5deg;
+  display:inline-flex; align-items:center; gap:.4em; padding:.1em .55em .1em .42em; margin:0 .1em;
+  border-radius:6px; background:var(--paper); color:var(--paper-ink);
+  font:650 .84em/1.5 var(--sans); white-space:nowrap; vertical-align:.04em;
+  box-shadow:0 1px 0 rgba(0,0,0,.28), 0 3px 8px rgba(0,0,0,.22);
+  transform:rotate(var(--r));
+  transition:transform .3s cubic-bezier(.3,1.7,.5,1), box-shadow .3s;
+  cursor:default;
 }
-.block h3{color:var(--accent)}
-.block p{margin:0; color:var(--tx-dim); font-size:.94rem; line-height:1.7}
-.block .kw{color:var(--tx); font-weight:600}
+.chip:nth-of-type(even){--r:1.2deg}
+.chip:hover{
+  transform:translateY(-4px) rotate(calc(var(--r) * -2.5)) scale(1.07);
+  box-shadow:0 2px 0 rgba(0,0,0,.25), 0 10px 18px rgba(0,0,0,.35);
+  animation:wiggle .5s ease;
+}
+@keyframes wiggle{0%,100%{rotate:0deg} 25%{rotate:-6deg} 50%{rotate:4deg} 75%{rotate:-2deg}}
+.chip img,.chip .glyph{width:1.08em; height:1.08em; flex:none}
+.glyph{display:inline-grid; place-items:center; border-radius:3px; background:var(--paper-ink); color:var(--paper); font:800 .5em/1 var(--mono); letter-spacing:-.02em}
+.chip.big{font-size:15px; padding:10px 16px 10px 13px; border-radius:10px; gap:10px}
+.chip.big img,.chip.big .glyph{width:22px; height:22px}
+.chip.big .glyph{font-size:9px}
 
-/* proyecto */
-.project{
-  background:linear-gradient(180deg, var(--surface2), var(--surface));
-  border:1px solid var(--line); border-left:3px solid var(--accent);
-  border-radius:10px; padding:26px 24px;
+.marquee{
+  overflow:hidden; padding:16px 0 22px; margin:0 -6px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
 }
+.track{display:flex; width:max-content; animation:scroll 56s linear infinite}
+.set{display:flex; gap:14px; padding-right:14px}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ---------- experiencia ---------- */
+.job{display:grid; grid-template-columns:140px minmax(0,1fr); gap:28px; padding:34px 0; border-top:1px solid var(--line)}
+.job:first-of-type{border-top:0; padding-top:4px}
+.range{display:block; font:500 13px/1.5 var(--mono); color:var(--accent)}
+.dur{display:block; font:500 12px/1.5 var(--mono); color:var(--tx-faint); margin-top:4px}
+.job h3{font-size:1.45rem; margin:0 0 3px; letter-spacing:-.015em}
+.org{color:var(--tx-dim); margin:0 0 22px; font-size:.95rem; display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px}
+.learned{margin:-8px 0 24px; padding-left:14px; border-left:2px solid var(--line); color:var(--tx-dim); font-size:.93rem; line-height:1.85; max-width:66ch}
+.learned b{color:var(--tx); font-weight:650}
+.roles{position:relative; padding-left:28px}
+.roles::before{content:""; position:absolute; left:6px; top:12px; bottom:14px; width:2px; background:linear-gradient(var(--accent), var(--accent-dim) 70%, transparent)}
+.role{position:relative; margin-bottom:26px}
+.role:last-child{margin-bottom:0}
+.role::before{content:""; position:absolute; left:-28px; top:.36em; width:14px; height:14px; border-radius:50%; background:var(--bg); border:2px solid var(--accent)}
+.role:first-child::before{background:var(--accent)}
+.role h4{font-size:1.07rem; margin:0 0 4px; font-weight:700; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px}
+.rdate{font:500 12px/1 var(--mono); color:var(--tx-faint)}
+.scope{margin:0 0 10px; font:500 12.5px/1.8 var(--mono); color:var(--tx-faint)}
+.role ul{list-style:none; margin:10px 0 0; padding:0}
+.role li{position:relative; padding-left:18px; margin:0 0 10px; color:var(--tx-dim); line-height:1.85}
+.role li::before{content:""; position:absolute; left:0; top:.78em; width:6px; height:6px; border-radius:1px; background:var(--accent-dim)}
+.role li b{color:var(--tx); font-weight:650}
+
+/* ---------- los dos CVs ---------- */
+.cvcards{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+.cvcard{background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--cvc); border-radius:10px; padding:22px 22px 20px; display:flex; flex-direction:column; gap:10px}
+.cvcard.infra{--cvc:var(--cv-infra)}
+.cvcard.sap{--cvc:var(--cv-sap)}
+.cvtag{align-self:flex-start; font:700 10px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--cvc); border:1px solid var(--cvc); border-radius:4px; padding:5px 8px}
+.cvcard h3{font-size:1.2rem; margin:2px 0 0}
+.cvcard p{margin:0 0 6px; color:var(--tx-dim); font-size:.94rem; line-height:1.85; flex:1}
+.cvbtn{align-self:flex-start}
+.cvbtn:hover{border-color:var(--cvc); color:var(--cvc)}
+@media (max-width:660px){ .cvcards{grid-template-columns:1fr} }
+
+/* ---------- proyecto ---------- */
+.project{background:linear-gradient(180deg, var(--surface2), var(--surface)); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:10px; padding:26px 24px}
 .project h3{font-size:1.35rem; margin-bottom:4px}
 .project .sub{color:var(--tx-dim); font-size:.96rem; margin:0 0 20px}
-.project ul{margin:0 0 20px; padding-left:0; list-style:none}
-.project li{
-  position:relative; padding-left:20px; margin-bottom:11px;
-  color:var(--tx-dim); font-size:.94rem; line-height:1.65;
-}
-.project li::before{
-  content:"▸"; position:absolute; left:0; top:0; color:var(--accent); font-size:.9em;
-}
+.project ul{margin:0 0 22px; padding:0; list-style:none}
+.project li{position:relative; padding-left:20px; margin-bottom:11px; color:var(--tx-dim); font-size:.95rem; line-height:1.8}
+.project li::before{content:"▸"; position:absolute; left:0; top:0; color:var(--accent); font-size:.9em}
 .project li b{color:var(--tx); font-weight:650}
-.tags{display:flex; flex-wrap:wrap; gap:7px; margin:0 0 20px}
-.tag{
-  font:500 12px/1 var(--mono); color:var(--tx-dim);
-  background:var(--bg); border:1px solid var(--line);
-  border-radius:5px; padding:6px 10px;
-}
 .note{font-size:.85rem; color:var(--tx-faint); margin:14px 0 0}
 
-/* método */
-.method{display:grid; gap:16px}
+/* ---------- método ---------- */
+.intro{color:var(--tx-dim); max-width:64ch; margin:0 0 26px}
+.intro b{color:var(--tx)}
+.method{display:grid; gap:22px 30px; grid-template-columns:1fr 1fr}
+@media (max-width:660px){ .method{grid-template-columns:1fr} }
+.mitem p{line-height:1.8}
 .mitem{padding-left:18px; border-left:2px solid var(--accent-dim)}
 .mitem h3{color:var(--tx)}
 .mitem p{margin:0; color:var(--tx-dim); font-size:.93rem}
-.intro{color:var(--tx-dim); max-width:64ch; margin:0 0 26px}
-.intro b{color:var(--tx)}
-.closing{
-  margin:26px 0 0; padding:16px 18px; background:var(--surface);
-  border-radius:8px; border:1px solid var(--line);
-  color:var(--tx-dim); font-size:.94rem;
-}
+.closing{margin:26px 0 0; padding:16px 18px; background:var(--surface); border-radius:8px; border:1px solid var(--line); color:var(--tx-dim); font-size:.94rem}
 .closing b{color:var(--accent)}
 
-/* dos columnas */
+/* ---------- docencia y formación ---------- */
 .two{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-@media (max-width:660px){ .two{grid-template-columns:1fr} }
-.two .block p{margin-bottom:9px}
-.two .block p:last-child{margin-bottom:0}
+.block{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:20px 22px}
+.block h3{color:var(--accent)}
+.block p{margin:0 0 9px; color:var(--tx-dim); font-size:.94rem; line-height:1.7}
+.block p:last-child{margin-bottom:0}
+.block .kw{color:var(--tx); font-weight:600}
 
-/* contacto */
-footer{padding:48px 0 62px}
+/* ---------- contacto ---------- */
+footer{padding:52px 0 64px; border-top:1px solid var(--line)}
 .links{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 22px}
-.btn{
-  display:inline-flex; align-items:center; gap:8px;
-  font-size:.94rem; font-weight:600; text-decoration:none;
-  color:var(--tx); background:var(--surface);
-  border:1px solid var(--line); border-radius:8px; padding:12px 18px;
-  transition:.15s;
-}
+.btn{display:inline-flex; align-items:center; gap:8px; font-size:.94rem; font-weight:600; text-decoration:none; color:var(--tx); background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:12px 18px; transition:.15s}
 .btn:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-1px)}
 .btn.primary{background:var(--accent); color:#0e1014; border-color:var(--accent)}
 .btn.primary:hover{color:#0e1014; filter:brightness(1.08)}
 .colofon{font:500 12px/1.7 var(--mono); color:var(--tx-faint)}
 
-a{color:var(--accent)}
-[hidden]{display:none !important}
-
+@media (max-width:660px){
+  .job{grid-template-columns:1fr; gap:12px}
+  .two{grid-template-columns:1fr}
+  .hero{padding-top:34px}
+}
+@media (prefers-reduced-motion: reduce){
+  .track{animation:none; width:auto}
+  .set{flex-wrap:wrap}
+  .set[aria-hidden]{display:none}
+  .caret,.dot{animation:none}
+  .chip,.chip:hover,.polaroid,.cvsheet{animation:none; transition:none}
+}
 @media print{
-  :root{--bg:#fff;--surface:#fff;--surface2:#fff;--line:#ccc;--tx:#000;--tx-dim:#333;--tx-faint:#666;--accent:#000;--accent-dim:#999}
-  .langbar,.dot{display:none}
-  section,header.hero{page-break-inside:avoid; padding:22px 0}
-  .btn{border:1px solid #ccc}
+  .top,.board,.tools,.caret{display:none}
+  .page{display:block}
+  section,.hero{page-break-inside:avoid; padding:22px 0}
 }
 </style>
 </head>
 <body>
 
-<nav class="langbar">
-  <div class="wrap">
-    <button class="langbtn" data-set="es" aria-pressed="true">ES</button>
-    <button class="langbtn" data-set="en" aria-pressed="false">EN</button>
+<nav class="top">
+  <div class="top-in">
+    <a class="brand" href="#top"><span class="brand-mark">MC</span>Martín Contreras</a>
+    <div class="nav">
+      <a href="#herramientas" data-en="Tools">Herramientas</a>
+      <a href="#experiencia" data-en="Experience">Experiencia</a>
+      <a href="#proyecto" data-en="Project">Proyecto</a>
+      <a href="#metodo" data-en="AI">IA</a>
+      <a href="#cv">CV</a>
+      <a href="#contacto" data-en="Contact">Contacto</a>
+    </div>
+    <div class="lang">
+      <button class="langbtn" data-set="es" aria-pressed="true">ES</button>
+      <button class="langbtn" data-set="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </nav>
 
-<div class="wrap">
+<div class="page">
+
+<!-- ============ EL TABLERO: la foto y el CV, pegados con cinta ============ -->
+<aside class="board">
+  <figure class="polaroid">
+    <span class="tape tape-l"></span><span class="tape tape-r"></span>
+    <img src="img/martin.jpg" alt="Martín Contreras" width="720" height="720">
+    <figcaption>Martín · Bs. As.</figcaption>
+  </figure>
+
+  <div class="cvwrap">
+    <a class="cvsheet" href="#cv" aria-label="Ver mis CVs">
+      <span class="tape tape-c"></span>
+      <span class="cv-in">
+      <span class="cv-name">MARTÍN CONTRERAS</span>
+      <span class="cv-role">SAP Basis · IT Platforms</span>
+      <span class="cv-h" data-en="PROFILE">PERFIL</span>
+      <span class="ln" style="width:97%"></span><span class="ln" style="width:92%"></span><span class="ln" style="width:70%"></span>
+      <span class="cv-h" data-en="EXPERIENCE">EXPERIENCIA</span>
+      <span class="ln" style="width:55%"></span><span class="ln" style="width:94%"></span><span class="ln" style="width:88%"></span><span class="ln" style="width:96%"></span><span class="ln" style="width:62%"></span>
+      <span class="ln" style="width:48%"></span><span class="ln" style="width:90%"></span><span class="ln" style="width:78%"></span>
+      <span class="cv-h" data-en="SKILLS">APTITUDES</span>
+      <span class="ln" style="width:84%"></span><span class="ln" style="width:66%"></span>
+      </span>
+    </a>
+    <a class="cv-note" href="#cv" data-en="my 2 CVs ↓">mis 2 CVs ↓</a>
+  </div>
+</aside>
+
+<main>
 
 <!-- ============ HERO ============ -->
-<header class="hero">
-  <p class="eyebrow" data-es="Portfolio" data-en="Portfolio">Portfolio</p>
+<header class="hero" id="top">
+  <p class="eyebrow">Portfolio</p>
   <h1>Martín Contreras</h1>
-  <p class="role" data-es="Administrador SAP Basis y de plataformas"
-                  data-en="SAP Basis and platform administrator">Administrador SAP Basis y de plataformas</p>
-  <p class="place">Buenos Aires, Argentina</p>
+  <p class="typer" aria-label="SAP Basis Administrator · IT Platform Administrator"><span class="pr" aria-hidden="true">&gt;</span><span id="typed" aria-hidden="true">SAP Basis Administrator</span><span class="caret" aria-hidden="true"></span></p>
 
-  <p class="lede" data-es="Más de 6 años en IT, 4 de ellos sobre SAP S/4HANA en producción bajo compliance bancario. Última barrera de control de cambios antes de producción, y autoridad de acceso privilegiado para el soporte internacional de SAP."
-                  data-en="Over 6 years in IT, 4 of them on SAP S/4HANA in production under banking compliance. I was the last control before production, and the access authority for SAP international support.">Más de 6 años en IT, 4 de ellos sobre SAP S/4HANA en producción bajo compliance bancario. Última barrera de control de cambios antes de producción, y autoridad de acceso privilegiado para el soporte internacional de SAP.</p>
+  <p class="lede" data-en="6+ years in IT, focused on <b>SAP Basis</b> on [[s4]] and [[redhat]] platforms under banking compliance. I was the final change-control gate before production, and the privileged-access authority for SAP international support. Over the last few months I've leaned heavily on <b>AI</b> to build my own product end to end.">Más de 6 años en IT, con foco en <b>SAP Basis</b> sobre [[s4]] y plataformas [[redhat]] bajo compliance bancario. Fui la última barrera de control de cambios antes de producción y la autoridad de acceso privilegiado para el soporte internacional de SAP. En los últimos meses me apoyé fuerte en la <b>IA</b> para construir mi propio producto de punta a punta.</p>
 
-  <p class="path" data-es="Vengo del hardware y subí por infraestructura: técnico de campo en sucursales bancarias → responsable único de IT de un edificio → Active Directory a escala → SAP Basis → plataformas y seguridad."
-                  data-en="I came up through hardware and infrastructure: field technician in bank branches → sole IT owner of a site → Active Directory at scale → SAP Basis → platforms and security.">Vengo del hardware y subí por infraestructura: técnico de campo en sucursales bancarias → responsable único de IT de un edificio → Active Directory a escala → SAP Basis → plataformas y seguridad.</p>
+  <p class="path" data-en="I came up through hardware and infrastructure: field technician in bank branches → sole on-site technician of a building, my manager's right hand → Active Directory at scale → SAP Basis → platforms and security.">Vengo del hardware y subí por infraestructura: técnico de campo en sucursales bancarias → único técnico on-site de un edificio, mano derecha de mi jefe → Active Directory a escala → SAP Basis → plataformas y seguridad.</p>
 
   <div class="seeking">
     <span class="dot"></span>
-    <span data-es="Buscando roles de SAP Basis · Seguridad SAP · Plataformas e Infraestructura"
-          data-en="Open to SAP Basis · SAP Security · Platforms and Infrastructure roles">Buscando roles de SAP Basis · Seguridad SAP · Plataformas e Infraestructura</span>
+    <span data-en="Open to SAP Basis · SAP Security · Platforms and Infrastructure roles">Buscando roles de SAP Basis · Seguridad SAP · Plataformas e Infraestructura</span>
   </div>
 </header>
 
-<!-- ============ LO QUE ADMINISTRO ============ -->
-<section>
-  <h2 data-es="Lo que administro" data-en="What I administer">Lo que administro</h2>
-  <div class="stack">
+<!-- ============ HERRAMIENTAS ============ -->
+<section id="herramientas" class="tools">
+  <h2 data-en="Tools I work with">Herramientas con las que trabajo</h2>
+  <div class="marquee"><div class="track" id="track"></div></div>
+</section>
 
-    <div class="block">
-      <h3>SAP Basis</h3>
-      <p data-es="S/4HANA · HANA DB · STMS y ciclo de transportes · <span class='kw'>control de cambios sobre producción</span> · PFCG / SU01 / SU10 · SPAM / SNOTE · SM36 / SM37 · SAP OSS y SAP for Me · <span class='kw'>gestión de acceso privilegiado</span>"
-         data-en="S/4HANA · HANA DB · STMS and transport cycle · <span class='kw'>production change control</span> · PFCG / SU01 / SU10 · SPAM / SNOTE · SM36 / SM37 · SAP OSS and SAP for Me · <span class='kw'>privileged access management</span>">S/4HANA · HANA DB · STMS y ciclo de transportes · <span class='kw'>control de cambios sobre producción</span> · PFCG / SU01 / SU10 · SPAM / SNOTE · SM36 / SM37 · SAP OSS y SAP for Me · <span class='kw'>gestión de acceso privilegiado</span></p>
+<!-- ============ EXPERIENCIA ============ -->
+<section id="experiencia">
+  <h2 data-en="Experience">Experiencia</h2>
+
+  <article class="job">
+    <div class="when">
+      <span class="range" data-en="2026 – now">2026 – hoy</span>
+      <span class="dur" data-en="own product">proyecto propio</span>
     </div>
-
-    <div class="block">
-      <h3>SAP BusinessObjects</h3>
-      <p data-es="Instalación y despliegue de BO 4.3 sobre RHEL 9 en tres ambientes, <span class='kw'>íntegramente por consola, en red segmentada sin salida a internet</span> · CMC · autenticación LDAP / Active Directory · repositorio Oracle · Tomcat y keystore Java · arquitectura de nodo APS · diagnóstico en producción"
-         data-en="Installed and deployed BO 4.3 on RHEL 9 across three environments, <span class='kw'>entirely from the console, in a segmented network with no internet access</span> · CMC · LDAP / Active Directory authentication · Oracle repository · Tomcat and Java keystore · APS node architecture · production troubleshooting">Instalación y despliegue de BO 4.3 sobre RHEL 9 en tres ambientes, <span class='kw'>íntegramente por consola, en red segmentada sin salida a internet</span> · CMC · autenticación LDAP / Active Directory · repositorio Oracle · Tomcat y keystore Java · arquitectura de nodo APS · diagnóstico en producción</p>
+    <div class="what">
+      <h3>Gaucho Agro</h3>
+      <p class="org" data-en="Own product · AI-assisted development · Buenos Aires">Proyecto propio · desarrollo asistido por IA · Buenos Aires</p>
+      <div class="roles">
+        <div class="role">
+          <h4 data-en="End-to-end product development">Desarrollo de producto de punta a punta</h4>
+          <ul>
+            <li data-en="Designed and directed the build of a complete poultry-farm management system — backend, frontend, database and Windows installer. <b>The code is written by AI under my direction</b>, every day, with [[claude]] and [[gemini]].">Diseñé y dirigí la construcción de un sistema completo de gestión avícola —backend, frontend, base de datos e instalador de Windows—. <b>El código lo escribe la IA bajo mi dirección</b>, todos los días, con [[claude]] y [[gemini]].</li>
+            <li data-en="I built the scaffolding so the AI works by rules, not by memory: <b>hooks, custom skills and context in version-controlled files</b>. AI writes; 300+ tests and my review decide what gets in.">Armé el andamiaje para que la IA trabaje con reglas y no de memoria: <b>hooks, skills propias y contexto en archivos versionados</b>. La IA escribe; más de 300 tests y mi revisión deciden qué entra.</li>
+            <li data-en="More on <a href='#proyecto'>the product</a> and on <a href='#metodo'>how I work with AI</a>, below.">Más sobre <a href='#proyecto'>el producto</a> y sobre <a href='#metodo'>cómo trabajo con IA</a>, abajo.</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </article>
 
-    <div class="block">
-      <h3 data-es="Infraestructura" data-en="Infrastructure">Infraestructura</h3>
-      <p data-es="RHEL / Linux · Red Hat OpenShift · <span class='kw'>Active Directory y migración de dominio completa</span> · GPOs · diseño de reglas de firewall · balanceo F5 · certificados TLS · MDM sobre 140 dispositivos · operación de Data Center · redes LAN"
-         data-en="RHEL / Linux · Red Hat OpenShift · <span class='kw'>Active Directory and full domain migration</span> · GPOs · firewall rule design · F5 load balancing · TLS certificates · MDM across 140 devices · data center operations · LAN">RHEL / Linux · Red Hat OpenShift · <span class='kw'>Active Directory y migración de dominio completa</span> · GPOs · diseño de reglas de firewall · balanceo F5 · certificados TLS · MDM sobre 140 dispositivos · operación de Data Center · redes LAN</p>
+  <article class="job">
+    <div class="when">
+      <span class="range" data-en="Feb 2022 – Mar 2026">feb 2022 – mar 2026</span>
+      <span class="dur" data-en="4 yrs 2 mos · 3 roles">4 años 2 meses · 3 puestos</span>
     </div>
+    <div class="what">
+      <h3>GIRE S.A.</h3>
+      <p class="org" data-en="DUCIT–GIRE Group · Buenos Aires · regulated banking environment">Grupo DUCIT–GIRE · Buenos Aires · entorno bancario regulado</p>
+      <p class="learned" data-en="At GIRE I also learned the Infrastructure team's work up close — backups, [[vmware]] and server installation — and <b>built and restored an HPE LTO-7 tape server, leaving it production-ready for critical banking backups</b>.">En GIRE también aprendí de cerca el trabajo del área de Infraestructura —backups, [[vmware]] e instalación de servidores— y <b>armé y restauré un servidor de cintas LTO-7 de HPE, dejándolo listo para producción para el backup crítico bancario</b>.</p>
 
-    <div class="block">
-      <h3 data-es="Operación y seguridad" data-en="Operations and security">Operación y seguridad</h3>
-      <p data-es="Circuito formal de service desk · ventanas de mantenimiento coordinadas · on-call sobre HANA · definición de política de backup · monitoreo SNMP · <span class='kw'>respuesta a incidente de ransomware</span> · compliance bancario"
-         data-en="Formal service desk process · coordinated maintenance windows · HANA on-call · backup policy definition · SNMP monitoring · <span class='kw'>ransomware incident response</span> · banking compliance">Circuito formal de service desk · ventanas de mantenimiento coordinadas · on-call sobre HANA · definición de política de backup · monitoreo SNMP · <span class='kw'>respuesta a incidente de ransomware</span> · compliance bancario</p>
+      <div class="roles">
+        <div class="role">
+          <h4 data-en="Platforms and Infrastructure Analyst <span class='rdate'>Apr 2025 – Mar 2026</span>">Analista de Plataformas e Infraestructura <span class='rdate'>abr 2025 – mar 2026</span></h4>
+          <ul>
+            <li data-en="Installation and deployment of [[bo]] 4.3 on [[rhel]] 9 across three environments, backend and frontend, <b>entirely from the console, with no internet access</b>.">Instalación y despliegue de [[bo]] 4.3 sobre [[rhel]] 9 en tres ambientes, backend y frontend, <b>íntegramente por consola y sin salida a internet</b>.</li>
+            <li data-en="Designed and coordinated <b>~20 connectivity rules</b> across two firewall platforms — app nodes, [[oracle]] and [[sqlserver]] backends, SMTP and the [[f5]] VIP — <b>requested through the Networking team instead of changing them directly</b>.">Diseñé y coordiné <b>~20 reglas de conectividad</b> sobre dos plataformas de firewall —nodos, backends [[oracle]] y [[sqlserver]], SMTP y la VIP del [[f5]]—, <b>pedidas por el circuito de Redes en lugar de cambiarlas yo directo</b>.</li>
+            <li data-en="Integrated [[ldap]] / [[ad]] authentication with the [[tomcat]] launchpad, and managed TLS certificates in the [[java]] keystore.">Integré la autenticación [[ldap]] / [[ad]] con el launchpad de [[tomcat]] y gestioné los certificados TLS en el keystore de [[java]].</li>
+            <li data-en="Fixed an HTTP 500 by finding an <b>SSL-offloading mismatch</b> at the load balancer, confirmed against an SAP Note. Diagnosed recurring APS node crashes and <b>presented node separation to BI management</b>.">Resolví un HTTP 500 encontrando un <b>desajuste de SSL offloading</b> en el balanceador, confirmado con una nota SAP. Diagnostiqué las caídas recurrentes del nodo APS y <b>presenté la separación de nodos a la gerencia de BI</b>.</li>
+            <li data-en="[[openshift]] operations with [[yaml]]: monitoring, users, access and group permissions.">Operación de [[openshift]] con [[yaml]]: monitoreo, usuarios, accesos y permisos por grupo.</li>
+            <li data-en="Worked with <b>APIs and [[ibmapi]]</b>, including the response to an API incident with critical impact on banking transactions.">Trabajo con <b>APIs e [[ibmapi]]</b>, incluida la respuesta a un incidente de API con impacto crítico en transacciones bancarias.</li>
+            <li data-en="SNMP monitoring and backup policy: daily for production, weekly for lower environments, 30-day retention.">Monitoreo SNMP y política de backup: diaria en producción, semanal en ambientes inferiores, retención de 30 días.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <h4 data-en="SAP Basis Analyst <span class='rdate'>May 2024 – Nov 2025</span>">Analista SAP Basis <span class='rdate'>may 2024 – nov 2025</span></h4>
+          <p class="scope" data-en="[[s4]] · MM and TM modules · 200+ users · DEV / QAS / PRD · banking compliance">[[s4]] · módulos MM y TM · +200 usuarios · DEV / QAS / PRD · compliance bancario</p>
+          <ul>
+            <li data-en="<b>Final change-control gate</b> before the production billing environment: validated integration and permissions on every change before promoting it."><b>Última barrera de control de cambios</b> antes del ambiente productivo de facturación: validaba integración y permisos de cada cambio antes de promoverlo.</li>
+            <li data-en="<b>Privileged-access authority</b> to production for SAP international support: credentials granted in scheduled windows, with a dual documentary record."><b>Autoridad de acceso privilegiado</b> a producción para el soporte internacional de SAP: credenciales en ventanas programadas, con doble registro documental.</li>
+            <li data-en="Transports (STMS), users and roles (SU01 / SU10 / PFCG), patches (SPAM / SNOTE) and jobs (SM36 / SM37). On-call for [[hana]].">Transportes (STMS), usuarios y roles (SU01 / SU10 / PFCG), parches (SPAM / SNOTE) y jobs (SM36 / SM37). Guardia on-call sobre [[hana]].</li>
+            <li data-en="Formal service desk in [[jira]]: triage, routing to the owning team and follow-through to closure.">Service desk formal en [[jira]]: triage, derivación al sector responsable y seguimiento hasta el cierre.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <h4 data-en="IT Business Support Specialist <span class='rdate'>Feb 2022 – May 2024</span>">IT Business Support Specialist <span class='rdate'>feb 2022 – may 2024</span></h4>
+          <ul>
+            <li data-en="[[ad]] administration: user lifecycle, groups, permissions, unlocks and GPOs.">Administración de [[ad]]: ciclo de vida de usuarios, grupos, permisos, desbloqueos y GPOs.</li>
+            <li data-en="Support requests in [[jira]]. Advanced hardware diagnosis and repair.">Pedidos de soporte en [[jira]]. Diagnóstico y reparación avanzada de hardware.</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </article>
 
+  <article class="job">
+    <div class="when">
+      <span class="range" data-en="Feb 2021 – Mar 2022">feb 2021 – mar 2022</span>
+      <span class="dur" data-en="1 yr 2 mos">1 año 2 meses</span>
+    </div>
+    <div class="what">
+      <h3>DUCIT</h3>
+      <p class="org" data-en="Armored transport · DUCIT–GIRE Group · ~150 staff">Transporte blindado · Grupo DUCIT–GIRE · ~150 personas</p>
+      <div class="roles">
+        <div class="role">
+          <h4 data-en="Infrastructure and MDM Analyst · on-site">Analista de Infraestructura y MDM · on-site</h4>
+          <ul>
+            <li data-en="<b>Sole on-site technician and my manager's right hand</b>: I handled the whole building's IT on the spot — offices, crews and the armored-unit fleet — and consulted him on doubts and on decisions that required it."><b>Único técnico on-site y mano derecha de mi jefe</b>: resolvía en el lugar toda la IT del edificio —oficinas, tripulaciones y la flota de unidades blindadas— y le consultaba las dudas y las decisiones que lo requerían.</li>
+            <li data-en="<b>Configuration of the [[zebra]] devices</b> in the armored units, alongside GPS tablets, phones and PCs: 140 devices on [[mdm]] with profiles, kiosk mode, certificates and a custom [[android]] image."><b>Configuración de los dispositivos [[zebra]]</b> de las unidades blindadas, junto con tablets GPS, celulares y PCs: 140 equipos en [[mdm]] con perfiles, modo kiosco, certificados e imagen [[android]] personalizada.</li>
+            <li data-en="Found the root cause of recurring failures across the mobile fleet and proposed <b>redesigning the MDM update cycle</b>; we defined it with management and I carried it out with the team, eliminating on-site coverage of the critical 30-minute window before each route.">Encontré la causa de fallas recurrentes en la flota móvil y propuse <b>rediseñar el ciclo de actualización del MDM</b>; lo definimos con la gerencia y lo ejecuté con el equipo: se eliminó la guardia de la ventana crítica de 30 minutos antes de cada ruta.</li>
+            <li data-en="Took part in a full [[ad]] redesign after 8 years of technical debt: new domain, security policies and migration of every user.">Participé del rediseño completo de [[ad]] con 8 años de deuda técnica: dominio nuevo, políticas de seguridad y migración de todos los usuarios.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="job">
+    <div class="when">
+      <span class="range" data-en="Jun 2019 – Feb 2021">jun 2019 – feb 2021</span>
+      <span class="dur" data-en="1 yr 9 mos">1 año 9 meses</span>
+    </div>
+    <div class="what">
+      <h3>POWERSIS</h3>
+      <p class="org" data-en="Clients: ICBC, Santander Río, Cencosud">Clientes: ICBC, Santander Río, Cencosud</p>
+      <div class="roles">
+        <div class="role">
+          <h4 data-en="Field IT Technician">Técnico IT de campo</h4>
+          <ul>
+            <li data-en="Server hardware migration and on-site equipment installation across bank branches.">Migración de hardware de servidores e instalación de equipos en sucursales bancarias.</li>
+            <li data-en="<b>Ransomware incident response</b> at a large retail client: assessment, isolation of infected machines and recovery of viable equipment."><b>Respuesta a un incidente de ransomware</b> en un cliente retail de gran escala: relevamiento, aislamiento de equipos infectados y recuperación de los viables.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ CV: dos perfiles para elegir ============ -->
+<section id="cv">
+  <h2 data-en="Pick the CV you need">Elegí el CV que te sirve</h2>
+  <div class="cvcards">
+    <article class="cvcard infra">
+      <span class="cvtag" data-en="Infrastructure">Infraestructura</span>
+      <h3>IT Platform Administrator</h3>
+      <p data-en="Focused on my latest role: Linux platforms ([[rhel]], [[openshift]]), networking and firewall rules, APIs and [[ibmapi]], tape backup, Active Directory and MDM fleets — all in a banking environment. SAP shows up as a platform I ran.">Enfocado en mi último rol: plataformas Linux ([[rhel]], [[openshift]]), redes y reglas de firewall, APIs e [[ibmapi]], backup en cinta, Active Directory y flotas MDM, todo en entorno bancario. SAP aparece como plataforma que operé.</p>
+      <a class="btn cvbtn" href="cv/CV_Martin_Contreras_Infra_ES.pdf" data-href-en="cv/CV_Martin_Contreras_Infra_EN.pdf" target="_blank" rel="noopener" data-en="Download PDF ↓">Descargar PDF ↓</a>
+    </article>
+    <article class="cvcard sap">
+      <span class="cvtag">SAP</span>
+      <h3>SAP Basis Administrator</h3>
+      <p data-en="Focused on SAP Basis on [[s4]]: transports, users and roles, patches, jobs and [[hana]] on-call, production change control and privileged access under banking compliance, plus the [[bo]] 4.3 deployment.">Enfocado en SAP Basis sobre [[s4]]: transportes, usuarios y roles, parches, jobs y guardia sobre [[hana]], control de cambios a producción y acceso privilegiado bajo compliance bancario, más el despliegue de [[bo]] 4.3.</p>
+      <a class="btn cvbtn" href="cv/CV_Martin_Contreras_SAP_ES.pdf" data-href-en="cv/CV_Martin_Contreras_SAP_EN.pdf" target="_blank" rel="noopener" data-en="Download PDF ↓">Descargar PDF ↓</a>
+    </article>
   </div>
+  <p class="note" data-en="Both tell the same career; what changes is what comes first.">Los dos cuentan la misma carrera: cambia qué va primero.</p>
 </section>
 
 <!-- ============ PROYECTO ============ -->
-<section>
-  <h2 data-es="Proyecto propio" data-en="My own product">Proyecto propio</h2>
+<section id="proyecto">
+  <h2 data-en="My own product">Proyecto propio</h2>
   <div class="project">
-    <h3>GAUCHO Aves</h3>
-    <p class="sub" data-es="Software de gestión avícola para granjas de gallinas ponedoras en Argentina."
-                   data-en="Farm management software for laying-hen poultry farms in Argentina.">Software de gestión avícola para granjas de gallinas ponedoras en Argentina.</p>
-
+    <h3>Gaucho Agro · Aves</h3>
+    <p class="sub" data-en="Farm management software for laying-hen poultry farms in Argentina.">Software de gestión avícola para granjas de gallinas ponedoras en Argentina.</p>
     <ul>
-      <li data-es="Corre <b>offline</b> en la PC del campo. Los empleados cargan desde el celular por WiFi local. Las granjas no tienen conectividad: el sistema no puede depender de ella."
-          data-en="Runs <b>offline</b> on the farm's own PC. Staff enter data from their phones over the local WiFi. Farms have no connectivity, so the system cannot depend on it.">Corre <b>offline</b> en la PC del campo. Los empleados cargan desde el celular por WiFi local. Las granjas no tienen conectividad: el sistema no puede depender de ella.</li>
-      <li data-es="Resuelve el cumplimiento <b>DT-e / SENASA</b>, que ningún competidor local cubre."
-          data-en="Solves <b>DT-e / SENASA</b> government traceability compliance, which no local competitor covers.">Resuelve el cumplimiento <b>DT-e / SENASA</b>, que ningún competidor local cubre.</li>
-      <li data-es="Inventario por lote, producción, sanidad y alertas INTA."
-          data-en="Flock inventory, production, animal health, and INTA-based alerts.">Inventario por lote, producción, sanidad y alertas INTA.</li>
-      <li data-es="<b>Instalador todo-en-uno de Windows</b>: Python embebido + PostgreSQL portable + Inno Setup. El productor hace doble clic y anda. Sin dependencias, sin internet."
-          data-en="<b>Self-contained Windows installer</b>: embedded Python + portable PostgreSQL + Inno Setup. The farmer double-clicks and it runs. No dependencies, no internet."><b>Instalador todo-en-uno de Windows</b>: Python embebido + PostgreSQL portable + Inno Setup. El productor hace doble clic y anda. Sin dependencias, sin internet.</li>
-      <li data-es="<b>109 archivos de test automatizados</b> en el backend."
-          data-en="<b>109 automated test files</b> in the backend."><b>109 archivos de test automatizados</b> en el backend.</li>
+      <li data-en="Runs <b>offline</b> on the farm's own PC. Staff enter data from their phones over the local WiFi. Farms have no connectivity, so the system cannot depend on it.">Corre <b>offline</b> en la PC del campo. Los empleados cargan desde el celular por WiFi local. Las granjas no tienen conectividad: el sistema no puede depender de ella.</li>
+      <li data-en="Solves <b>DT-e / SENASA</b> government traceability compliance, which no local competitor covers.">Resuelve el cumplimiento <b>DT-e / SENASA</b>, que ningún competidor local cubre.</li>
+      <li data-en="Flock inventory, production, animal health, economics, incubation, and INTA-based alerts.">Inventario por lote, producción, sanidad, economía, incubación y alertas con valores INTA.</li>
+      <li data-en="[[python]] with [[fastapi]], [[react]] and [[postgres]]. <b>Self-contained Windows installer</b> built with [[inno]]: embedded Python and portable PostgreSQL. Double-click and it runs, no internet.">[[python]] con [[fastapi]], [[react]] y [[postgres]]. <b>Instalador todo-en-uno de Windows</b> hecho con [[inno]]: Python embebido y PostgreSQL portable. Doble clic y anda, sin internet.</li>
+      <li data-en="<b>300+ automated tests</b> in the backend."><b>Más de 300 tests automatizados</b> en el backend.</li>
     </ul>
-
-    <div class="tags">
-      <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span>
-      <span class="tag">React</span><span class="tag">Inno Setup</span>
-    </div>
-
     <a class="btn" href="https://gauchoagro.com" target="_blank" rel="noopener">gauchoagro.com →</a>
-    <p class="note" data-es="El repositorio es privado por ser un producto comercial."
-                    data-en="The repository is private, as it is a commercial product.">El repositorio es privado por ser un producto comercial.</p>
+    <p class="note" data-en="The repository is private, as it is a commercial product.">El repositorio es privado por ser un producto comercial.</p>
   </div>
 </section>
 
 <!-- ============ MÉTODO ============ -->
-<section>
-  <h2 data-es="Cómo trabajo" data-en="How I work">Cómo trabajo</h2>
-
-  <p class="intro" data-es="Construí GAUCHO solo y de forma autodidacta, y para lograrlo tuve que resolver un problema aparte: <b>cómo sostener un proyecto largo sin depender de mi memoria.</b> Terminé diseñando el andamiaje antes que el código."
-                   data-en="I built GAUCHO alone and self-taught, and to get there I had to solve a separate problem first: <b>how to sustain a long project without relying on my own memory.</b> I ended up designing the scaffolding before the code.">Construí GAUCHO solo y de forma autodidacta, y para lograrlo tuve que resolver un problema aparte: <b>cómo sostener un proyecto largo sin depender de mi memoria.</b> Terminé diseñando el andamiaje antes que el código.</p>
-
+<section id="metodo">
+  <h2 data-en="How I work with AI">Cómo trabajo con IA</h2>
+  <p class="intro" data-en="I built Gaucho Agro alone, and AI was part of the team from day one. To make it work I had to solve a separate problem first: <b>how to get an AI to work by rules, not by memory.</b> I ended up designing the scaffolding before the code.">Gaucho Agro lo construí solo, y la IA fue parte del equipo desde el primer día. Para que funcionara tuve que resolver un problema aparte: <b>cómo hacer que una IA trabaje con reglas, y no de memoria.</b> Terminé diseñando el andamiaje antes que el código.</p>
   <div class="method">
     <div class="mitem">
-      <h3 data-es="Protocolo de orquestación de IAs" data-en="An AI orchestration protocol">Protocolo de orquestación de IAs</h3>
-      <p data-es="Varias asistentes proponen, una sola escribe. Reglas por escrito, no improvisación."
-         data-en="Several assistants propose, only one writes. Written rules, not improvisation.">Varias asistentes proponen, una sola escribe. Reglas por escrito, no improvisación.</p>
+      <h3 data-en="Several AIs, only one writes">Varias IAs, una sola escribe</h3>
+      <p data-en="I work with [[claude]] and [[gemini]]: several propose, only one writes, under written rules. I compared models on the same spec — where the spec is precise they converge; where it is silent, each model's judgment shows.">Trabajo con [[claude]] y [[gemini]]: proponen varias, escribe una sola, con reglas por escrito. Comparé modelos sobre la misma especificación: donde la spec es precisa convergen; donde calla, aparece el criterio de cada uno.</p>
     </div>
     <div class="mitem">
-      <h3 data-es="Memoria en archivos versionados" data-en="Memory in version-controlled files">Memoria en archivos versionados</h3>
-      <p data-es="El contexto vive en el repositorio, no en una conversación. Cualquiera, persona o IA, puede arrancar en frío sin preguntar nada."
-         data-en="Context lives in the repository, not in a chat. Anyone, human or AI, can start cold without asking a single question.">El contexto vive en el repositorio, no en una conversación. Cualquiera, persona o IA, puede arrancar en frío sin preguntar nada.</p>
+      <h3 data-en="Rules that enforce themselves">Reglas que se aplican solas</h3>
+      <p data-en="Hooks that re-inject the current task into every message, and custom skills: one starts each session up to date, another saves progress by building, testing and committing — only if everything passes.">Hooks que le reinyectan a la IA la tarea en curso en cada mensaje, y skills propias: una arranca cada sesión al día, otra guarda el avance haciendo build, tests y commit, solo si todo pasa.</p>
     </div>
     <div class="mitem">
-      <h3 data-es="Disciplina de handover" data-en="Handover discipline">Disciplina de handover</h3>
-      <p data-es="Los documentos se marcan como caducos cuando dejan de ser ciertos. Un documento desactualizado traiciona al que lo lee."
-         data-en="Documents are marked stale the moment they stop being true. A document that lies betrays whoever reads it.">Los documentos se marcan como caducos cuando dejan de ser ciertos. Un documento desactualizado traiciona al que lo lee.</p>
+      <h3 data-en="Memory in files, not in the chat">Memoria en archivos, no en el chat</h3>
+      <p data-en="Context lives in version-controlled files, so anyone, human or AI, can start cold without asking a single question. And a document is marked stale the moment it stops being true.">El contexto vive en archivos versionados: cualquiera, persona o IA, arranca en frío sin preguntar nada. Y un documento se marca vencido apenas deja de ser cierto.</p>
+    </div>
+    <div class="mitem">
+      <h3 data-en="AI writes, tests decide">La IA escribe, los tests deciden</h3>
+      <p data-en="300+ automated tests are the gate: nothing gets committed unless they pass. And before touching code, dependencies get audited.">Más de 300 tests automatizados son la puerta: nada se commitea si no pasan. Y antes de tocar código, se auditan las dependencias.</p>
     </div>
   </div>
-
-  <p class="closing" data-es="Es la misma lógica que aplico en infraestructura: <b>que cada cambio tenga dueño, registro y forma de volver atrás.</b>"
-                     data-en="It is the same logic I apply to infrastructure: <b>every change should have an owner, a record, and a way back.</b>">Es la misma lógica que aplico en infraestructura: <b>que cada cambio tenga dueño, registro y forma de volver atrás.</b></p>
+  <p class="closing" data-en="It is the same logic I apply to infrastructure: <b>every change should have an owner, a record, and a way back.</b> And it is what I want to bring to platform operations: automating the repetitive side of Basis with AI, without losing change control.">Es la misma lógica que aplico en infraestructura: <b>que cada cambio tenga dueño, registro y forma de volver atrás.</b> Y es lo que quiero llevar a la operación de plataformas: automatizar lo repetitivo de Basis con IA, sin perder el control de cambios.</p>
 </section>
 
 <!-- ============ DOCENCIA + FORMACIÓN ============ -->
-<section>
-  <h2 data-es="Docencia y formación" data-en="Teaching and education">Docencia y formación</h2>
+<section id="formacion">
+  <h2 data-en="Teaching and education">Docencia y formación</h2>
   <div class="two">
     <div class="block">
-      <h3 data-es="Docencia" data-en="Teaching">Docencia</h3>
-      <p data-es="Profesor de secundaria — sistemas, 4to año. Binario, electricidad, resistencias, estructuras de control y robótica."
-         data-en="Secondary school teacher — systems, 4th year. Binary, electricity, resistors, control structures and robotics.">Profesor de secundaria — sistemas, 4to año. Binario, electricidad, resistencias, estructuras de control y robótica.</p>
-      <p data-es="Enseñar me obliga a entender de verdad, y a explicar claro bajo presión."
-         data-en="Teaching forces me to actually understand, and to explain clearly under pressure.">Enseñar me obliga a entender de verdad, y a explicar claro bajo presión.</p>
+      <h3 data-en="Teaching">Docencia</h3>
+      <p data-en="<span class='kw'>Computer science teacher</span> at a secondary school (DGCyE, Province of Buenos Aires), since January 2025 — 4th year: binary, electricity, resistors, control structures and robotics."><span class='kw'>Profesor de informática</span> en secundaria (DGCyE, Provincia de Buenos Aires), desde enero de 2025 — 4to año: binario, electricidad, resistencias, estructuras de control y robótica.</p>
+      <p data-en="Teaching forces me to actually understand, and to explain clearly under pressure.">Enseñar me obliga a entender de verdad, y a explicar claro bajo presión.</p>
     </div>
     <div class="block">
-      <h3 data-es="Formación" data-en="Education">Formación</h3>
-      <p data-es="<span class='kw'>SAP TADM10 y TADM12</span> — capacitación (Buffa Sistemas, 2024)"
-         data-en="<span class='kw'>SAP TADM10 and TADM12</span> — training (Buffa Sistemas, 2024)"><span class='kw'>SAP TADM10 y TADM12</span> — capacitación (Buffa Sistemas, 2024)</p>
-      <p data-es="<span class='kw'>Google IT Support Professional</span> — sistemas e infraestructura"
-         data-en="<span class='kw'>Google IT Support Professional Certificate</span> — systems and infrastructure"><span class='kw'>Google IT Support Professional</span> — sistemas e infraestructura</p>
-      <p data-es="<span class='kw'>Licenciatura en Gestión de TI</span> — UADE (en curso)"
-         data-en="<span class='kw'>BSc in Information Technology Management</span> — UADE (in progress)"><span class='kw'>Licenciatura en Gestión de TI</span> — UADE (en curso)</p>
-      <p data-es="Inglés: escrito fluido · oral funcional. Uso diario de documentación y soporte internacional de SAP."
-         data-en="English: fluent written · functional spoken. Daily use of SAP documentation and international support.">Inglés: escrito fluido · oral funcional. Uso diario de documentación y soporte internacional de SAP.</p>
+      <h3 data-en="Education">Formación</h3>
+      <p data-en="<span class='kw'>SAP TADM10 and TADM12</span> — training (Buffa Sistemas, 2024)"><span class='kw'>SAP TADM10 y TADM12</span> — capacitación (Buffa Sistemas, 2024)</p>
+      <p data-en="<span class='kw'>Google IT Support Professional Certificate</span> — systems and infrastructure"><span class='kw'>Google IT Support Professional</span> — sistemas e infraestructura</p>
+      <p data-en="<span class='kw'>BSc in Information Technology Management</span> — UADE (in progress)"><span class='kw'>Licenciatura en Gestión de TI</span> — UADE (en curso)</p>
+      <p data-en="English: fluent written · functional spoken. Daily use of SAP documentation and international support.">Inglés: escrito fluido · oral funcional. Uso diario de documentación y soporte internacional de SAP.</p>
     </div>
   </div>
 </section>
 
 <!-- ============ CONTACTO ============ -->
-<footer>
-  <h2 data-es="Contacto" data-en="Contact">Contacto</h2>
+<footer id="contacto">
+  <h2 data-en="Contact">Contacto</h2>
   <div class="links">
     <a class="btn primary" href="https://linkedin.com/in/martinalejandrocontereras" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn" href="#cv" data-en="CVs (PDF)">CVs (PDF)</a>
     <a class="btn" href="mailto:martinalejandrocontreras@outlook.es">martinalejandrocontreras@outlook.es</a>
     <a class="btn" href="https://github.com/confederador" target="_blank" rel="noopener">GitHub</a>
   </div>
-  <p class="colofon">Buenos Aires, Argentina · <span data-es="Hecho a mano, sin frameworks." data-en="Hand-written, no frameworks.">Hecho a mano, sin frameworks.</span></p>
+  <p class="colofon">Buenos Aires, Argentina</p>
 </footer>
 
+</main>
 </div>
 
 <script>
 (function(){
-  var nodes = document.querySelectorAll('[data-es],[data-en]');
-  var btns  = document.querySelectorAll('.langbtn');
+  /* ---- las herramientas: nombre + logo (Simple Icons) o monograma si no hay logo ---- */
+  var TOOLS = {
+    sap:{n:'SAP',i:'sap'}, s4:{n:'S/4HANA',i:'sap'}, hana:{n:'SAP HANA',i:'sap'}, bo:{n:'BusinessObjects',i:'sap'},
+    redhat:{n:'Red Hat',i:'redhat'}, rhel:{n:'RHEL',i:'redhat'}, openshift:{n:'OpenShift',i:'redhatopenshift'},
+    docker:{n:'Docker',i:'docker'}, yaml:{n:'YAML',i:'yaml'}, linux:{n:'Linux',i:'linux'},
+    oracle:{n:'Oracle',g:'OR'}, sqlserver:{n:'SQL Server',g:'SQL'}, postgres:{n:'PostgreSQL',i:'postgresql'},
+    python:{n:'Python',i:'python'}, fastapi:{n:'FastAPI',i:'fastapi'}, react:{n:'React',i:'react'},
+    f5:{n:'F5',i:'f5'}, tomcat:{n:'Tomcat',i:'apachetomcat'}, java:{n:'Java',i:'openjdk'},
+    jira:{n:'Jira',i:'jira'}, git:{n:'Git',i:'git'}, github:{n:'GitHub',i:'github'},
+    ad:{n:'Active Directory',g:'AD'}, ldap:{n:'LDAP',g:'LD'}, mdm:{n:'ManageEngine MDM',g:'ME'},
+    android:{n:'Android',i:'android'}, inno:{n:'Inno Setup',g:'IS'},
+    claude:{n:'Claude Code',i:'claude'}, gemini:{n:'Gemini',i:'googlegemini'},
+    vmware:{n:'VMware',i:'vmware'},
+    ibmapi:{n:'IBM API Gateway',g:'IBM'}, zebra:{n:'Zebra',i:'zebratechnologies',g:'ZB'}
+  };
+  var BANNER = ['sap','redhat','openshift','vmware','docker','yaml','linux','ad','oracle','postgres','python','claude','gemini','ibmapi','f5','tomcat','mdm','zebra','jira','git'];
+
+  function chip(k, big){
+    var t = TOOLS[k]; if(!t) return '[[' + k + ']]';
+    var g = t.g || t.n.slice(0,2).toUpperCase();
+    var ico = t.i
+      ? '<img src="https://cdn.simpleicons.org/' + t.i + '" alt="" width="16" height="16" decoding="async" data-g="' + g + '">'
+      : '<span class="glyph" aria-hidden="true">' + g + '</span>';
+    return '<span class="chip' + (big ? ' big' : '') + '">' + ico + '<span>' + t.n + '</span></span>';
+  }
+  function render(s){ return String(s).replace(/\[\[(\w+)\]\]/g, function(_, k){ return chip(k, false); }); }
+
+  /* si un logo no carga, queda el monograma: nunca una imagen rota */
+  document.addEventListener('error', function(e){
+    var im = e.target;
+    if(!im || im.tagName !== 'IMG' || !im.closest('.chip')) return;
+    var s = document.createElement('span');
+    s.className = 'glyph'; s.setAttribute('aria-hidden','true');
+    s.textContent = im.getAttribute('data-g') || '?';
+    im.replaceWith(s);
+  }, true);
+
+  /* ---- el banner que se desliza (dos copias para que el loop no salte) ---- */
+  var track = document.getElementById('track');
+  if(track){
+    var set = BANNER.map(function(k){ return chip(k, true); }).join('');
+    track.innerHTML = '<div class="set">' + set + '</div><div class="set" aria-hidden="true">' + set + '</div>';
+  }
+
+  /* ---- idioma: el HTML trae el español; el inglés vive en data-en ---- */
+  var els = [].slice.call(document.querySelectorAll('[data-en]'));
+  els.forEach(function(n){ n.setAttribute('data-es', n.innerHTML); });
+  var links = [].slice.call(document.querySelectorAll('[data-href-en]'));
+  links.forEach(function(a){ a.setAttribute('data-href-es', a.getAttribute('href')); });
+  var btns = [].slice.call(document.querySelectorAll('.langbtn'));
 
   function apply(lang){
     document.documentElement.lang = lang;
-    nodes.forEach(function(n){
-      var v = n.getAttribute('data-' + lang);
-      if (v !== null) n.innerHTML = v;
-    });
-    btns.forEach(function(b){
-      b.setAttribute('aria-pressed', String(b.dataset.set === lang));
-    });
+    els.forEach(function(n){ n.innerHTML = render(n.getAttribute('data-' + lang)); });
+    links.forEach(function(a){ a.setAttribute('href', a.getAttribute('data-href-' + lang)); });
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-set') === lang)); });
     try { localStorage.setItem('lang', lang); } catch(e){}
   }
-
   var start = 'es';
-  try { start = localStorage.getItem('lang') || ((navigator.language||'es').slice(0,2) === 'en' ? 'en' : 'es'); } catch(e){}
+  try { start = localStorage.getItem('lang') || ((navigator.language || 'es').slice(0,2) === 'en' ? 'en' : 'es'); } catch(e){}
   apply(start);
+  btns.forEach(function(b){ b.addEventListener('click', function(){ apply(b.getAttribute('data-set')); }); });
 
-  btns.forEach(function(b){
-    b.addEventListener('click', function(){ apply(b.dataset.set); });
-  });
+  /* ---- la máquina de escribir ---- */
+  var el = document.getElementById('typed');
+  var P = ['SAP Basis Administrator', 'IT Platform Administrator'];
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(el && !still){
+    var i = 0, j = P[0].length, del = true;
+    var tick = function(){
+      var p = P[i];
+      if(!del){
+        el.textContent = p.slice(0, ++j);
+        if(j >= p.length){ del = true; return setTimeout(tick, 2200); }
+        return setTimeout(tick, 55 + Math.random() * 55);
+      }
+      el.textContent = p.slice(0, --j);
+      if(j <= 0){ del = false; i = (i + 1) % P.length; return setTimeout(tick, 380); }
+      setTimeout(tick, 28);
+    };
+    setTimeout(tick, 2200);
+  }
 })();
 </script>
-
 </body>
 </html>
