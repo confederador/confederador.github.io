@@ -872,12 +872,12 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
 @keyframes exp-estrella{0%,100%{transform:scale(.95) rotate(0)} 50%{transform:scale(1.25) rotate(45deg)}}
 /* el cometa que baja por la línea de cada empresa, cuando se ve */
 .roles::after{content:""; position:absolute; left:4px; top:12px; width:6px; height:34px; border-radius:6px; opacity:0; pointer-events:none;
-  background:linear-gradient(transparent, color-mix(in srgb, var(--accent) 80%, transparent) 60%, #fff);
+  background:linear-gradient(to top, transparent, color-mix(in srgb, var(--accent) 80%, transparent) 60%, #fff);
   filter:drop-shadow(0 0 5px var(--accent))}
 @media (prefers-reduced-motion: no-preference){
   .job.en-vista .roles::after{animation:exp-cometa 7s cubic-bezier(.5,0,.6,1) .3s infinite}
 }
-@keyframes exp-cometa{0%{top:0; opacity:0} 6%{opacity:1} 45%{top:calc(100% - 40px); opacity:1} 52%,100%{top:calc(100% - 36px); opacity:0}}
+@keyframes exp-cometa{0%{top:calc(100% - 36px); opacity:0} 6%{opacity:1} 45%{top:4px; opacity:1} 52%,100%{top:0; opacity:0}}
 @media (prefers-reduced-motion: reduce){ .job.propio .role:first-child::before{animation:none} }
 
 /* ── Chips dentro del texto: cristal, para que no distraigan de la lectura ── */
@@ -976,7 +976,6 @@ img.emp-logo{object-fit:cover; background:#fff}
 #puntos{opacity:.35}
 .rc-paso .rc-dibujo *{animation-play-state:running !important}
 .rc-paso:hover .rc-dibujo *,.rc-paso:focus-within .rc-dibujo *{animation-play-state:running !important}
-.job.en-vista .roles::after{animation-iteration-count:1 !important}
 .rc-beta{animation:none !important}
 
 /* 7 · Aire y tres tamaños de letra */
@@ -1146,6 +1145,19 @@ html[data-perfil="ia"] .cp-btn[data-ir="ia"],html[data-perfil="general"] .cp-btn
 @keyframes pico-rota-2{0%{opacity:0} 8%,42%{opacity:1} 50%,100%{opacity:0}}
 .pico-rota-2 svg{animation-name:pico-rota-2}
 .rc-sello{opacity:.9}
+/* ── Experiencia: cada punto larga una onda de su color, de a uno, y al pasar el mouse ── */
+.roles .role:nth-child(1){--k:0} .roles .role:nth-child(2){--k:1} .roles .role:nth-child(3){--k:2} .roles .role:nth-child(4){--k:3}
+@media (prefers-reduced-motion: no-preference){
+  .job.en-vista .role::before{animation:exp-onda 6s ease-out infinite; animation-delay:calc(1s + var(--k) * 1.2s)}
+  .job .role:hover::before{animation:exp-onda 1.3s ease-out infinite; animation-delay:0s}
+  /* la estrella del proyecto propio conserva su latido, más rápido al pasar el mouse */
+  .job.propio .role:first-child::before{animation:exp-estrella 2.6s ease-in-out infinite}
+  .job.propio .role:first-child:hover::before{animation:exp-estrella 1s ease-in-out infinite}
+}
+@keyframes exp-onda{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 75%, transparent), 0 0 0 0 color-mix(in srgb, var(--accent) 40%, transparent)}
+  22%{box-shadow:0 0 0 14px color-mix(in srgb, var(--accent) 0%, transparent), 0 0 22px 8px color-mix(in srgb, var(--accent) 0%, transparent)}
+  100%{box-shadow:0 0 0 0 transparent}}
 </style>
 
 <style>/* técnico de campo */
