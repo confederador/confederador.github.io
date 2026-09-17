@@ -900,6 +900,19 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
 .rc-habla .rc-persona{animation:an-balanceo-cuerpo 3.2s ease-in-out infinite}
 @keyframes an-balanceo-cuerpo{0%,100%{transform:translateY(0)} 50%{transform:translateY(-.8px)}}
 @media (prefers-reduced-motion: reduce){ .an-asiente,.an-gesto,.rc-habla .rc-persona{animation:none} }
+/* ── Ficha: empresas en las que trabajé ─────────────────────────────────── */
+.carta-emp{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:5px}
+.carta-emp li{display:flex; align-items:center; gap:7px; min-width:0; padding:4px 6px; border-radius:8px; border:1px solid var(--line);
+  background:color-mix(in srgb, var(--tx) 4%, transparent)}
+.carta-emp li.emp-propio{grid-column:1 / -1; border-style:dashed; border-color:color-mix(in srgb, var(--accent) 50%, transparent)}
+.carta-emp b{display:block; font-size:.74rem; line-height:1.15; color:var(--tx)}
+.carta-emp small{display:block; font:500 9.5px/1.25 var(--mono); color:var(--tx-faint)}
+.emp-logo{flex:none; width:28px; height:28px; border-radius:7px; display:grid; place-items:center; font:900 8px/1 var(--sans); letter-spacing:-.02em; color:#fff}
+.emp-gire{background:linear-gradient(135deg, #1b4fa0, #0d2f66); font-size:7.5px}
+.emp-ducit{background:linear-gradient(135deg, #3b4350, #1d2229); font-size:6.5px}
+.emp-powersis{background:linear-gradient(135deg, #c2410c, #7c2d12)}
+.emp-bitfix{background:linear-gradient(135deg, #0f766e, #134e4a)}
+img.emp-logo{object-fit:cover; background:#fff}
 </style>
 </head>
 <body>
@@ -1177,7 +1190,7 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
     </div>
     <div class="what">
       <h3>GIRE S.A.</h3>
-      <p class="org" data-en="DUCIT–GIRE Group · Buenos Aires · under banking compliance">Grupo DUCIT–GIRE · Buenos Aires · bajo compliance bancario</p>
+      <p class="org" data-en="The company behind Rapipago: payments and collections, 10,000+ collection points · DUCIT–GIRE Group · Buenos Aires · under banking compliance">Empresa de Rapipago: pagos y cobranzas, +10.000 puntos de cobro · Grupo DUCIT–GIRE · Buenos Aires · bajo compliance bancario</p>
       <p class="learned" data-p="infra" data-en="At GIRE I also handled physical server infrastructure — rack mounting, cabling and server connectivity to the HPE tape library (LTO-7) — managing the production sign-off ticket for critical banking backups, alongside [[vmware]] and SNMP monitoring.">En GIRE también metí mano física en la infraestructura de servidores: montaje en rack, cableado y conexión física a la librería de cintas HPE (LTO-7), gestionando el ticket de homologación hasta producción para el backup crítico bancario, junto a [[vmware]] y monitoreo SNMP.</p>
 
       <div class="roles">
@@ -1200,7 +1213,8 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
           <ul>
             <li data-p="sap infra" data-en="<b>Final change-control gate</b> before the production billing environment: validated integration and permissions on every change before promoting it."><b>Última barrera de control de cambios</b> antes del ambiente productivo de facturación: validaba integración y permisos de cada cambio antes de promoverlo.</li>
             <li data-p="sap infra" data-en="<b>Privileged-access authority</b> to production for SAP international support: enabled credentials and SSH access in scheduled windows, required the planned tasks to be logged in the ticket, validated the work afterwards, and kept a dual documentary record."><b>Autoridad de acceso privilegiado</b> a producción para el soporte internacional de SAP: habilitación de credenciales y acceso SSH en ventanas programadas, con registro de tareas en el ticket, validación posterior y doble registro documental.</li>
-            <li data-p="sap" data-en="Transports (STMS), users and parent and child roles (SU01 / SU10 / PFCG), authorization analysis (SUIM / ST01), notes and patches (SPAM / SNOTE) and jobs (SM36 / SM37). On-call over [[hana]] with ST22 and SM21.">Transportes (STMS), usuarios y roles padre e hijo (SU01 / SU10 / PFCG), análisis de autorizaciones (SUIM / ST01), notas y parches (SPAM / SNOTE) y jobs (SM36 / SM37). Guardia on-call sobre [[hana]] con ST22 y SM21.</li>
+            <li data-p="sap" data-en="<b>Day-to-day Basis across DEV, QAS and PRD:</b> transports (STMS) daily or every other day, SAP notes and patches (SPAM / SNOTE) every other day, users and parent and child roles (SU01 / SU10 / PFCG), authorization analysis (SUIM / ST01) and jobs (SM36 / SM37)."><b>Basis del día a día en DEV, QAS y PRD:</b> transportes (STMS) todos los días o día por medio, notas y parches (SPAM / SNOTE) día por medio, usuarios y roles padre e hijo (SU01 / SU10 / PFCG), análisis de autorizaciones (SUIM / ST01) y jobs (SM36 / SM37).</li>
+            <li data-p="sap infra" data-en="<b>On-call</b> over [[hana]] with ST22 and SM21: when the vendor connection tunnel went down after hours, I went back online and restored it."><b>Guardia on-call</b> sobre [[hana]] con ST22 y SM21: cuando se cortó el túnel de conexión con el proveedor fuera de horario, volví a conectarme y lo restablecí.</li>
             <li data-p="sap ia" data-en="Formal service desk in [[jira]]: triage, routing to the owning team and follow-through to closure.">Service desk formal en [[jira]]: triage, derivación al sector responsable y seguimiento hasta el cierre.</li>
           </ul>
         </div>
@@ -1208,8 +1222,8 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
         <div class="role" data-p="infra ia">
           <h4 data-en="IT Business Support Specialist <span class='rdate'>Feb 2022 – May 2024</span>">IT Business Support Specialist <span class='rdate'>feb 2022 – may 2024</span></h4>
           <ul>
-            <li data-en="[[ad]] administration: user lifecycle, groups, permissions, unlocks and GPOs.">Administración de [[ad]]: ciclo de vida de usuarios, grupos, permisos, desbloqueos y GPOs.</li>
-            <li data-en="Support requests in [[jira]]. Advanced hardware diagnosis and repair.">Pedidos de soporte en [[jira]]. Diagnóstico y reparación avanzada de hardware.</li>
+            <li data-en="[[ad]] administration for ~300 users: user lifecycle, groups, permissions, unlocks and GPOs.">Administración de [[ad]] para ~300 usuarios: ciclo de vida de usuarios, grupos, permisos, desbloqueos y GPOs.</li>
+            <li data-en="Every change that needed an audit trail went through a [[jira]] ticket. Advanced hardware diagnosis and repair.">Todo cambio que necesitaba trazabilidad para auditoría pasaba por un ticket en [[jira]]. Diagnóstico y reparación avanzada de hardware.</li>
           </ul>
         </div>
       </div>
@@ -1223,7 +1237,7 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
     </div>
     <div class="what">
       <h3>DUCIT</h3>
-      <p class="org" data-en="Armored transport · DUCIT–GIRE Group · ~150 staff">Transporte blindado · Grupo DUCIT–GIRE · ~150 personas</p>
+      <p class="org" data-en="Cash-in-transit company of the DUCIT–GIRE Group · ~150 staff">Transporte de caudales del Grupo DUCIT–GIRE · ~150 personas</p>
       <div class="roles">
         <div class="role">
           <h4 data-en="Infrastructure and MDM Analyst · on-site">Analista de Infraestructura y MDM · on-site</h4>
@@ -1232,7 +1246,7 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
             <li data-p="infra ia" data-en="<b>Configuration of the [[zebra]] devices</b> in the armored units, alongside GPS tablets, phones and PCs: 140 devices on [[mdm]] with profiles, kiosk mode, certificates and a custom [[android]] image."><b>Configuración de los dispositivos [[zebra]]</b> de las unidades blindadas, junto con tablets GPS, celulares y PCs: 140 equipos en [[mdm]] con perfiles, modo kiosco, certificados e imagen [[android]] personalizada.</li>
             <li data-p="infra ia" data-en="Found the root cause of recurring failures across the mobile fleet and proposed <b>redesigning the MDM update cycle</b>; we defined it with management and I carried it out with the team, eliminating on-site coverage of the critical 30-minute window before each route.">Encontré la causa de fallas recurrentes en la flota móvil y propuse <b>rediseñar el ciclo de actualización del MDM</b>; lo definimos con la gerencia y lo ejecuté con el equipo: se eliminó la guardia de la ventana crítica de 30 minutos antes de cada ruta.</li>
             <li data-p="sap infra" data-en="<b>Key management electronic board — SAP integration:</b> identified and reported third-party API flaws, applied firmware updates over console, worked with the vendor on a physical redesign, including 3D-printed parts, and mediated technical escalations with management up to Legal."><b>Tablero electrónico de llaves — integración con SAP:</b> detecté y reporté fallas en la API del proveedor, apliqué firmwares por consola, pensamos con el proveedor un rediseño físico, con piezas impresas en 3D y medié con la jefatura la escalación hasta Legales.</li>
-            <li data-p="infra" data-en="<b>Tape backup administration and forensic video recovery:</b> managed tape backups and executed forensic recovery of security camera footage during cash-in-transit and treasury audits."><b>Administración de backups en cinta y peritaje de grabaciones:</b> gestión de respaldos en cinta y recuperación forense de video de seguridad ante incidentes y auditorías de transporte de caudales y tesorería.</li>
+            <li data-p="infra" data-en="<b>Tape backup administration and forensic video recovery:</b> managed tape backups and recovered security camera footage, exporting it to video files for each cash-in-transit and treasury audit."><b>Administración de backups en cinta y peritaje de grabaciones:</b> gestión de respaldos en cinta y recuperación de video de seguridad, exportado a archivos para cada auditoría de transporte de caudales y tesorería.</li>
             <li data-p="infra ia" data-en="Took part in a full [[ad]] redesign after 8 years of technical debt: new domain, security policies and migration of every user.">Participé del rediseño completo de [[ad]] con 8 años de deuda técnica: dominio nuevo, políticas de seguridad y migración de todos los usuarios.</li>
           </ul>
         </div>
@@ -1253,7 +1267,7 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
           <h4 data-en="Field IT Technician">Técnico IT de campo</h4>
           <ul>
             <li data-p="infra" data-en="Server hardware migration and on-site equipment installation across bank branches.">Migración de hardware de servidores e instalación de equipos en sucursales bancarias.</li>
-            <li data-p="infra ia" data-en="<b>Ransomware incident response</b> at a large retail client: assessment, isolation of infected machines and recovery of viable equipment."><b>Respuesta a un incidente de ransomware</b> en un cliente retail de gran escala: relevamiento, aislamiento de equipos infectados y recuperación de los viables.</li>
+            <li data-p="infra ia" data-en="<b>Ransomware incident response</b> at a large retail client: assessment, isolation of infected machines and recovery of viable equipment, including locating and loading backup tapes for the restore."><b>Respuesta a un incidente de ransomware</b> en un cliente retail de gran escala: relevamiento, aislamiento de equipos infectados y recuperación de los viables, incluida la búsqueda y colocación de cintas de backup para restaurar.</li>
           </ul>
         </div>
       </div>
@@ -1425,6 +1439,14 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
     <p class="carta-desc" id="carta-desc"></p>
     <p class="carta-nivel" data-en="Level 6 · years in IT">Nivel 6 · años en IT</p>
     <p class="carta-frase" data-en="“Everything has a system. If it doesn't, I build one.”">“Todo tiene un sistema. Si no lo tiene, se lo armo.”</p>
+    <p class="carta-h" data-en="Where I've played">Empresas en las que trabajé</p>
+    <ul class="carta-emp">
+      <li><span class="emp-logo emp-gire" aria-hidden="true">GIRE</span><span><b>GIRE S.A.</b><small data-en="Rapipago · 2022–2026">Rapipago · 2022–2026</small></span></li>
+      <li><span class="emp-logo emp-ducit" aria-hidden="true">DUCIT</span><span><b>DUCIT</b><small data-en="Cash-in-transit · 2021–2022">Caudales · 2021–2022</small></span></li>
+      <li><span class="emp-logo emp-powersis" aria-hidden="true">PS</span><span><b>POWERSIS</b><small data-en="Field IT · 2019–2021">IT de campo · 2019–2021</small></span></li>
+      <li><span class="emp-logo emp-bitfix" aria-hidden="true">BF</span><span><b>BitFix</b><small data-en="Own shop · 2016–2019">Taller propio · 2016–2019</small></span></li>
+      <li class="emp-propio"><img class="emp-logo" src="img/gaucho-aves.png" alt="" width="28" height="28"><span><b>Gaucho Agro</b><small data-en="Own product · 2026–today">Producto propio · 2026–hoy</small></span></li>
+    </ul>
     <p class="carta-h" data-en="Core Attributes">Atributos principales</p>
     <ul class="stats" id="carta-stats-top"></ul>
 
@@ -1726,14 +1748,17 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
     acceso:['Acceso bajo control', 'Access under control', 'Da acceso al soporte de SAP con ticket y validación.', 'Grants SAP support access with a ticket and validation.'],
     prod:  ['Pone en producción', 'Takes it to production', 'Llevó SAP BusinessObjects de cero a producción.', 'Took SAP BusinessObjects from zero to production.'],
     escala:['Escala con criterio', 'Escalates wisely', 'Proveedores, Redes y Seguridad; hasta Legales si hace falta.', 'Vendors, Networking and Security; up to Legal if needed.'],
+    dudas: ['No se queda con la duda', 'Never leaves a doubt', 'Investiga problemas complejos hasta dar con la causa, y trae la solución.', 'Digs into complex problems until he finds the cause, and brings the fix.'],
+    crisis:['Firme en los días difíciles', 'Steady on hard days', 'Cuando hay un incidente crítico, se queda hasta resolverlo.', 'When there is a critical incident, he stays until it is solved.'],
+    equipo:['Suma al equipo', 'Adds to the team', 'Rinde rodeado de gente, y avanza solo cuando hace falta.', 'Thrives among people, and moves on his own when needed.'],
     varias:['Varias IAs, una escribe', 'Many AIs, one writes', 'Proponen varias; entra solo lo que pasa los tests.', 'Several propose; only what passes the tests gets in.']
   };
   var FICHA = {
-    base:    { clase:['Técnico Multiclase', 'Multiclass Technician'], desc:['Del taller de hardware a plataformas bancarias e IA: resuelve de punta a punta.', 'From hardware workshop to banking platforms and AI: solves end-to-end.'], orden:['hw','cc','edu','id','srv','red','sop','sap','ia','ele','nube','prog'], habs:['cero','nada','aprob','expl'] },
-    general: { clase:['Técnico Multiclase', 'Multiclass Technician'], desc:['Del taller de hardware a plataformas bancarias e IA: resuelve de punta a punta.', 'From hardware workshop to banking platforms and AI: solves end-to-end.'], orden:['hw','cc','edu','id','srv','red','sop','sap','ia','ele','nube','prog'], habs:['cero','nada','aprob','expl'] },
-    sap:     { clase:['Guardián de Producción', 'Production Guardian'], desc:['Cuida producción: nada cambia sin control.', 'Guards production: nothing changes without control.'], orden:['cc','sap','id','srv','sop','edu','red','hw','ia','ele','nube','prog'], habs:['aprob','acceso','prod','expl'] },
-    infra:   { clase:['Comodín de Infraestructura', 'Infrastructure All-Rounder'], desc:['Sabe un poco de todo; si hay que profundizar, estudia y aprende.', 'Knows a bit of everything; when it needs depth, he studies and learns.'], orden:['srv','red','id','hw','sop','cc','sap','edu','ele','ia','nube','prog'], habs:['nada','cero','escala','aprob'] },
-    ia:      { clase:['Constructor con IA', 'AI Builder'], desc:['Construye con IA, pero con reglas, tests y control.', 'Builds with AI, but with rules, tests and control.'], orden:['ia','hw','edu','red','cc','sop','ele','id','srv','sap','nube','prog'], habs:['varias','cero','expl','aprob'] }
+    base:    { clase:['Técnico Multiclase', 'Multiclass Technician'], desc:['Del taller de hardware a plataformas bancarias e IA: resuelve de punta a punta.', 'From hardware workshop to banking platforms and AI: solves end-to-end.'], orden:['hw','cc','edu','id','srv','red','sop','sap','ia','ele','nube','prog'], habs:['dudas','crisis','equipo','cero'] },
+    general: { clase:['Técnico Multiclase', 'Multiclass Technician'], desc:['Del taller de hardware a plataformas bancarias e IA: resuelve de punta a punta.', 'From hardware workshop to banking platforms and AI: solves end-to-end.'], orden:['hw','cc','edu','id','srv','red','sop','sap','ia','ele','nube','prog'], habs:['dudas','crisis','equipo','cero'] },
+    sap:     { clase:['Guardián de Producción', 'Production Guardian'], desc:['Cuida producción: nada cambia sin control.', 'Guards production: nothing changes without control.'], orden:['cc','sap','id','srv','sop','edu','red','hw','ia','ele','nube','prog'], habs:['aprob','acceso','crisis','dudas'] },
+    infra:   { clase:['Comodín de Infraestructura', 'Infrastructure All-Rounder'], desc:['Sabe un poco de todo; si hay que profundizar, estudia y aprende.', 'Knows a bit of everything; when it needs depth, he studies and learns.'], orden:['srv','red','id','hw','sop','cc','sap','edu','ele','ia','nube','prog'], habs:['crisis','dudas','escala','nada'] },
+    ia:      { clase:['Constructor con IA', 'AI Builder'], desc:['Construye con IA, pero con reglas, tests y control.', 'Builds with AI, but with rules, tests and control.'], orden:['ia','hw','edu','red','cc','sop','ele','id','srv','sap','nube','prog'], habs:['varias','dudas','cero','expl'] }
   };
   function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
   function pintarCarta(pf){
