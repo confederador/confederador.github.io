@@ -923,6 +923,125 @@ img.emp-logo{object-fit:cover; background:#fff}
 /* BitFix no tiene logo: su nombre como marca, del mismo tamaño que las otras */
 .emp-bitfix-marca{display:flex; justify-content:center; align-items:center; background:linear-gradient(135deg, #0f766e, #134e4a); color:#fff; font:900 13px/1 var(--sans); letter-spacing:-.02em}
 .emp-bitfix-marca i{font-style:normal; color:#5eead4}
+/* ═══════════ DEMO · MODO CALMA ═══════════ */
+:root{--vidrio:color-mix(in srgb, var(--surface) 58%, transparent); --vidrio-borde:color-mix(in srgb, var(--tx) 9%, transparent)}
+
+/* 1 · Un protagonista: cara, nombre, una frase, la tarjetita del PJ y el recorrido */
+.h2o{max-width:1240px; margin:0 auto; padding:40px 24px 8px}
+.h2o-top{display:grid; grid-template-columns:auto minmax(0,1fr) 330px; gap:32px; align-items:center}
+.h2o .sol{margin:0} .h2o .sol-disco{width:140px} .h2o .lema{display:none}
+.h2o-nombre{font:800 clamp(2.3rem, 4.2vw, 3.3rem)/1.02 var(--sans); letter-spacing:-.02em; margin:0}
+.h2o-rol{font:700 1.1rem/1.3 var(--sans); color:var(--accent); margin:8px 0 0}
+.h2o-valor{font-size:1.12rem; line-height:1.6; color:var(--tx-dim); max-width:54ch; margin:12px 0 0}
+.h2o-valor b{color:var(--tx); font-weight:650}
+.h2o-acc{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:20px}
+.h2o-acc .rapido{width:auto; display:flex; flex-direction:row; align-items:center; gap:8px; margin:0}
+.h2o-acc .rapido-mail{padding:0 18px; min-height:44px; background:transparent; color:var(--tx); border:1px solid color-mix(in srgb, var(--accent) 60%, transparent)}
+.h2o-acc .rapido-fila{grid-template-columns:repeat(3,44px)} .h2o-acc .rapido-ico{min-height:44px} .h2o-acc .rapido-ok{display:none}
+.h2o-acc .hero-cvbtn{min-height:44px}
+.h2o-rec{margin-top:30px; padding:20px 20px 8px}
+.h2o-rec .recorrido{margin:0}
+.h2o-rec .rc-h{font:700 1rem/1.2 var(--sans); letter-spacing:0; text-transform:none; color:var(--tx); margin:0 0 14px}
+.h2o-perf{display:flex; align-items:center; gap:14px; margin:22px 0 0; flex-wrap:wrap}
+.h2o-perf > span{font:700 .95rem/1 var(--sans); color:var(--tx-dim)}
+.h2o-perf .perfiles{margin:0; display:flex; gap:8px; flex-wrap:wrap}
+.h2o-perf .perfil{padding:8px 14px 8px 8px}
+.h2o-perf .perfil small{display:none}
+.h2o-perf .perfil .pico{width:32px; height:32px}
+.h2o-perf .perfil[aria-pressed="true"]::after{display:none}
+
+/* 6 · Lo repetido se va */
+.hero-legado,.perfil-todo,.foco-nota,.side-gaucho{display:none !important}
+.page{grid-template-columns:200px minmax(0,1fr) !important; gap:40px !important}
+
+/* 5 · Un solo material: cristal oscuro, mismo redondeo, borde tenue */
+.h2o-rec,.perfil,.pj-btn,.grp,.job.propio,.cvcard,.mitem,.project,.block{
+  background:var(--vidrio) !important; border:1px solid var(--vidrio-borde) !important; border-radius:14px !important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.15); backdrop-filter:blur(14px) saturate(1.15);
+  box-shadow:inset 0 1px 0 color-mix(in srgb, #fff 5%, transparent), 0 10px 30px rgba(0,0,0,.18) !important}
+.job.propio{border-style:dashed !important; border-color:color-mix(in srgb, var(--accent) 35%, transparent) !important}
+.perfil[aria-pressed="true"]{border-color:color-mix(in srgb, var(--accent) 70%, transparent) !important;
+  background:color-mix(in srgb, var(--accent) 10%, var(--vidrio)) !important}
+
+/* 3 · Un solo color: lo que no está activo va en gris hasta que lo tocás */
+.perfil .pico{filter:grayscale(1); opacity:.55; transition:filter .25s, opacity .25s}
+.perfil:hover .pico,.perfil[aria-pressed="true"] .pico{filter:none; opacity:1}
+.st-tag.crit{animation:none !important; color:var(--accent) !important; background:transparent !important;
+  border:1px solid color-mix(in srgb, var(--accent) 40%, transparent) !important; box-shadow:none !important}
+.emp-marca{filter:grayscale(1); opacity:.7; transition:filter .25s, opacity .25s}
+.carta-emp li:hover .emp-marca{filter:none; opacity:1}
+.navdot i{opacity:.55} html[data-perfil] .navdot[aria-pressed="true"] i{opacity:1}
+
+/* 4 · Menos movimiento: la estrella y el cometa se quedan, lo demás espera a que lo mires */
+#puntos{opacity:.35}
+.rc-paso .rc-dibujo *{animation-play-state:paused !important}
+.rc-paso:hover .rc-dibujo *,.rc-paso:focus-within .rc-dibujo *{animation-play-state:running !important}
+.job.en-vista .roles::after{animation-iteration-count:1 !important}
+.rc-beta{animation:none !important}
+
+/* 7 · Aire y tres tamaños de letra */
+main section{padding-top:28px}
+main{counter-reset:sec}
+main section > h2{font:800 1.7rem/1.2 var(--sans); letter-spacing:-.01em; text-transform:none; color:var(--tx); margin:0 0 20px; counter-increment:sec}
+main section > h2::before{content:"0" counter(sec); display:block; font:700 11px/1 var(--mono); letter-spacing:.16em; color:var(--accent); margin-bottom:8px}
+main p,main li{max-width:70ch}
+
+/* 2 · La tarjetita del PJ y su panel */
+.pj-invita{position:relative}
+.pj-btn{all:unset; box-sizing:border-box; cursor:pointer; display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:center; width:100%; padding:14px; position:relative; transition:transform .2s}
+.pj-btn:hover,.pj-btn:focus-visible{transform:translateY(-2px); border-color:color-mix(in srgb, var(--accent) 60%, transparent) !important}
+.pj-fig{width:52px; height:65px; overflow:visible}
+.pj-persona{fill:var(--tx-dim); stroke:var(--tx-dim); stroke-width:4; stroke-linecap:round; stroke-linejoin:round}
+.pj-persona circle,.pj-persona path{stroke:none} .pj-persona polyline{fill:none}
+.pj-joy{fill:none; stroke:var(--accent); stroke-width:2; stroke-linecap:round}
+.pj-saluda{transform-box:view-box; transform-origin:33px 33px}
+.pj-btn:hover .pj-saluda{animation:pj-saluda 1.2s ease-in-out infinite}
+@keyframes pj-saluda{0%,100%{transform:rotate(0)} 30%{transform:rotate(-14deg)} 60%{transform:rotate(8deg)}}
+.pj-txt{display:flex; flex-direction:column; gap:6px}
+.pj-globo{font:600 .82rem/1.35 var(--sans); color:var(--tx)}
+.pj-cta{font:800 .9rem/1.25 var(--sans); color:var(--accent)}
+.pj-adelanto{position:absolute; left:0; right:0; top:calc(100% + 8px); z-index:30; padding:12px 14px; border-radius:12px;
+  background:var(--surface2); border:1px solid color-mix(in srgb, var(--accent) 50%, transparent); box-shadow:0 18px 40px rgba(0,0,0,.45);
+  opacity:0; transform:translateY(-6px); pointer-events:none; transition:opacity .18s, transform .18s}
+.pj-ad-clase{margin:0 0 8px; font:800 .9rem/1.2 var(--sans); color:var(--accent)}
+.pj-ad-pie{margin:8px 0 0; font:500 10px/1.3 var(--mono); color:var(--tx-faint)}
+@media (hover:hover){ .pj-invita:hover .pj-adelanto{opacity:1; transform:none} }
+.pj-panel{position:fixed; inset:0; z-index:200; visibility:hidden}
+.pj-fondo{position:absolute; inset:0; background:rgba(5,7,10,.55); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); opacity:0; transition:opacity .25s}
+.pj-panel .carta{position:absolute !important; top:0; right:0; bottom:0; width:min(400px, 100%) !important; padding:16px !important; margin:0; max-width:none;
+  background:var(--bg); border-left:1px solid var(--line); overflow-y:auto; transform:translateX(100%); transition:transform .3s cubic-bezier(.2,.8,.2,1); display:block !important}
+.pj-panel .carta-in{max-height:none; overflow:visible}
+.pj-panel .carta-toggle{display:none}
+.pj-cerrar{position:absolute; top:22px; right:24px; z-index:3; width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:var(--surface2); color:var(--tx); cursor:pointer}
+body.pj-abierta{overflow:hidden}
+body.pj-abierta .pj-panel{visibility:visible}
+body.pj-abierta .pj-fondo{opacity:1}
+body.pj-abierta .pj-panel .carta{transform:none}
+
+@media (max-width:1040px){
+  .h2o-top{grid-template-columns:auto minmax(0,1fr)} .h2o .pj-invita{grid-column:1 / -1}
+  .page{grid-template-columns:1fr !important}
+}
+@media (max-width:640px){
+  .h2o{padding:22px 16px 6px}
+  .h2o-top{grid-template-columns:1fr; gap:14px}
+  .h2o .sol-disco{width:92px}
+  .h2o-rec{padding:12px 8px 4px}
+  .pj-panel .carta{top:auto; left:0; width:100% !important; max-height:88vh; border-left:0; border-top:1px solid var(--accent); border-radius:18px 18px 0 0; transform:translateY(100%)}
+  .h2o-perf .perfil{padding:6px 10px 6px 6px}
+}
+@media (prefers-reduced-motion: reduce){ .pj-panel .carta,.pj-fondo{transition:none} }
+
+/* el sol, casi un susurro detrás de la foto */
+.h2o .sol-rayos{opacity:.14 !important}
+.h2o-cara{display:flex; flex-direction:column; align-items:center; gap:10px}
+/* Made in Argentina */
+.hecho-ar{display:inline-flex; align-items:center; gap:7px; padding:5px 10px 5px 7px; border-radius:999px; white-space:nowrap;
+  font:700 10.5px/1 var(--mono); letter-spacing:.06em; color:var(--tx);
+  background:var(--vidrio); border:1px solid var(--vidrio-borde); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px)}
+.hecho-ar svg{flex:none; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+@media (max-width:640px){ .h2o-cara{flex-direction:row; justify-content:flex-start; gap:14px} }
+
 </style>
 </head>
 <body>
@@ -960,10 +1079,10 @@ img.emp-logo{object-fit:cover; background:#fff}
   </div>
 </nav>
 
-<div class="page">
-
-<!-- ============ EL TABLERO: el sol con la foto, y el CV ============ -->
-<aside class="board">
+<!-- ============ PRESENTACIÓN: cara, nombre, una frase y el recorrido ============ -->
+<section class="h2o" id="top" aria-label="Presentación">
+  <div class="h2o-top">
+    <div class="h2o-cara">
   <figure class="sol">
     <div class="sol-disco">
       <svg class="sol-rayos" viewBox="-100 -100 200 200" aria-hidden="true"><defs><radialGradient id="solg" cx="0" cy="0" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#e9c66b"/><stop offset=".6" stop-color="#c9a24a"/><stop offset="1" stop-color="#8f7433"/></radialGradient></defs><g fill="url(#solg)"><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(0.00)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(11.25)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(22.50)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(33.75)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(45.00)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(56.25)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(67.50)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(78.75)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(90.00)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(101.25)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(112.50)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(123.75)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(135.00)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(146.25)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(157.50)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(168.75)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(180.00)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(191.25)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(202.50)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(213.75)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(225.00)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(236.25)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(247.50)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(258.75)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(270.00)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(281.25)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(292.50)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(303.75)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(315.00)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(326.25)"/><path d="M-4.2,-47 L0,-97 L4.2,-47 Z" transform="rotate(337.50)"/><path d="M-3.4,-47 C5,-56 -9,-64 -1.5,-72 C5,-79 -5,-86 0,-93 C1.5,-86 9,-79 2.5,-72 C-4,-64 9,-56 3.4,-47 Z" transform="rotate(348.75)"/></g><circle r="46" fill="none" stroke="#f6b40e" stroke-width="3"/><circle r="43" fill="#f6b40e" opacity=".25"/></svg>
@@ -971,23 +1090,17 @@ img.emp-logo{object-fit:cover; background:#fff}
     </div>
     <figcaption class="lema" data-en="Self-taught · Curious · Early adopter">Autodidacta · Curioso · Vanguardista</figcaption>
   </figure>
-
-  <!-- La descarga del CV, SIEMPRE a la vista: la columna es sticky, así que
-       sigue al scroll. Quien entra tiene que encontrarla en segundos, sin
-       buscar el botón en la página. Los 4, con su color de perfil. -->
-  <nav class="cvdock" aria-label="Descargar CV">
-    <span class="tape tape-c" aria-hidden="true"></span>
-    <p class="cvdock-h" data-en="Download my CV">Descargar mi CV</p>
-    <a class="cvdock-btn" data-cv="infra" href="cv/CV_Martin_Contreras_Infra_ES.pdf" data-href-en="cv/CV_Martin_Contreras_Infra_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="Infrastructure">Infraestructura</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="Infrastructure and platforms">Infraestructura y plataformas</b><span data-en="Servers, networking, backup and OpenShift under banking compliance.">Servidores, redes, backup y OpenShift bajo compliance bancario.</span></span></a>
-    <a class="cvdock-btn" data-cv="sap" href="cv/CV_Martin_Contreras_SAP_ES.pdf" data-href-en="cv/CV_Martin_Contreras_SAP_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="SAP Basis">SAP Basis</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="SAP Basis">SAP Basis</b><span data-en="Change control, access and transports on S/4HANA under banking compliance.">Control de cambios, accesos y transportes en S/4HANA bajo compliance bancario.</span></span></a>
-    <a class="cvdock-btn" data-cv="ia" href="cv/CV_Martin_Contreras_IA_ES.pdf" data-href-en="cv/CV_Martin_Contreras_IA_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="IT + AI">IT + IA</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="End-to-end IT with AI">IT integral con IA</b><span data-en="End-to-end projects for SMBs, with AI, rules and tests.">Proyectos de punta a punta para PyMEs, con IA, reglas y tests.</span></span></a>
-    <a class="cvdock-btn" data-cv="general" href="cv/CV_Martin_Contreras_General_ES.pdf" data-href-en="cv/CV_Martin_Contreras_General_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="General">General</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="Full career">Recorrido completo</b><span data-en="The whole career: hardware, infrastructure, SAP Basis and applied AI.">Toda la trayectoria: hardware, infraestructura, SAP Basis e IA aplicada.</span></span></a>
-    <p class="cvdock-pie" id="cvdock-pie" aria-live="polite"><span class="cvdock-pie-base" data-en="PDF · 2 pages · ES/EN follows the site language">PDF · 2 páginas · en el idioma del sitio</span></p>
-  </nav>
-
-  <!-- Contacto a mano, en la columna fija. Antes vivía al pie de la ficha de la
-       derecha, que se DESPLIEGA sola al pasar el mouse: al ir a tocar "Enviar
-       Email", la ficha se abría y lo empujaba para abajo. -->
+      <span class="hecho-ar"><svg viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><rect width="18" height="12" rx="2" fill="#74acdf"/><rect y="4" width="18" height="4" fill="#fff"/><circle cx="9" cy="6" r="1.5" fill="#f6b40e"/></svg><span>Made in Argentina</span></span>
+    </div>
+    <div>
+      <h1 class="h2o-nombre">Martín Contreras</h1>
+      <p class="h2o-rol" data-en="IT platforms &amp; infrastructure · SAP Basis · Applied AI">Plataformas e infraestructura IT · SAP Basis · IA aplicada</p>
+      <p class="h2o-valor" data-en="10+ years in technology: from a hardware repair shop to running <b>OpenShift, payment APIs and SAP Basis</b> under banking compliance. Today I also build <b>my own software with AI</b>.">Más de 10 años en tecnología: del taller de hardware a operar <b>OpenShift, APIs de pagos y SAP Basis</b> bajo compliance bancario. Hoy además construyo <b>software propio con IA</b>.</p>
+      <div class="h2o-acc">
+    <a class="btn primary hero-cvbtn" id="hero-cvbtn" href="cv/CV_Martin_Contreras_General_ES.pdf" data-href-en="cv/CV_Martin_Contreras_General_EN.pdf" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      <span id="hero-cvtxt">Descargar CV General (PDF) ↓</span>
+    </a>
   <nav class="rapido" aria-label="Contacto">
     <a class="rapido-mail" href="mailto:martinalejandrocontreras@outlook.es">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
@@ -1006,52 +1119,30 @@ img.emp-logo{object-fit:cover; background:#fff}
     </div>
     <p class="rapido-ok" id="copiar-ok" role="status" aria-live="polite"></p>
   </nav>
-
-  <div class="cvwrap">
-    <a class="side-gaucho" href="#proyecto" aria-label="Ver proyecto Gaucho Agro">
-      <span class="side-ghead">
-        <img src="img/gaucho-aves.png" alt="" width="24" height="24">
-        <span>Gaucho Agro</span>
-      </span>
-      <span class="side-gtag" data-en="Product · Offline-first">Producto · Offline-first</span>
-    </a>
+      </div>
+    </div>
+    <div class="h2o-pj"><div class="pj-invita" id="pj-invita">
+      <button type="button" class="pj-btn" id="pj-btn" aria-haspopup="dialog" aria-controls="pj-panel">
+        <svg class="pj-fig" viewBox="0 0 64 80" aria-hidden="true">
+          <g class="pj-persona"><circle cx="24" cy="18" r="8"/><path d="M13 50 L13.5 34 Q13.5 28 24 28 Q34.5 28 34.5 34 L35 50 Z"/>
+            <polyline points="19,50 18,77"/><polyline points="29,50 30,77"/>
+            <polyline class="pj-saluda" points="33,33 42,26 46,15"/>
+            <polyline points="15,34 14,44 22,46"/></g>
+          <g class="pj-joy"><rect x="17" y="42" width="15" height="8" rx="4"/><line x1="20" y1="46" x2="24" y2="46"/><rect x="27" y="45" width="2" height="2"/></g>
+        </svg>
+        <span class="pj-txt">
+          <span class="pj-globo" data-en="My hobby is video games. Yours too?">Mi hobby son los videojuegos. ¿Los tuyos también?</span>
+          <b class="pj-cta" data-en="See my skills as a game character ▶">Ver mis habilidades como un PJ ▶</b>
+        </span>
+      </button>
+      <div class="pj-adelanto" role="tooltip">
+        <p class="pj-ad-clase"></p>
+        <ul class="stats pj-ad-stats"></ul>
+        <p class="pj-ad-pie" data-en="Click for the full sheet">Clic para ver la ficha completa</p>
+      </div>
+    </div></div>
   </div>
-</aside>
-
-<main>
-
-<!-- ============ HERO ============ -->
-<header class="hero" id="top">
-  <p class="eyebrow">Portfolio</p>
-  <h1>Martín Contreras</h1>
-  <p class="typer" aria-label="Responsable de IT · Plataformas e Infraestructura · Automatización con IA · SAP Basis"><span class="pr" aria-hidden="true">&gt;</span><span id="typed" aria-hidden="true">Generalista IT · Plataformas · Formador</span><span class="caret" aria-hidden="true"></span></p>
-
-  <div class="perfiles" role="group" aria-label="Perfil">
-    <button class="perfil infra" type="button" data-perfil="infra" aria-pressed="false">
-      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3.5" width="18" height="7" rx="1.8"/><rect x="3" y="13.5" width="18" height="7" rx="1.8"/><circle cx="7" cy="7" r=".9" fill="currentColor"/><circle cx="7" cy="17" r=".9" fill="currentColor"/><path d="M11 7h6M11 17h6"/></svg></span>
-      <span><b data-en="Infrastructure">Infraestructura</b><small data-en="IT Platform Administrator">Administrador de Plataformas IT</small></span>
-    </button>
-    <button class="perfil sap" type="button" data-perfil="sap" aria-pressed="false">
-      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24" class="marca-sap"><use href="#i-sap"></use></svg></span>
-      <span><b>SAP Basis</b><small data-en="SAP Basis Administrator">Administrador SAP Basis</small></span>
-    </button>
-    <button class="perfil ia" type="button" data-perfil="ia" aria-pressed="false">
-      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="10" width="10" height="10" rx="1.5"/><rect x="10" y="13" width="4" height="4" rx=".6"/><path d="M9.5 10V8.5M14.5 10V8.5M9.5 21.5V20M14.5 21.5V20M5.5 13H7M5.5 17H7M17 13h1.5M17 17h1.5"/><path d="M8.5 5.5a5 5 0 0 1 7 0M10.3 7.2a2.5 2.5 0 0 1 3.4 0"/></svg></span>
-      <span><b data-en="IT + AI">IT + IA</b><small data-en="IT Generalist · Applied AI">IT Integral + IA aplicada</small></span>
-    </button>
-    <button class="perfil general" type="button" data-perfil="general" aria-pressed="true">
-      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="4" width="15" height="17.5" rx="2"/><path d="M9 4V2.8h6V4"/><path d="M7.5 9l1.2 1.2 2-2.2M12.5 9.5h4M7.5 13.5l1.2 1.2 2-2.2M12.5 14h4M7.5 18l1.2 1.2 2-2.2M12.5 18.5h4"/></svg></span>
-      <span><b data-en="General Profile">Perfil General</b><small data-en="Technical Generalist · Full picture">Generalista Técnico · Recorrido completo</small></span>
-    </button>
-  </div>
-
-  <button class="perfil-todo" type="button" id="perfil-todo" aria-pressed="true">
-    <span data-en="Viewing full profile and all skills">Viendo perfil completo y todas mis habilidades</span><span aria-hidden="true"> →</span>
-  </button>
-
-  <p class="lede" id="lede" data-en="10+ years in technology: from self-taught hardware beginnings (UTN course and BitFix shop with 50+ clients) to operating <b>OpenShift and banking APIs</b>, <b>SAP Basis</b> change control, and HPE LTO-7 tape backups. Today, also building my own software with <b>AI</b> and teaching computer science.">Más de 10 años en tecnología: desde los inicios autodidactas en hardware (curso UTN y servicio técnico BitFix con 50+ clientes) hasta operar <b>OpenShift y APIs bancarias</b>, control de cambios en <b>SAP Basis</b> y backup en cintas HPE LTO-7. Hoy además desarrollo software propio con <b>IA</b> y ejerzo la <b>docencia</b> en informática.</p>
-
-  <p class="path" data-en="I came up through hardware and infrastructure: self-taught at home → UTN course → BitFix repair service (3 years, 50+ clients) → field technician in bank branches → the only night-shift technician at an armored-truck base → Active Directory at scale → SAP Basis → OpenShift and APIs for hyper-critical payments → own product with AI.">Vengo del hardware y subí por infraestructura: autodidacta en casa → curso UTN → servicio técnico BitFix (3 años, 50+ clientes) → técnico de campo en sucursales bancarias → único técnico de noche en una base de camiones blindados → Active Directory a escala → SAP Basis → OpenShift y APIs de pagos hipercríticos → producto propio con IA.</p>
+  <div class="h2o-rec">
   <!-- El recorrido, dibujado: la misma frase de arriba, con la persona que crece
        en cada etapa. Todo sale de MI-HISTORIA-Y-SKILLS.md; no hay edades porque
        no están en ningún lado, y no se inventan. -->
@@ -1113,6 +1204,78 @@ img.emp-logo{object-fit:cover; background:#fff}
     </li>
     </ol>
   </figure>
+  </div>
+  <div class="h2o-perf"><span data-en="Which profile are you looking for?">¿Qué perfil buscás?</span>
+  <div class="perfiles" role="group" aria-label="Perfil">
+    <button class="perfil infra" type="button" data-perfil="infra" aria-pressed="false">
+      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3.5" width="18" height="7" rx="1.8"/><rect x="3" y="13.5" width="18" height="7" rx="1.8"/><circle cx="7" cy="7" r=".9" fill="currentColor"/><circle cx="7" cy="17" r=".9" fill="currentColor"/><path d="M11 7h6M11 17h6"/></svg></span>
+      <span><b data-en="Infrastructure">Infraestructura</b><small data-en="IT Platform Administrator">Administrador de Plataformas IT</small></span>
+    </button>
+    <button class="perfil sap" type="button" data-perfil="sap" aria-pressed="false">
+      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24" class="marca-sap"><use href="#i-sap"></use></svg></span>
+      <span><b>SAP Basis</b><small data-en="SAP Basis Administrator">Administrador SAP Basis</small></span>
+    </button>
+    <button class="perfil ia" type="button" data-perfil="ia" aria-pressed="false">
+      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="10" width="10" height="10" rx="1.5"/><rect x="10" y="13" width="4" height="4" rx=".6"/><path d="M9.5 10V8.5M14.5 10V8.5M9.5 21.5V20M14.5 21.5V20M5.5 13H7M5.5 17H7M17 13h1.5M17 17h1.5"/><path d="M8.5 5.5a5 5 0 0 1 7 0M10.3 7.2a2.5 2.5 0 0 1 3.4 0"/></svg></span>
+      <span><b data-en="IT + AI">IT + IA</b><small data-en="IT Generalist · Applied AI">IT Integral + IA aplicada</small></span>
+    </button>
+    <button class="perfil general" type="button" data-perfil="general" aria-pressed="true">
+      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="4" width="15" height="17.5" rx="2"/><path d="M9 4V2.8h6V4"/><path d="M7.5 9l1.2 1.2 2-2.2M12.5 9.5h4M7.5 13.5l1.2 1.2 2-2.2M12.5 14h4M7.5 18l1.2 1.2 2-2.2M12.5 18.5h4"/></svg></span>
+      <span><b data-en="General Profile">Perfil General</b><small data-en="Technical Generalist · Full picture">Generalista Técnico · Recorrido completo</small></span>
+    </button>
+  </div>
+  </div>
+</section>
+
+<div class="page">
+
+<!-- ============ EL TABLERO: el sol con la foto, y el CV ============ -->
+<aside class="board">
+
+  <!-- La descarga del CV, SIEMPRE a la vista: la columna es sticky, así que
+       sigue al scroll. Quien entra tiene que encontrarla en segundos, sin
+       buscar el botón en la página. Los 4, con su color de perfil. -->
+  <nav class="cvdock" aria-label="Descargar CV">
+    <span class="tape tape-c" aria-hidden="true"></span>
+    <p class="cvdock-h" data-en="Download my CV">Descargar mi CV</p>
+    <a class="cvdock-btn" data-cv="infra" href="cv/CV_Martin_Contreras_Infra_ES.pdf" data-href-en="cv/CV_Martin_Contreras_Infra_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="Infrastructure">Infraestructura</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="Infrastructure and platforms">Infraestructura y plataformas</b><span data-en="Servers, networking, backup and OpenShift under banking compliance.">Servidores, redes, backup y OpenShift bajo compliance bancario.</span></span></a>
+    <a class="cvdock-btn" data-cv="sap" href="cv/CV_Martin_Contreras_SAP_ES.pdf" data-href-en="cv/CV_Martin_Contreras_SAP_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="SAP Basis">SAP Basis</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="SAP Basis">SAP Basis</b><span data-en="Change control, access and transports on S/4HANA under banking compliance.">Control de cambios, accesos y transportes en S/4HANA bajo compliance bancario.</span></span></a>
+    <a class="cvdock-btn" data-cv="ia" href="cv/CV_Martin_Contreras_IA_ES.pdf" data-href-en="cv/CV_Martin_Contreras_IA_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="IT + AI">IT + IA</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="End-to-end IT with AI">IT integral con IA</b><span data-en="End-to-end projects for SMBs, with AI, rules and tests.">Proyectos de punta a punta para PyMEs, con IA, reglas y tests.</span></span></a>
+    <a class="cvdock-btn" data-cv="general" href="cv/CV_Martin_Contreras_General_ES.pdf" data-href-en="cv/CV_Martin_Contreras_General_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="General">General</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="Full career">Recorrido completo</b><span data-en="The whole career: hardware, infrastructure, SAP Basis and applied AI.">Toda la trayectoria: hardware, infraestructura, SAP Basis e IA aplicada.</span></span></a>
+    <p class="cvdock-pie" id="cvdock-pie" aria-live="polite"><span class="cvdock-pie-base" data-en="PDF · 2 pages · ES/EN follows the site language">PDF · 2 páginas · en el idioma del sitio</span></p>
+  </nav>
+
+  <!-- Contacto a mano, en la columna fija. Antes vivía al pie de la ficha de la
+       derecha, que se DESPLIEGA sola al pasar el mouse: al ir a tocar "Enviar
+       Email", la ficha se abría y lo empujaba para abajo. -->
+
+  <div class="cvwrap">
+    <a class="side-gaucho" href="#proyecto" aria-label="Ver proyecto Gaucho Agro">
+      <span class="side-ghead">
+        <img src="img/gaucho-aves.png" alt="" width="24" height="24">
+        <span>Gaucho Agro</span>
+      </span>
+      <span class="side-gtag" data-en="Product · Offline-first">Producto · Offline-first</span>
+    </a>
+  </div>
+</aside>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<header class="hero hero-legado" aria-hidden="true">
+  <p class="eyebrow">Portfolio</p>
+  <p class="h1-legado">Martín Contreras</p>
+  <p class="typer" aria-label="Responsable de IT · Plataformas e Infraestructura · Automatización con IA · SAP Basis"><span class="pr" aria-hidden="true">&gt;</span><span id="typed" aria-hidden="true">Generalista IT · Plataformas · Formador</span><span class="caret" aria-hidden="true"></span></p>
+
+
+  <button class="perfil-todo" type="button" id="perfil-todo" aria-pressed="true">
+    <span data-en="Viewing full profile and all skills">Viendo perfil completo y todas mis habilidades</span><span aria-hidden="true"> →</span>
+  </button>
+
+  <p class="lede" id="lede" data-en="10+ years in technology: from self-taught hardware beginnings (UTN course and BitFix shop with 50+ clients) to operating <b>OpenShift and banking APIs</b>, <b>SAP Basis</b> change control, and HPE LTO-7 tape backups. Today, also building my own software with <b>AI</b> and teaching computer science.">Más de 10 años en tecnología: desde los inicios autodidactas en hardware (curso UTN y servicio técnico BitFix con 50+ clientes) hasta operar <b>OpenShift y APIs bancarias</b>, control de cambios en <b>SAP Basis</b> y backup en cintas HPE LTO-7. Hoy además desarrollo software propio con <b>IA</b> y ejerzo la <b>docencia</b> en informática.</p>
+
+  <p class="path" data-en="I came up through hardware and infrastructure: self-taught at home → UTN course → BitFix repair service (3 years, 50+ clients) → field technician in bank branches → the only night-shift technician at an armored-truck base → Active Directory at scale → SAP Basis → OpenShift and APIs for hyper-critical payments → own product with AI.">Vengo del hardware y subí por infraestructura: autodidacta en casa → curso UTN → servicio técnico BitFix (3 años, 50+ clientes) → técnico de campo en sucursales bancarias → único técnico de noche en una base de camiones blindados → Active Directory a escala → SAP Basis → OpenShift y APIs de pagos hipercríticos → producto propio con IA.</p>
 
 
   <div class="seeking">
@@ -1121,10 +1284,6 @@ img.emp-logo{object-fit:cover; background:#fff}
   </div>
 
   <div class="hero-actions">
-    <a class="btn primary hero-cvbtn" id="hero-cvbtn" href="cv/CV_Martin_Contreras_General_ES.pdf" data-href-en="cv/CV_Martin_Contreras_General_EN.pdf" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-      <span id="hero-cvtxt">Descargar CV General (PDF) ↓</span>
-    </a>
     <a class="btn hero-allcvs" href="#cv" data-en="Compare all 4 CVs →">Comparar los 4 CVs →</a>
   </div>
 </header>
@@ -1441,7 +1600,7 @@ img.emp-logo{object-fit:cover; background:#fff}
 </main>
 
 <!-- ============ LA FICHA DE PERSONAJE ============ -->
-<aside class="carta" aria-label="Ficha de personaje">
+<div class="pj-panel" id="pj-panel" role="dialog" aria-modal="true" aria-label="Ficha de personaje"><div class="pj-fondo" data-cerrar></div><aside class="carta expandida" aria-label="Ficha de personaje"><button type="button" class="pj-cerrar" data-cerrar aria-label="Cerrar">✕</button>
   <div class="carta-in">
     <p class="carta-top" data-en="Character sheet">Ficha de personaje</p>
     <p class="carta-nom">Martín Contreras</p>
@@ -1474,7 +1633,7 @@ img.emp-logo{object-fit:cover; background:#fff}
     </button>
 
   </div>
-</aside>
+</aside></div>
 </div>
 
 <script>
@@ -2231,6 +2390,25 @@ img.emp-logo{object-fit:cover; background:#fff}
       es.forEach(function(e){ e.target.classList.toggle('en-vista', e.isIntersecting); });
     }, { threshold: .15 });
     jobs.forEach(function(j){ obs.observe(j); });
+  })();
+
+  /* ---- la tarjetita del PJ: adelanto al pasar el mouse, ficha completa al hacer clic ---- */
+  (function(){
+    var inv = document.getElementById('pj-invita'), btn = document.getElementById('pj-btn');
+    if(!inv || !btn) return;
+    function adelanto(){
+      var c = document.getElementById('carta-clase'), top = document.getElementById('carta-stats-top');
+      inv.querySelector('.pj-ad-clase').textContent = c ? c.textContent : '';
+      var ul = inv.querySelector('.pj-ad-stats'); ul.innerHTML = '';
+      if(top) [].slice.call(top.children, 0, 3).forEach(function(li){ ul.appendChild(li.cloneNode(true)); });
+    }
+    inv.addEventListener('mouseenter', adelanto);
+    function abrir(){ document.body.classList.add('pj-abierta'); var x = document.querySelector('.pj-cerrar'); if(x) x.focus(); }
+    function cerrar(){ if(!document.body.classList.contains('pj-abierta')) return; document.body.classList.remove('pj-abierta'); btn.focus(); }
+    btn.addEventListener('click', abrir);
+    [].slice.call(document.querySelectorAll('[data-cerrar]')).forEach(function(b){ b.addEventListener('click', cerrar); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrar(); });
+    adelanto();
   })();
 </script>
 </body>
