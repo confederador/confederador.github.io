@@ -857,6 +857,49 @@ html[data-theme="light"] .tecla-led{background:#39ff88;
 html[data-theme="light"] .tecla-tema{color:#e8ecf2}
 @media (max-width:480px){ .tecla-txt{display:none} .tecla-tema{padding:0 9px; margin-right:6px} }
 @media (prefers-reduced-motion: reduce){ .tecla-tema,.tecla-led{transition:none} }
+/* ── Experiencia: proyecto personal aparte, y el cometa baja por la línea ── */
+.exp-div{display:flex; align-items:center; gap:12px; margin:8px 0 14px; font:700 11px/1 var(--mono); letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent)}
+.exp-div::after{content:""; flex:1; height:1px; background:linear-gradient(90deg, color-mix(in srgb, var(--accent) 50%, transparent), transparent)}
+.exp-div + .job{border-top:0; padding-top:6px}
+.job.propio{border:1px dashed color-mix(in srgb, var(--accent) 45%, transparent); border-radius:16px; padding:22px 22px 24px 18px; margin-bottom:34px;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, transparent), transparent 60%)}
+/* hoy: el punto del proyecto es una estrella que late */
+.job.propio .role:first-child::before{border:0; width:16px; height:16px; left:-29px; background:radial-gradient(circle, #fff 0 25%, var(--accent) 60%);
+  clip-path:polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation:exp-estrella 2.6s ease-in-out infinite}
+.job.propio .roles{--brillo:1}
+.job.propio .role:first-child h4{position:relative}
+@keyframes exp-estrella{0%,100%{transform:scale(.95) rotate(0)} 50%{transform:scale(1.25) rotate(45deg)}}
+/* el cometa que baja por la línea de cada empresa, cuando se ve */
+.roles::after{content:""; position:absolute; left:4px; top:12px; width:6px; height:34px; border-radius:6px; opacity:0; pointer-events:none;
+  background:linear-gradient(transparent, color-mix(in srgb, var(--accent) 80%, transparent) 60%, #fff);
+  filter:drop-shadow(0 0 5px var(--accent))}
+@media (prefers-reduced-motion: no-preference){
+  .job.en-vista .roles::after{animation:exp-cometa 7s cubic-bezier(.5,0,.6,1) .3s infinite}
+}
+@keyframes exp-cometa{0%{top:0; opacity:0} 6%{opacity:1} 45%{top:calc(100% - 40px); opacity:1} 52%,100%{top:calc(100% - 36px); opacity:0}}
+@media (prefers-reduced-motion: reduce){ .job.propio .role:first-child::before{animation:none} }
+
+/* ── Chips dentro del texto: cristal, para que no distraigan de la lectura ── */
+.chip:not(.big){background:color-mix(in srgb, var(--tx) 7%, transparent); color:var(--tx);
+  border:1px solid color-mix(in srgb, var(--tx) 16%, transparent);
+  -webkit-backdrop-filter:blur(8px) saturate(1.2); backdrop-filter:blur(8px) saturate(1.2);
+  box-shadow:inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent), 0 1px 6px rgba(0,0,0,.18);
+  transform:none; font-weight:600}
+.chip:not(.big):hover{transform:translateY(-2px); animation:none; border-color:color-mix(in srgb, var(--accent) 60%, transparent)}
+.chip:not(.big) svg.line{stroke:currentColor}
+
+/* ── Recorrido: la empresa de cada etapa ── */
+.rc-empresa{font:700 9.5px/1 var(--mono); letter-spacing:.06em; color:var(--tx-dim); padding:3px 6px; border-radius:5px;
+  border:1px solid var(--line); background:color-mix(in srgb, var(--tx) 5%, transparent); margin:1px 0 2px}
+/* turno noche: habla por teléfono, asiente y gesticula */
+.an-asiente{transform-box:view-box; transform-origin:14px 41px; animation:an-asiente 1.6s ease-in-out infinite}
+@keyframes an-asiente{0%,100%{transform:rotate(0)} 20%{transform:rotate(7deg)} 40%{transform:rotate(-2deg)} 60%{transform:rotate(6deg)} 80%{transform:rotate(0)}}
+.an-gesto{transform-box:view-box; transform-origin:9px 47px; animation:an-gesto 2.4s ease-in-out infinite}
+@keyframes an-gesto{0%,100%{transform:rotate(0)} 30%{transform:rotate(-38deg)} 45%{transform:rotate(-26deg)} 60%{transform:rotate(-40deg)} 80%{transform:rotate(0)}}
+.rc-habla .rc-persona{animation:an-balanceo-cuerpo 3.2s ease-in-out infinite}
+@keyframes an-balanceo-cuerpo{0%,100%{transform:translateY(0)} 50%{transform:translateY(-.8px)}}
+@media (prefers-reduced-motion: reduce){ .an-asiente,.an-gesto,.rc-habla .rc-persona{animation:none} }
 </style>
 </head>
 <body>
@@ -1009,24 +1052,28 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
       <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-mueble"><line x1="5" y1="72" x2="23" y2="72"/><line x1="7" y1="72" x2="5" y2="86"/><line x1="21" y1="72" x2="23" y2="86"/><line x1="34" y1="70" x2="83" y2="70"/><line x1="38" y1="70" x2="38" y2="86"/><line x1="79" y1="70" x2="79" y2="86"/></g><g class="rc-prop"><rect x="46" y="66" width="22" height="4" rx=".8"/><rect x="53" y="62.5" width="8" height="3.5" rx=".5"/><rect x="71" y="60" width="10" height="10" rx="1.2"/><circle cx="76" cy="65" r="1.6"/><path d="M71 66 q-4 -1 -5 -4"/><line x1="37" y1="57" x2="45" y2="61.5" style="stroke-width:3.6"/><line x1="45" y1="61.5" x2="51" y2="65.5"/><line x1="38" y1="66" x2="49" y2="64.5" style="stroke-width:1"/><g class="an-calor"><path d="M52 62 q-2 -3 0 -6 q2 -3 0 -6"/><path d="M48 61 q-2 -3 0 -5"/></g></g><g class="rc-persona" style="stroke-width:3"><circle cx="20" cy="42" r="6"/><path d="M8.9 70 L11 56 Q11 50 17 50 Q23 50 23 56 L19.1 70 Z"/><polyline class="rc-brazo" points="13,70 28,70 28,86"/><polyline class="rc-brazo" points="21,53 28.1,58.6 37,57.5"/><polyline class="rc-brazo" points="18,55 27.5,60.5 37,66"/></g></svg>
       <span class="rc-cuando" data-en="2016 – 2019">2016 – 2019</span>
       <b class="rc-titulo" data-en="Own shop">Taller propio</b>
+      <span class="rc-empresa">BitFix</span>
       <span class="rc-linea" data-en="UTN course and BitFix: soldering, boards and 50+ clients.">Curso UTN y BitFix: soldadura, placas y 50+ clientes.</span>
     </li>
     <li class="rc-paso rc-campo" style="--i:3">
       <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-prop"><path d="M46 56 L64 45 L82 56 Z"/><path d="M65.6 49.4 q-1.6 -1 -3 0 q-1 1 1.4 1.8 q2.4 .8 1.4 1.8 q-1.4 1 -3 0 M64 48 v6"/><line x1="46" y1="58" x2="82" y2="58"/><line x1="50" y1="60" x2="50" y2="80"/><line x1="64" y1="60" x2="64" y2="80"/><line x1="78" y1="60" x2="78" y2="80"/><line x1="44" y1="84" x2="84" y2="84"/></g><g class="rc-persona" style="stroke-width:3.1"><circle cx="18" cy="36" r="6.8"/><path d="M11.1 66 L11 51 Q11 44 18 44 Q25 44 25 51 L22.9 66 Z"/><polyline class="rc-brazo" points="14,66 11,76 6,86"/><polyline class="rc-brazo" points="20,66 24,76 28,86"/><polyline class="rc-brazo" points="13,48 10,55.5 7,63"/><polyline class="rc-brazo" points="22,48 31.7,53.3 34,64"/><g class="rc-prop an-caja"><path d="M31 67 v-3 h6 v3"/><rect x="27" y="67" width="14" height="10" rx="1.5"/><line x1="27" y1="71" x2="41" y2="71"/></g></g></svg>
       <span class="rc-cuando" data-en="2019 – 2021">2019 – 2021</span>
       <b class="rc-titulo" data-en="Field technician">Técnico de campo</b>
+      <span class="rc-empresa">POWERSIS</span>
       <span class="rc-linea" data-en="Servers and equipment in bank branches.">Servidores y equipos en sucursales bancarias.</span>
     </li>
     <li class="rc-paso rc-edificio" style="--i:4">
-      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-prop"><g class="an-luna"><path d="M76 38 a5 5 0 1 0 5 7 a4 4 0 1 1 -5 -7 Z"/></g><g class="an-senal"><path d="M27 25 q3 3 0 6"/><path d="M30 22 q5 6 0 12"/></g><rect x="33" y="56" width="29" height="22" rx="1.5"/><path d="M62 62 h10 l7 7 v9 h-17 Z"/><path d="M64 64 h7 l4 5 h-11 Z"/><path d="M41 63.5 L47.5 59.5 L54 63.5 Z"/><line x1="42" y1="65.5" x2="53" y2="65.5"/><line x1="44.5" y1="64" x2="44.5" y2="65.5"/><line x1="50.5" y1="64" x2="50.5" y2="65.5"/><rect x="35.5" y="68.5" width="13" height="7.5" rx=".6"/><rect x="37" y="70" width="10" height="4.5" rx=".4" style="stroke-width:.7"/><path d="M43.1 70.9 q-.9 -.6 -1.8 0 q-.6 .6 .9 1.1 q1.4 .5 .8 1.1 q-.9 .6 -1.8 0 M42 70.2 v4.1" style="stroke-width:.8"/><path class="rc-oro" d="M50 76 h9.5 l-2 -4.5 h-5.5 Z"/><line x1="52.5" y1="73.5" x2="55" y2="73.5" style="stroke:#fff; stroke-width:.8; opacity:.8"/><g class="an-brillo"><path d="M59.5 64 l1 2.5 2.5 1 -2.5 1 -1 2.5 -1 -2.5 -2.5 -1 2.5 -1 Z" style="fill:#fff; stroke:var(--accent); stroke-width:.6"/></g><g class="an-brillo b2"><path d="M50 66.5 l.6 1.4 1.4 .6 -1.4 .6 -.6 1.4 -.6 -1.4 -1.4 -.6 1.4 -.6 Z" style="fill:#fff; stroke:none"/></g><circle cx="41" cy="81.5" r="4"/><circle cx="71" cy="81.5" r="4"/></g><g class="rc-persona" style="stroke-width:3.2"><circle cx="14" cy="34" r="7.2"/><path d="M7.6 65 L6.5 50.5 Q6.5 43 14 43 Q21.5 43 21.5 50.5 L20.4 65 Z"/><polyline class="rc-brazo" points="11,65 10,86"/><polyline class="rc-brazo" points="18,65 19,86"/><polyline class="rc-brazo" points="9,47 5.7,54.8 8,63"/><polyline class="rc-brazo" points="19,47 15.4,38.7 20,31"/><g class="rc-prop"><rect x="18" y="26" width="5" height="9" rx="1"/></g></g></svg>
+      <svg class="rc-dibujo rc-habla" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-prop"><g class="an-luna"><path d="M76 38 a5 5 0 1 0 5 7 a4 4 0 1 1 -5 -7 Z"/></g><g class="an-senal"><path d="M27 25 q3 3 0 6"/><path d="M30 22 q5 6 0 12"/></g><rect x="33" y="56" width="29" height="22" rx="1.5"/><path d="M62 62 h10 l7 7 v9 h-17 Z"/><path d="M64 64 h7 l4 5 h-11 Z"/><path d="M41 63.5 L47.5 59.5 L54 63.5 Z"/><line x1="42" y1="65.5" x2="53" y2="65.5"/><line x1="44.5" y1="64" x2="44.5" y2="65.5"/><line x1="50.5" y1="64" x2="50.5" y2="65.5"/><rect x="35.5" y="68.5" width="13" height="7.5" rx=".6"/><rect x="37" y="70" width="10" height="4.5" rx=".4" style="stroke-width:.7"/><path d="M43.1 70.9 q-.9 -.6 -1.8 0 q-.6 .6 .9 1.1 q1.4 .5 .8 1.1 q-.9 .6 -1.8 0 M42 70.2 v4.1" style="stroke-width:.8"/><path class="rc-oro" d="M50 76 h9.5 l-2 -4.5 h-5.5 Z"/><line x1="52.5" y1="73.5" x2="55" y2="73.5" style="stroke:#fff; stroke-width:.8; opacity:.8"/><g class="an-brillo"><path d="M59.5 64 l1 2.5 2.5 1 -2.5 1 -1 2.5 -1 -2.5 -2.5 -1 2.5 -1 Z" style="fill:#fff; stroke:var(--accent); stroke-width:.6"/></g><g class="an-brillo b2"><path d="M50 66.5 l.6 1.4 1.4 .6 -1.4 .6 -.6 1.4 -.6 -1.4 -1.4 -.6 1.4 -.6 Z" style="fill:#fff; stroke:none"/></g><circle cx="41" cy="81.5" r="4"/><circle cx="71" cy="81.5" r="4"/></g><g class="rc-persona" style="stroke-width:3.2"><g class="an-asiente"><circle cx="14" cy="34" r="7.2"/></g><path d="M7.6 65 L6.5 50.5 Q6.5 43 14 43 Q21.5 43 21.5 50.5 L20.4 65 Z"/><polyline class="rc-brazo" points="11,65 10,86"/><polyline class="rc-brazo" points="18,65 19,86"/><g class="an-gesto"><polyline class="rc-brazo" points="9,47 5.7,54.8 8,63"/></g><polyline class="rc-brazo" points="19,47 15.4,38.7 20,31"/><g class="rc-prop"><rect x="18" y="26" width="5" height="9" rx="1"/></g></g></svg>
       <span class="rc-cuando" data-en="2021 – 2022">2021 – 2022</span>
       <b class="rc-titulo" data-en="Night shift">Turno noche</b>
+      <span class="rc-empresa">DUCIT S.A.</span>
       <span class="rc-linea" data-en="Only tech on site at an armored-truck base. My manager on the phone, delegating more over time.">Único técnico en una base de camiones blindados. Mi jefe al teléfono, delegándome cada vez más.</span>
     </li>
     <li class="rc-paso rc-gire" style="--i:5">
       <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-prop"><rect x="42" y="44" width="22" height="42" rx="2"/><line x1="42" y1="54" x2="64" y2="54"/><line x1="42" y1="64" x2="64" y2="64"/><line x1="42" y1="74" x2="64" y2="74"/><g class="an-led"><circle cx="59" cy="49" r="1"/><circle cx="59" cy="59" r="1"/><circle cx="59" cy="69" r="1"/><circle cx="59" cy="79" r="1"/></g><line x1="46" y1="49" x2="53" y2="49"/><line x1="46" y1="59" x2="53" y2="59"/><line x1="46" y1="69" x2="53" y2="69"/><line x1="46" y1="79" x2="53" y2="79"/><rect x="67" y="74" width="16" height="11" rx="1.5"/><circle cx="72" cy="79.5" r="2.2"/><circle cx="78" cy="79.5" r="2.2"/><rect x="69" y="56" width="11" height="9" rx="1.5"/><path d="M71.5 56 v-3 a3 3 0 0 1 6 0 v3"/></g><g class="rc-persona" style="stroke-width:3.2"><circle cx="15" cy="30" r="7.8"/><path d="M8.2 64 L7 48 Q7 40 15 40 Q23 40 23 48 L21.8 64 Z"/><polyline class="rc-brazo" points="11,64 10,86"/><polyline class="rc-brazo" points="19,64 20,86"/><polyline class="rc-brazo" points="9,45 8.5,53.5 8,62"/><polyline class="rc-brazo" points="21,45 32.5,51.5 44,58"/></g></svg>
       <span class="rc-cuando" data-en="2022 – 2026">2022 – 2026</span>
       <b class="rc-titulo" data-en="Critical platforms">Plataformas críticas</b>
+      <span class="rc-empresa">GIRE S.A.</span>
       <span class="rc-linea" data-en="AD at scale, SAP Basis and OpenShift under banking compliance.">AD a escala, SAP Basis y OpenShift bajo compliance bancario.</span>
     </li>
     <li class="rc-paso rc-hoy" style="--i:6" aria-current="step">
@@ -1100,7 +1147,8 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
   <h2 data-en="Experience">Experiencia</h2>
   <p class="foco-nota"><span data-foco="infra" data-en="Showing what relates to <b>Infrastructure</b>.">Mostrando lo que tiene que ver con <b>Infraestructura</b>.</span><span data-foco="sap" data-en="Showing what relates to <b>SAP Basis</b>.">Mostrando lo que tiene que ver con <b>SAP Basis</b>.</span><span data-foco="ia" data-en="Showing what relates to <b>IT + Applied AI</b>.">Mostrando lo que tiene que ver con <b>IT + IA aplicada</b>.</span> <button type="button" class="foco-todo" onclick="document.getElementById('perfil-todo').click()" data-en="See full career">Ver el recorrido completo</button></p>
 
-  <article class="job" data-p="ia infra">
+  <p class="exp-div" data-p="ia infra" data-en="Own project">Proyecto personal</p>
+  <article class="job propio" data-p="ia infra">
     <div class="when">
       <span class="range" data-en="2026 – now">2026 – hoy</span>
       <span class="dur" data-en="own product">proyecto propio</span>
@@ -1121,6 +1169,7 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
     </div>
   </article>
 
+  <p class="exp-div" data-en="Employment">Experiencia laboral</p>
   <article class="job">
     <div class="when">
       <span class="range" data-en="Feb 2022 – Mar 2026">feb 2022 – mar 2026</span>
@@ -2136,6 +2185,17 @@ html[data-theme="light"] .tecla-tema{color:#e8ecf2}
         if(!guardado) poner(e.matches ? 'light' : 'dark', false);
       });
     }
+  })();
+
+  /* ---- experiencia: el cometa baja por la línea de la empresa que estás mirando ---- */
+  (function(){
+    var jobs = [].slice.call(document.querySelectorAll('.job'));
+    if(!jobs.length) return;
+    if(!('IntersectionObserver' in window)){ jobs.forEach(function(j){ j.classList.add('en-vista'); }); return; }
+    var obs = new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.target.classList.toggle('en-vista', e.isIntersecting); });
+    }, { threshold: .15 });
+    jobs.forEach(function(j){ obs.observe(j); });
   })();
 </script>
 </body>
