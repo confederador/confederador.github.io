@@ -1019,7 +1019,7 @@ body.pj-abierta .pj-fondo{opacity:1}
 body.pj-abierta .pj-panel .carta{transform:none}
 
 @media (max-width:1040px){
-  .h2o-top{grid-template-columns:auto minmax(0,1fr)} .h2o .pj-invita{grid-column:1 / -1}
+  .h2o-top{grid-template-columns:auto minmax(0,1fr)} .h2o .pj-invita,.h2o-pj{grid-column:1 / -1}
   .page{grid-template-columns:1fr !important}
 }
 @media (max-width:640px){
@@ -1042,6 +1042,16 @@ body.pj-abierta .pj-panel .carta{transform:none}
 .hecho-ar svg{flex:none; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,.15)}
 @media (max-width:640px){ .h2o-cara{flex-direction:row; justify-content:flex-start; gap:14px} }
 
+/* ── Que se adapte a cualquier ancho: nada se sale ni se encima ───────── */
+/* la barra: los links se esconden antes de que empujen el idioma afuera */
+@media (max-width:1120px){ .top-in .nav{display:none} }
+/* en una sola columna, el papel de los CVs deja de seguir al scroll: se encimaba sobre las tarjetas */
+@media (max-width:1040px){
+  .board{position:static !important; top:auto !important; padding:8px 0 0 !important; align-items:center}
+  .cvdock{margin:0 auto}
+}
+/* la presentación con el mismo ancho que el resto, así los bordes quedan alineados en pantallas grandes */
+.h2o{max-width:var(--maxw) !important}
 </style>
 </head>
 <body>
@@ -2341,10 +2351,15 @@ body.pj-abierta .pj-panel .carta{transform:none}
       var hoy = lista.querySelector('.rc-hoy');
       if(!hoy) return;
       lista.style.setProperty('--rc-x', (hoy.offsetLeft + hoy.offsetWidth / 2) + 'px');
-      lista.style.setProperty('--rc-ancho', (lista.scrollWidth - 40) + 'px');
+      /* el ancho del camino sale de la última etapa, no de scrollWidth: el propio camino lo inflaba
+         y al achicar la ventana nunca volvía a encoger */
+      var ult = lista.querySelector('.rc-paso:last-child');
+      if(ult) lista.style.setProperty('--rc-ancho', (ult.offsetLeft + ult.offsetWidth - 40) + 'px');
     }
     medir();
     window.addEventListener('resize', medir);
+    /* también cuando cambia el ancho de la lista sin evento de resize (zoom, paneles, fuentes que cargan tarde) */
+    if('ResizeObserver' in window) new ResizeObserver(medir).observe(lista);
     if(!('IntersectionObserver' in window)) return;
     var obs = new IntersectionObserver(function(es){
       if(!es[0].isIntersecting) return;
