@@ -651,6 +651,53 @@ html[data-perfil="sap"] .cvdock-btn[data-cv="sap"]{border-color:#2b2f36; backgro
   .arq svg{min-width:560px}
   .arq figcaption{min-width:0}
 }
+/* ── Idioma: interruptor electrónico ───────────────────────────────────── */
+.lang{position:relative; gap:0; padding:3px; border-radius:999px; background:#0b0d10;
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.55), 0 0 0 1px var(--line)}
+.lang::before{content:""; position:absolute; top:3px; bottom:3px; left:3px; width:calc(50% - 3px); border-radius:999px;
+  background:linear-gradient(180deg, color-mix(in srgb, var(--accent) 88%, #fff), var(--accent));
+  box-shadow:0 1px 3px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.35), 0 0 10px color-mix(in srgb, var(--accent) 55%, transparent); transition:transform .28s cubic-bezier(.3,1.4,.5,1)}
+html[lang="en"] .lang::before{transform:translateX(100%)}
+.lang .langbtn{position:relative; z-index:1; background:transparent !important; min-width:38px; padding:7px 10px}
+.lang .langbtn[aria-pressed="true"]{color:#0e1014}
+
+/* ── Perfiles en la barra: un punto de color por CV ────────────────────── */
+.navperfil{display:flex; align-items:center; gap:4px; padding:4px 6px; margin-right:10px; border:1px solid var(--line); border-radius:999px}
+.navdot{width:24px; height:24px; display:grid; place-items:center; border:0; background:transparent; border-radius:50%; cursor:pointer}
+.navdot i{width:10px; height:10px; border-radius:50%; transition:transform .2s, box-shadow .2s}
+.navdot[data-ir="infra"] i{background:#34d399}
+.navdot[data-ir="sap"] i{background:#3d9bff}
+.navdot[data-ir="ia"] i{background:#a78bfa}
+.navdot[data-ir="general"] i{background:#d9a441}
+.navdot:hover i,.navdot:focus-visible i{transform:scale(1.25)}
+.navdot:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+html[data-perfil="infra"] .navdot[data-ir="infra"] i,
+html[data-perfil="sap"] .navdot[data-ir="sap"] i,
+html[data-perfil="ia"] .navdot[data-ir="ia"] i,
+html[data-perfil="general"] .navdot[data-ir="general"] i{transform:scale(1.35); box-shadow:0 0 0 3px var(--bg), 0 0 0 5px currentColor}
+html[data-perfil="infra"] .navdot[data-ir="infra"]{color:#34d399}
+html[data-perfil="sap"] .navdot[data-ir="sap"]{color:#3d9bff}
+html[data-perfil="ia"] .navdot[data-ir="ia"]{color:#a78bfa}
+html[data-perfil="general"] .navdot[data-ir="general"]{color:#d9a441}
+@media (max-width:760px){ .navperfil{margin-left:auto; margin-right:8px} .lang{margin-left:0} }
+
+/* ── El logo de SAP sobre blanco, para que se vea su azul ─────────────── */
+.perfil.sap .pico{background:#fff !important; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.perfil .pico svg.marca-sap{width:30px; height:30px; stroke:none}
+/* En celular no entran nombre + 4 puntos + interruptor: queda el logo "MC".
+   El nombre igual está enorme justo abajo, en el título. */
+@media (max-width:480px){
+  .brand-nombre{display:none}
+  .navperfil{gap:2px; padding:3px 4px; margin-right:6px}
+  .navdot{width:22px; height:22px}
+  .lang .langbtn{min-width:32px; padding:6px 8px}
+}
+/* Tablet vertical: los 6 links del menú + los puntos + el idioma no entran.
+   Se esconden los links (como en celular) y quedan perfil e idioma. */
+@media (max-width:900px){
+  .nav{display:none}
+  .navperfil{margin-left:auto}
+}
 </style>
 </head>
 <body>
@@ -662,7 +709,7 @@ html[data-perfil="sap"] .cvdock-btn[data-cv="sap"]{border-color:#2b2f36; backgro
 
 <nav class="top">
   <div class="top-in">
-    <a class="brand" href="#top"><span class="brand-mark">MC</span>Martín Contreras</a>
+    <a class="brand" href="#top"><span class="brand-mark">MC</span><span class="brand-nombre">Martín Contreras</span></a>
     <div class="nav">
       <a href="#herramientas" data-en="Tools">Herramientas</a>
       <a href="#experiencia" data-en="Experience">Experiencia</a>
@@ -671,7 +718,13 @@ html[data-perfil="sap"] .cvdock-btn[data-cv="sap"]{border-color:#2b2f36; backgro
       <a href="#cv">CV</a>
       <a href="#contacto" data-en="Contact">Contacto</a>
     </div>
-    <div class="lang">
+    <div class="navperfil" role="group" aria-label="Cambiar de perfil">
+      <button class="navdot" type="button" data-ir="infra" title="Infraestructura" aria-label="Perfil Infraestructura"><i></i></button>
+      <button class="navdot" type="button" data-ir="sap" title="SAP Basis" aria-label="Perfil SAP Basis"><i></i></button>
+      <button class="navdot" type="button" data-ir="ia" title="IT + IA" aria-label="Perfil IT + IA"><i></i></button>
+      <button class="navdot" type="button" data-ir="general" title="General" aria-label="Perfil General"><i></i></button>
+    </div>
+    <div class="lang" role="group" aria-label="Idioma">
       <button class="langbtn" data-set="es" aria-pressed="true">ES</button>
       <button class="langbtn" data-set="en" aria-pressed="false">EN</button>
     </div>
@@ -696,10 +749,10 @@ html[data-perfil="sap"] .cvdock-btn[data-cv="sap"]{border-color:#2b2f36; backgro
   <nav class="cvdock" aria-label="Descargar CV">
     <span class="tape tape-c" aria-hidden="true"></span>
     <p class="cvdock-h" data-en="Download my CV">Descargar mi CV</p>
-    <a class="cvdock-btn" data-cv="general" href="cv/CV_Martin_Contreras_General_ES.pdf" data-href-en="cv/CV_Martin_Contreras_General_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="General">General</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="Full career">Recorrido completo</b><span data-en="The whole career: hardware, infrastructure, SAP Basis and applied AI.">Toda la trayectoria: hardware, infraestructura, SAP Basis e IA aplicada.</span></span></a>
     <a class="cvdock-btn" data-cv="infra" href="cv/CV_Martin_Contreras_Infra_ES.pdf" data-href-en="cv/CV_Martin_Contreras_Infra_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="Infrastructure">Infraestructura</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="Infrastructure and platforms">Infraestructura y plataformas</b><span data-en="Servers, networking, backup and OpenShift under banking compliance.">Servidores, redes, backup y OpenShift bajo compliance bancario.</span></span></a>
-    <a class="cvdock-btn" data-cv="ia" href="cv/CV_Martin_Contreras_IA_ES.pdf" data-href-en="cv/CV_Martin_Contreras_IA_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="IT + AI">IT + IA</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="End-to-end IT with AI">IT integral con IA</b><span data-en="End-to-end projects for SMBs, with AI, rules and tests.">Proyectos de punta a punta para PyMEs, con IA, reglas y tests.</span></span></a>
     <a class="cvdock-btn" data-cv="sap" href="cv/CV_Martin_Contreras_SAP_ES.pdf" data-href-en="cv/CV_Martin_Contreras_SAP_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="SAP Basis">SAP Basis</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="SAP Basis">SAP Basis</b><span data-en="Change control, access and transports on S/4HANA under banking compliance.">Control de cambios, accesos y transportes en S/4HANA bajo compliance bancario.</span></span></a>
+    <a class="cvdock-btn" data-cv="ia" href="cv/CV_Martin_Contreras_IA_ES.pdf" data-href-en="cv/CV_Martin_Contreras_IA_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="IT + AI">IT + IA</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="End-to-end IT with AI">IT integral con IA</b><span data-en="End-to-end projects for SMBs, with AI, rules and tests.">Proyectos de punta a punta para PyMEs, con IA, reglas y tests.</span></span></a>
+    <a class="cvdock-btn" data-cv="general" href="cv/CV_Martin_Contreras_General_ES.pdf" data-href-en="cv/CV_Martin_Contreras_General_EN.pdf" target="_blank" rel="noopener"><i class="cvdock-dot"></i><span data-en="General">General</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span class="cvdock-nota" role="tooltip"><b data-en="Full career">Recorrido completo</b><span data-en="The whole career: hardware, infrastructure, SAP Basis and applied AI.">Toda la trayectoria: hardware, infraestructura, SAP Basis e IA aplicada.</span></span></a>
     <p class="cvdock-pie" id="cvdock-pie" aria-live="polite"><span class="cvdock-pie-base" data-en="PDF · 2 pages · ES/EN follows the site language">PDF · 2 páginas · en el idioma del sitio</span></p>
   </nav>
 
@@ -745,21 +798,21 @@ html[data-perfil="sap"] .cvdock-btn[data-cv="sap"]{border-color:#2b2f36; backgro
   <p class="typer" aria-label="Responsable de IT · Plataformas e Infraestructura · Automatización con IA · SAP Basis"><span class="pr" aria-hidden="true">&gt;</span><span id="typed" aria-hidden="true">Generalista IT · Plataformas · Formador</span><span class="caret" aria-hidden="true"></span></p>
 
   <div class="perfiles" role="group" aria-label="Perfil">
-    <button class="perfil general" type="button" data-perfil="general" aria-pressed="true">
-      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
-      <span><b data-en="General Profile">Perfil General</b><small data-en="Technical Generalist · Full picture">Generalista Técnico · Recorrido completo</small></span>
-    </button>
     <button class="perfil infra" type="button" data-perfil="infra" aria-pressed="false">
-      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4.5h18v15H3zM7.5 9.5l3 2.8-3 2.8M13 15.1h4"/></svg></span>
+      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3.5" width="18" height="7" rx="1.8"/><rect x="3" y="13.5" width="18" height="7" rx="1.8"/><circle cx="7" cy="7" r=".9" fill="currentColor"/><circle cx="7" cy="17" r=".9" fill="currentColor"/><path d="M11 7h6M11 17h6"/></svg></span>
       <span><b data-en="Infrastructure">Infraestructura</b><small data-en="IT Platform Administrator">Administrador de Plataformas IT</small></span>
     </button>
+    <button class="perfil sap" type="button" data-perfil="sap" aria-pressed="false">
+      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24" class="marca-sap"><use href="#i-sap"></use></svg></span>
+      <span><b>SAP Basis</b><small data-en="SAP Basis Administrator">Administrador SAP Basis</small></span>
+    </button>
     <button class="perfil ia" type="button" data-perfil="ia" aria-pressed="false">
-      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.2 13.9 8.6 19.4 10.5 13.9 12.4 12 17.8 10.1 12.4 4.6 10.5 10.1 8.6 12 3.2Z"/><path d="M18.4 15.4 19.1 17.3 21 18l-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7.7-1.9Z"/></svg></span>
+      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="10" width="10" height="10" rx="1.5"/><rect x="10" y="13" width="4" height="4" rx=".6"/><path d="M9.5 10V8.5M14.5 10V8.5M9.5 21.5V20M14.5 21.5V20M5.5 13H7M5.5 17H7M17 13h1.5M17 17h1.5"/><path d="M8.5 5.5a5 5 0 0 1 7 0M10.3 7.2a2.5 2.5 0 0 1 3.4 0"/></svg></span>
       <span><b data-en="IT + AI">IT + IA</b><small data-en="IT Generalist · Applied AI">IT Integral + IA aplicada</small></span>
     </button>
-    <button class="perfil sap" type="button" data-perfil="sap" aria-pressed="false">
-      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 8.2 12 3.4 3 8.2l9 4.8 9-4.8Z"/><path d="M3 8.2v7.6l9 4.8 9-4.8V8.2M12 13v8"/></svg></span>
-      <span><b>SAP Basis</b><small data-en="SAP Basis Administrator">Administrador SAP Basis</small></span>
+    <button class="perfil general" type="button" data-perfil="general" aria-pressed="true">
+      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="4" width="15" height="17.5" rx="2"/><path d="M9 4V2.8h6V4"/><path d="M7.5 9l1.2 1.2 2-2.2M12.5 9.5h4M7.5 13.5l1.2 1.2 2-2.2M12.5 14h4M7.5 18l1.2 1.2 2-2.2M12.5 18.5h4"/></svg></span>
+      <span><b data-en="General Profile">Perfil General</b><small data-en="Technical Generalist · Full picture">Generalista Técnico · Recorrido completo</small></span>
     </button>
   </div>
 
@@ -1014,18 +1067,6 @@ html[data-perfil="sap"] .cvdock-btn[data-cv="sap"]{border-color:#2b2f36; backgro
 <section id="cv">
   <h2 data-en="Pick the CV you need">Elegí el CV que te sirve</h2>
   <div class="cvcards">
-    <article class="cvcard general">
-      <span class="cvtag" data-en="General · Full Journey">General · Trayectoria Completa</span>
-      <h3 data-en="IT Generalist · Full career">Generalista IT · Recorrido completo</h3>
-      <p data-en="The full picture across 10 years: from self-taught PC repair (UTN course, BitFix, 50+ clients) to banking compliance (OpenShift, SAP Basis, HPE LTO-7 tape backups), teaching, and building modern software with AI.">La visión completa a lo largo de 10 años: desde el taller de hardware (curso UTN, BitFix, 50+ clientes) hasta la operación bancaria crítica (OpenShift, SAP Basis, cintas HPE LTO-7), docencia y desarrollo de software con IA.</p>
-      <a class="btn cvbtn" href="cv/CV_Martin_Contreras_General_ES.pdf" data-href-en="cv/CV_Martin_Contreras_General_EN.pdf" target="_blank" rel="noopener" data-en="Download PDF ↓">Descargar PDF ↓</a>
-    </article>
-    <article class="cvcard ia">
-      <span class="cvtag" data-en="IT + Applied AI">IT + IA Aplicada</span>
-      <h3 data-en="IT Generalist · Applied AI">Responsable IT PyME · Automatización con IA</h3>
-      <p data-en="Focused on end-to-end IT problem solving: local hardware, networking, custom software with rules-based AI, Windows installers, offline architectures, and SMB technology modernization.">Enfocado en resolver la IT de punta a punta: hardware local, redes, software a medida con andamiaje de IA bajo reglas, instaladores Windows, arquitecturas offline y modernización integral de PyMEs.</p>
-      <a class="btn cvbtn" href="cv/CV_Martin_Contreras_IA_ES.pdf" data-href-en="cv/CV_Martin_Contreras_IA_EN.pdf" target="_blank" rel="noopener" data-en="Download PDF ↓">Descargar PDF ↓</a>
-    </article>
     <article class="cvcard infra">
       <span class="cvtag" data-en="Infrastructure">Infraestructura</span>
       <h3 data-en="IT Platform Administrator">Administrador de Plataformas IT</h3>
@@ -1037,6 +1078,18 @@ html[data-perfil="sap"] .cvdock-btn[data-cv="sap"]{border-color:#2b2f36; backgro
       <h3 data-en="SAP Basis Administrator">Administrador SAP Basis</h3>
       <p data-en="Focused on SAP Basis on [[s4]]: transports, users and roles, patches, jobs and [[hana]] on-call, production change control and privileged access under banking compliance, plus the [[bo]] 4.3 deployment.">Enfocado en SAP Basis sobre [[s4]]: transportes, usuarios y roles, parches, jobs y guardia sobre [[hana]], control de cambios a producción y acceso privilegiado bajo compliance bancario, más el despliegue de [[bo]] 4.3.</p>
       <a class="btn cvbtn" href="cv/CV_Martin_Contreras_SAP_ES.pdf" data-href-en="cv/CV_Martin_Contreras_SAP_EN.pdf" target="_blank" rel="noopener" data-en="Download PDF ↓">Descargar PDF ↓</a>
+    </article>
+    <article class="cvcard ia">
+      <span class="cvtag" data-en="IT + Applied AI">IT + IA Aplicada</span>
+      <h3 data-en="IT Generalist · Applied AI">Responsable IT PyME · Automatización con IA</h3>
+      <p data-en="Focused on end-to-end IT problem solving: local hardware, networking, custom software with rules-based AI, Windows installers, offline architectures, and SMB technology modernization.">Enfocado en resolver la IT de punta a punta: hardware local, redes, software a medida con andamiaje de IA bajo reglas, instaladores Windows, arquitecturas offline y modernización integral de PyMEs.</p>
+      <a class="btn cvbtn" href="cv/CV_Martin_Contreras_IA_ES.pdf" data-href-en="cv/CV_Martin_Contreras_IA_EN.pdf" target="_blank" rel="noopener" data-en="Download PDF ↓">Descargar PDF ↓</a>
+    </article>
+    <article class="cvcard general">
+      <span class="cvtag" data-en="General · Full Journey">General · Trayectoria Completa</span>
+      <h3 data-en="IT Generalist · Full career">Generalista IT · Recorrido completo</h3>
+      <p data-en="The full picture across 10 years: from self-taught PC repair (UTN course, BitFix, 50+ clients) to banking compliance (OpenShift, SAP Basis, HPE LTO-7 tape backups), teaching, and building modern software with AI.">La visión completa a lo largo de 10 años: desde el taller de hardware (curso UTN, BitFix, 50+ clientes) hasta la operación bancaria crítica (OpenShift, SAP Basis, cintas HPE LTO-7), docencia y desarrollo de software con IA.</p>
+      <a class="btn cvbtn" href="cv/CV_Martin_Contreras_General_ES.pdf" data-href-en="cv/CV_Martin_Contreras_General_EN.pdf" target="_blank" rel="noopener" data-en="Download PDF ↓">Descargar PDF ↓</a>
     </article>
   </div>
   <p class="note" data-en="All 4 reflect the same technical career: the focus and hierarchy change.">Los 4 cuentan la misma trayectoria técnica: cambia el foco y qué va primero.</p>
@@ -1857,6 +1910,14 @@ html[data-perfil="sap"] .cvdock-btn[data-cv="sap"]{border-color:#2b2f36; backgro
       btn.addEventListener('blur', base);
     });
   })();
+
+  /* ---- los puntos de perfil de la barra: usan el MISMO botón de perfil ---- */
+  [].slice.call(document.querySelectorAll('.navdot')).forEach(function(d){
+    d.addEventListener('click', function(){
+      var b = document.querySelector('.perfil[data-perfil="' + d.getAttribute('data-ir') + '"]');
+      if(b) b.click();
+    });
+  });
 </script>
 </body>
 </html>
