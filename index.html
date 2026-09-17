@@ -699,19 +699,12 @@ html[data-perfil="general"] .navdot[data-ir="general"]{color:#d9a441}
   .navperfil{margin-left:auto}
 }
 /* ── Recorrido vivo: el pulso que llega hasta hoy, y cada uno haciendo lo suyo ── */
-.rc-lista{grid-template-columns:repeat(8, minmax(80px, 1fr)); gap:6px; --rc-fin:calc(81.25% - 5px)}
+.rc-lista{grid-template-columns:repeat(8, minmax(80px, 1fr)); gap:6px; --rc-x:81.25%}
 /* el camino: lleno hasta hoy, punteado hacia lo que viene */
 .rc-lista::before{background:
   linear-gradient(90deg, transparent 0, var(--accent) 6%, var(--accent) 81.25%, transparent 81.25%),
   repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 12px)}
 /* el pulso que viaja hasta donde estoy */
-.rc-lista::after{content:""; position:absolute; top:83px; left:4%; width:9px; height:9px; border-radius:50%;
-  background:var(--accent); box-shadow:0 0 10px 3px var(--accent); animation:rc-pulso 3.6s cubic-bezier(.45,0,.35,1) infinite}
-@keyframes rc-pulso{0%{left:4%; opacity:0} 8%{opacity:1} 90%{opacity:1} 100%{left:var(--rc-fin); opacity:0}}
-/* al llegar el pulso, la persona de hoy se enciende */
-.rc-hoy .rc-persona{animation:rc-llega 3.6s ease-in-out infinite}
-@keyframes rc-llega{0%,82%{filter:none} 94%{filter:drop-shadow(0 0 6px var(--accent))} 100%{filter:none}}
-.rc-brazo{stroke-width:3.2}
 /* las acciones */
 .an-joy{animation:an-joy 1.4s ease-in-out infinite}
 @keyframes an-joy{0%,100%{transform:translateY(0)} 50%{transform:translateY(-1.6px)}}
@@ -723,8 +716,6 @@ html[data-perfil="general"] .navdot[data-ir="general"]{color:#d9a441}
 @keyframes an-luna{0%,100%{filter:none} 50%{filter:drop-shadow(0 0 3px var(--accent))}}
 .an-led circle{fill:var(--accent); animation:an-parpadeo 1s steps(2) infinite}
 .an-led circle:nth-child(2){animation-delay:.25s} .an-led circle:nth-child(3){animation-delay:.5s} .an-led circle:nth-child(4){animation-delay:.75s}
-.an-chispa{transform-box:fill-box; transform-origin:center; animation:an-chispa 1.8s ease-in-out infinite}
-@keyframes an-chispa{0%,100%{transform:scale(.85); opacity:.6} 50%{transform:scale(1.15); opacity:1}}
 @keyframes an-parpadeo{0%,100%{opacity:1} 50%{opacity:.25}}
 /* el paso que viene: punteado, sin relleno */
 .rc-proximo .rc-persona{fill:none; stroke:var(--tx-faint); stroke-width:1.6; stroke-dasharray:3 3}
@@ -733,13 +724,72 @@ html[data-perfil="general"] .navdot[data-ir="general"]{color:#d9a441}
 .rc-proximo .rc-cuando{padding:1px 8px; border:1px dashed var(--accent); border-radius:999px}
 .rc-proximo .rc-titulo{color:var(--tx-dim)}
 @media (max-width:760px){
-  .rc-lista{grid-template-columns:repeat(8, 132px); --rc-fin:889px}
+  .rc-lista{grid-template-columns:repeat(8, 132px); --rc-x:894px}
   .rc-lista::before{right:auto; width:calc(8 * 138px - 40px)}
 }
 @media (prefers-reduced-motion: reduce){
-  .rc-lista::after,.rc-hoy .rc-persona,.an-joy,.an-senal,.an-calor,.an-caja,.an-luna,.an-led circle,.an-chispa{animation:none}
-  .rc-lista::after{display:none}
+  .an-joy,.an-senal,.an-calor,.an-caja,.an-luna,.an-led circle,.an-robot,.an-huevo,.an-grafico,.an-parpadeo-lento,.an-brillo,
+  .rc-estrella::before,.rc-estrella::after,.rc-estela::after,.rc-beta{animation:none !important}
 }
+/* ── Recorrido 2: cada uno en su pose, la estrella que llega hasta hoy ─── */
+.rc-brazo{fill:none !important; stroke-linejoin:round}
+.rc-lista::before{right:auto; width:var(--rc-ancho, calc(100% - 40px)); background:repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 12px)}
+.rc-mueble{fill:none; stroke:var(--tx-faint); stroke-width:1.5; stroke-linecap:round; opacity:.75}
+.rc-dibujo{margin-bottom:14px}
+/* una marca por etapa sobre el camino: el nodo y su línea */
+.rc-paso::before{content:""; position:absolute; top:83px; left:calc(50% - 4px); width:8px; height:8px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 0 3px var(--bg), 0 0 8px var(--accent); z-index:2}
+.rc-paso::after{content:""; position:absolute; top:94px; left:calc(50% - .75px); width:1.5px; height:9px;
+  background:linear-gradient(var(--accent), transparent); opacity:.7}
+.rc-proximo::before{background:var(--bg); box-shadow:0 0 0 1.5px var(--accent); outline:1.5px dashed var(--bg)}
+.rc-proximo::after{opacity:.35}
+/* hoy ya viene marcado: es donde estoy */
+.rc-hoy{border-radius:12px; background:color-mix(in srgb, var(--accent) 9%, transparent);
+  box-shadow:0 0 0 5px color-mix(in srgb, var(--accent) 9%, transparent), 0 0 0 6px color-mix(in srgb, var(--accent) 45%, transparent)}
+.rc-hoy .rc-persona{filter:drop-shadow(0 0 5px color-mix(in srgb, var(--accent) 70%, transparent))}
+.rc-hoy .rc-titulo{display:inline-flex; align-items:center; gap:5px; flex-wrap:wrap; justify-content:center}
+.rc-beta{font:800 9px/1 var(--mono); letter-spacing:.12em; padding:3px 6px 2px; border-radius:4px; color:#111;
+  background:var(--accent); box-shadow:0 0 10px color-mix(in srgb, var(--accent) 60%, transparent); animation:rc-beta 2.4s ease-in-out infinite}
+@keyframes rc-beta{0%,100%{box-shadow:0 0 4px color-mix(in srgb, var(--accent) 40%, transparent)} 50%{box-shadow:0 0 14px var(--accent)}}
+/* la vía: estela encendida hasta hoy y la estrella parada ahí */
+.rc-via{position:absolute; inset:0; pointer-events:none; z-index:1}
+.rc-estela{position:absolute; top:86px; left:20px; width:calc(var(--rc-x) - 20px); height:2px; border-radius:2px; overflow:hidden;
+  background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 80%, transparent) 8%, var(--accent));
+  box-shadow:0 0 8px color-mix(in srgb, var(--accent) 70%, transparent); transform-origin:left center}
+.rc-estela::after{content:""; position:absolute; inset:0; width:60px;
+  background:linear-gradient(90deg, transparent, #fff, transparent); opacity:.8; animation:rc-barrido 3.8s linear infinite}
+@keyframes rc-barrido{from{transform:translateX(-60px)} to{transform:translateX(1100px)}}
+.rc-estrella{position:absolute; top:78px; left:calc(var(--rc-x) - 9px); width:18px; height:18px;
+  filter:drop-shadow(0 0 3px var(--accent)) drop-shadow(0 0 9px var(--accent))}
+.rc-estrella::before{content:""; position:absolute; inset:0;
+  background:radial-gradient(circle, #fff 0 22%, color-mix(in srgb, var(--accent) 60%, #fff) 40%, var(--accent) 70%);
+  clip-path:polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+  animation:rc-titila 2.2s ease-in-out infinite}
+@keyframes rc-titila{0%,100%{transform:rotate(0) scale(.9)} 50%{transform:rotate(45deg) scale(1.2)}}
+.rc-estrella::after{content:""; position:absolute; inset:2px; border-radius:50%; border:1.5px solid var(--accent);
+  animation:rc-onda 1.8s ease-out infinite}
+@keyframes rc-onda{from{transform:scale(.6); opacity:.9} to{transform:scale(2.6); opacity:0}}
+/* al cargar: la estela se enciende de a poco y la estrella avanza etapa por etapa hasta hoy */
+@media (prefers-reduced-motion: no-preference){
+  .rc-anda .rc-estela{animation:rc-crece 3.2s linear both}
+  .rc-anda .rc-estrella{animation:rc-viaja 3.2s linear both}
+  .rc-anda .rc-paso:not(.rc-proximo)::before{animation:rc-nodo .6s ease-out both; animation-delay:calc(.25s + var(--i) * .49s)}
+}
+@keyframes rc-crece{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+@keyframes rc-viaja{from{left:11px} to{left:calc(var(--rc-x) - 9px)}}
+@keyframes rc-nodo{from{background:var(--line); box-shadow:0 0 0 3px var(--bg); transform:scale(.7)}
+  50%{transform:scale(1.6)} to{transform:scale(1)}}
+/* las acciones nuevas */
+.an-robot{animation:an-robot 2.4s ease-in-out infinite}
+@keyframes an-robot{0%,100%{transform:translateX(0)} 50%{transform:translateX(2.5px)}}
+.an-caja{transform-box:fill-box; transform-origin:50% 0; animation:an-balanceo 1.4s ease-in-out infinite}
+@keyframes an-balanceo{0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)}}
+.an-huevo{transform-box:fill-box; transform-origin:50% 100%; animation:an-balanceo 2.6s ease-in-out infinite}
+.an-grafico{stroke-dasharray:22; animation:an-grafico 3s ease-in-out infinite}
+@keyframes an-grafico{0%{stroke-dashoffset:22} 45%,85%{stroke-dashoffset:0} 100%{stroke-dashoffset:22}}
+.an-parpadeo-lento{animation:an-parpadeo 2.6s ease-in-out infinite}
+.an-brillo{transform-box:fill-box; transform-origin:center; animation:an-brillo 1.6s ease-in-out infinite}
+@keyframes an-brillo{0%,100%{transform:scale(.4) rotate(0); opacity:.3} 50%{transform:scale(1.2) rotate(45deg); opacity:1}}
 </style>
 </head>
 <body>
@@ -871,50 +921,51 @@ html[data-perfil="general"] .navdot[data-ir="general"]{color:#d9a441}
   <figure class="recorrido" aria-labelledby="recorrido-t">
     <figcaption id="recorrido-t" class="rc-h" data-en="From kid to adult, one step at a time">De chico a adulto, paso a paso</figcaption>
     <ol class="rc-lista">
-    <li class="rc-paso rc-chico">
-      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-persona" transform="translate(20 86) scale(0.56) translate(-20 -86)"><circle cx="20" cy="30" r="8"/><path d="M8 62 Q8 44 20 44 Q32 44 32 62 L32 64 L8 64 Z"/><line x1="14" y1="64" x2="13" y2="86"/><line x1="26" y1="64" x2="27" y2="86"/><line class="rc-brazo" x1="30" y1="50" x2="39" y2="60"/></g><g class="rc-prop"><line x1="38" y1="74" x2="82" y2="74"/><line x1="41" y1="74" x2="41" y2="86"/><line x1="79" y1="74" x2="79" y2="86"/><rect x="42" y="48" width="26" height="19" rx="2"/><rect x="50" y="52" width="4.5" height="4.5"/><rect x="55.5" y="52" width="4.5" height="4.5"/><rect x="50" y="57.5" width="4.5" height="4.5"/><rect x="55.5" y="57.5" width="4.5" height="4.5"/><line x1="55" y1="67" x2="55" y2="72"/><line x1="50" y1="72" x2="60" y2="72"/><g class="an-joy"><rect x="68" y="66" width="13" height="7" rx="3.5"/><line x1="71" y1="69.5" x2="74" y2="69.5"/><circle cx="78" cy="69.5" r=".9"/></g></g></svg>
+    <li class="rc-via" aria-hidden="true"><i class="rc-estela"></i><i class="rc-estrella"></i></li>
+    <li class="rc-paso rc-chico" style="--i:0">
+      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-mueble"><line x1="11" y1="72" x2="27" y2="72"/><line x1="13" y1="72" x2="12" y2="86"/><line x1="25" y1="72" x2="26" y2="86"/><line x1="46" y1="72" x2="82" y2="72"/><line x1="49" y1="72" x2="49" y2="86"/><line x1="79" y1="72" x2="79" y2="86"/></g><g class="rc-prop"><rect x="50" y="46" width="26" height="18" rx="2"/><line x1="63" y1="64" x2="63" y2="71"/><line x1="57" y1="71" x2="69" y2="71"/><g class="an-parpadeo-lento"><rect x="58.5" y="50.5" width="4" height="4"/><rect x="63.5" y="50.5" width="4" height="4"/><rect x="58.5" y="55.5" width="4" height="4"/><rect x="63.5" y="55.5" width="4" height="4"/></g></g><g class="rc-persona" style="stroke-width:2.3"><circle cx="21" cy="51" r="4.6"/><path d="M15.8 71 L16 62 Q16 57 21 57 Q26 57 26 62 L24.2 71 Z"/><polyline class="rc-brazo" points="19,71 31,71 31,86"/><g class="an-joy"><polyline class="rc-brazo" points="24,60 29,64.9 36,65.5"/><g class="rc-prop"><rect x="34" y="62" width="11" height="6" rx="3"/><line x1="36.5" y1="65" x2="39.5" y2="65"/><rect x="41.5" y="64.3" width="1.4" height="1.4"/></g></g></g></svg>
       <span class="rc-cuando" data-en="At home">En casa</span>
       <b class="rc-titulo" data-en="Taking it apart">Desarmando</b>
       <span class="rc-linea" data-en="Broke his mom’s PC to see how it worked. Windows XP and video games.">Le rompió la PC a la mamá para ver cómo funcionaba. Windows XP y videojuegos.</span>
     </li>
-    <li class="rc-paso rc-adolescente">
-      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-persona" transform="translate(20 86) scale(0.68) translate(-20 -86)"><circle cx="20" cy="30" r="8"/><path d="M8 62 Q8 44 20 44 Q32 44 32 62 L32 64 L8 64 Z"/><line x1="14" y1="64" x2="13" y2="86"/><line x1="26" y1="64" x2="27" y2="86"/><line class="rc-brazo" x1="30" y1="50" x2="39" y2="60"/></g><g class="rc-prop"><rect x="39" y="66" width="22" height="12" rx="3"/><circle cx="45" cy="82" r="4"/><circle cx="55" cy="82" r="4"/><line x1="50" y1="66" x2="50" y2="60"/><circle cx="50" cy="58.5" r="1.6"/><rect x="43" y="69" width="14" height="6" rx=".6"/><line x1="45" y1="72" x2="55" y2="72"/><rect x="70" y="56" width="11" height="19" rx="2"/><path d="M73.5 61 l4 3.5 -2 1.7 v-7 l2 1.7 -4 3.5"/><g class="an-senal"><path d="M66 60 q-3 4 0 8"/><path d="M63 57 q-5 7 0 14"/></g></g></svg>
+    <li class="rc-paso rc-adolescente" style="--i:1">
+      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-prop"><rect x="29" y="46" width="7" height="12" rx="1.5"/><path d="M31.2 49.5 l2.6 2.3 -1.3 1.1 v-4.6 l1.3 1.1 -2.6 2.3"/><g class="an-senal"><path d="M39 49 q3 3 0 6"/><path d="M42 46 q5 6 0 12"/></g><g class="an-robot"><rect x="52" y="66" width="22" height="11" rx="3"/><rect x="56" y="69" width="14" height="5" rx=".6"/><line x1="58" y1="71.5" x2="68" y2="71.5"/><line x1="63" y1="66" x2="63" y2="60"/><rect x="61.5" y="57" width="3" height="3" rx=".6"/><circle cx="57" cy="81.5" r="4"/><circle cx="69" cy="81.5" r="4"/></g></g><g class="rc-persona" style="stroke-width:2.8"><circle cx="17" cy="41" r="5.5"/><path d="M11.9 66 L11 54 Q11 48 17 48 Q23 48 23 54 L22.1 66 Z"/><polyline class="rc-brazo" points="14,66 13,86"/><polyline class="rc-brazo" points="20,66 21,86"/><polyline class="rc-brazo" points="21,51 27,50.8 30,56"/></g></svg>
       <span class="rc-cuando" data-en="High school">Secundaria</span>
       <b class="rc-titulo" data-en="First robot">Primer robot</b>
       <span class="rc-linea" data-en="Arduino over Bluetooth, driven by an Android app he built himself.">Arduino por Bluetooth, manejado desde una app de Android que compiló él.</span>
     </li>
-    <li class="rc-paso rc-joven">
-      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-persona" transform="translate(20 86) scale(0.8) translate(-20 -86)"><circle cx="20" cy="30" r="8"/><path d="M8 62 Q8 44 20 44 Q32 44 32 62 L32 64 L8 64 Z"/><line x1="14" y1="64" x2="13" y2="86"/><line x1="26" y1="64" x2="27" y2="86"/><line class="rc-brazo" x1="30" y1="50" x2="39" y2="60"/></g><g class="rc-prop"><rect x="38" y="70" width="26" height="16" rx="1.5"/><rect x="45" y="74" width="9" height="8" rx=".5"/><line x1="47" y1="72" x2="47" y2="74"/><line x1="52" y1="72" x2="52" y2="74"/><line x1="47" y1="82" x2="47" y2="84"/><line x1="52" y1="82" x2="52" y2="84"/><line x1="58" y1="67" x2="67" y2="57"/><rect x="66" y="42" width="6.5" height="16" rx="3.2" transform="rotate(40 69 50)"/><path d="M75 43 q7 -3 8 6 t-2 16"/><g class="an-calor"><path d="M55 63 q-2 -3 0 -6 q2 -3 0 -6"/><path d="M50 65 q-2 -3 0 -6"/></g></g></svg>
+    <li class="rc-paso rc-joven" style="--i:2">
+      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-mueble"><line x1="5" y1="72" x2="23" y2="72"/><line x1="7" y1="72" x2="5" y2="86"/><line x1="21" y1="72" x2="23" y2="86"/><line x1="34" y1="70" x2="83" y2="70"/><line x1="38" y1="70" x2="38" y2="86"/><line x1="79" y1="70" x2="79" y2="86"/></g><g class="rc-prop"><rect x="46" y="66" width="22" height="4" rx=".8"/><rect x="53" y="62.5" width="8" height="3.5" rx=".5"/><rect x="71" y="60" width="10" height="10" rx="1.2"/><circle cx="76" cy="65" r="1.6"/><path d="M71 66 q-4 -1 -5 -4"/><line x1="37" y1="57" x2="45" y2="61.5" style="stroke-width:3.6"/><line x1="45" y1="61.5" x2="51" y2="65.5"/><line x1="38" y1="66" x2="49" y2="64.5" style="stroke-width:1"/><g class="an-calor"><path d="M52 62 q-2 -3 0 -6 q2 -3 0 -6"/><path d="M48 61 q-2 -3 0 -5"/></g></g><g class="rc-persona" style="stroke-width:3"><circle cx="20" cy="42" r="6"/><path d="M8.9 70 L11 56 Q11 50 17 50 Q23 50 23 56 L19.1 70 Z"/><polyline class="rc-brazo" points="13,70 28,70 28,86"/><polyline class="rc-brazo" points="21,53 28.1,58.6 37,57.5"/><polyline class="rc-brazo" points="18,55 27.5,60.5 37,66"/></g></svg>
       <span class="rc-cuando" data-en="2016 – 2019">2016 – 2019</span>
       <b class="rc-titulo" data-en="Own shop">Taller propio</b>
       <span class="rc-linea" data-en="UTN course and BitFix: soldering, boards and 50+ clients.">Curso UTN y BitFix: soldadura, placas y 50+ clientes.</span>
     </li>
-    <li class="rc-paso rc-campo">
-      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-persona" transform="translate(20 86) scale(0.88) translate(-20 -86)"><circle cx="20" cy="30" r="8"/><path d="M8 62 Q8 44 20 44 Q32 44 32 62 L32 64 L8 64 Z"/><line x1="14" y1="64" x2="13" y2="86"/><line x1="26" y1="64" x2="27" y2="86"/><line class="rc-brazo" x1="30" y1="50" x2="39" y2="60"/></g><g class="rc-prop"><path d="M38 56 L52 47 L66 56 Z"/><path d="M53.6 50.4 q-1.6 -1 -3 0 q-1 1 1.4 1.8 q2.4 .8 1.4 1.8 q-1.4 1 -3 0 M52 49 v6"/><line x1="38" y1="58" x2="66" y2="58"/><line x1="42" y1="60" x2="42" y2="80"/><line x1="52" y1="60" x2="52" y2="80"/><line x1="62" y1="60" x2="62" y2="80"/><line x1="36" y1="84" x2="68" y2="84"/><g class="an-caja"><rect x="69" y="75" width="14" height="10" rx="1.5"/><path d="M73 75 v-3 h6 v3"/><line x1="69" y1="79" x2="83" y2="79"/></g></g></svg>
+    <li class="rc-paso rc-campo" style="--i:3">
+      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-prop"><path d="M46 56 L64 45 L82 56 Z"/><path d="M65.6 49.4 q-1.6 -1 -3 0 q-1 1 1.4 1.8 q2.4 .8 1.4 1.8 q-1.4 1 -3 0 M64 48 v6"/><line x1="46" y1="58" x2="82" y2="58"/><line x1="50" y1="60" x2="50" y2="80"/><line x1="64" y1="60" x2="64" y2="80"/><line x1="78" y1="60" x2="78" y2="80"/><line x1="44" y1="84" x2="84" y2="84"/></g><g class="rc-persona" style="stroke-width:3.1"><circle cx="18" cy="36" r="6.8"/><path d="M11.1 66 L11 51 Q11 44 18 44 Q25 44 25 51 L22.9 66 Z"/><polyline class="rc-brazo" points="14,66 11,76 6,86"/><polyline class="rc-brazo" points="20,66 24,76 28,86"/><polyline class="rc-brazo" points="13,48 10,55.5 7,63"/><polyline class="rc-brazo" points="22,48 31.7,53.3 34,64"/><g class="rc-prop an-caja"><path d="M31 67 v-3 h6 v3"/><rect x="27" y="67" width="14" height="10" rx="1.5"/><line x1="27" y1="71" x2="41" y2="71"/></g></g></svg>
       <span class="rc-cuando" data-en="2019 – 2021">2019 – 2021</span>
       <b class="rc-titulo" data-en="Field technician">Técnico de campo</b>
       <span class="rc-linea" data-en="Servers and equipment in bank branches.">Servidores y equipos en sucursales bancarias.</span>
     </li>
-    <li class="rc-paso rc-edificio">
-      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-persona" transform="translate(20 86) scale(0.94) translate(-20 -86)"><circle cx="20" cy="30" r="8"/><path d="M8 62 Q8 44 20 44 Q32 44 32 62 L32 64 L8 64 Z"/><line x1="14" y1="64" x2="13" y2="86"/><line x1="26" y1="64" x2="27" y2="86"/><line class="rc-brazo" x1="30" y1="50" x2="39" y2="60"/></g><g class="rc-prop"><g class="an-luna"><path d="M77 40 a5 5 0 1 0 5 7 a4 4 0 1 1 -5 -7 Z"/></g><path d="M38 58 h16 l-3 -5 h-10 Z"/><path d="M41 53 h10 l-2.5 -4.5 h-5 Z"/><rect x="36" y="60" width="30" height="18" rx="1.5"/><path d="M66 64 h8 l5 6 v8 h-13 Z"/><line x1="68" y1="66" x2="73" y2="66"/><path d="M45 70 L51 66 L57 70 Z"/><line x1="46" y1="72" x2="56" y2="72"/><line x1="48" y1="70.5" x2="48" y2="72"/><line x1="54" y1="70.5" x2="54" y2="72"/><circle cx="43" cy="81" r="3.6"/><circle cx="71" cy="81" r="3.6"/></g></svg>
+    <li class="rc-paso rc-edificio" style="--i:4">
+      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-prop"><g class="an-luna"><path d="M76 38 a5 5 0 1 0 5 7 a4 4 0 1 1 -5 -7 Z"/></g><g class="an-senal"><path d="M27 25 q3 3 0 6"/><path d="M30 22 q5 6 0 12"/></g><rect x="33" y="56" width="29" height="22" rx="1.5"/><path d="M62 62 h10 l7 7 v9 h-17 Z"/><path d="M64 64 h7 l4 5 h-11 Z"/><path d="M41 63.5 L47.5 59.5 L54 63.5 Z"/><line x1="42" y1="65.5" x2="53" y2="65.5"/><line x1="44.5" y1="64" x2="44.5" y2="65.5"/><line x1="50.5" y1="64" x2="50.5" y2="65.5"/><rect x="36" y="69.5" width="12" height="6.5" rx=".6"/><circle cx="42" cy="72.75" r="1.5"/><line x1="37.8" y1="71.2" x2="37.8" y2="74.3" style="stroke-width:1"/><line x1="46.2" y1="71.2" x2="46.2" y2="74.3" style="stroke-width:1"/><path d="M50 76 h9 l-1.8 -4 h-5.4 Z"/><g class="an-brillo"><path d="M59.5 66 l.8 2 2 .8 -2 .8 -.8 2 -.8 -2 -2 -.8 2 -.8 Z" style="fill:var(--accent)"/></g><circle cx="41" cy="81.5" r="4"/><circle cx="71" cy="81.5" r="4"/></g><g class="rc-persona" style="stroke-width:3.2"><circle cx="14" cy="34" r="7.2"/><path d="M7.6 65 L6.5 50.5 Q6.5 43 14 43 Q21.5 43 21.5 50.5 L20.4 65 Z"/><polyline class="rc-brazo" points="11,65 10,86"/><polyline class="rc-brazo" points="18,65 19,86"/><polyline class="rc-brazo" points="9,47 5.7,54.8 8,63"/><polyline class="rc-brazo" points="19,47 15.4,38.7 20,31"/><g class="rc-prop"><rect x="18" y="26" width="5" height="9" rx="1"/></g></g></svg>
       <span class="rc-cuando" data-en="2021 – 2022">2021 – 2022</span>
       <b class="rc-titulo" data-en="Night shift">Turno noche</b>
       <span class="rc-linea" data-en="Only tech on site at an armored-truck base. My manager on the phone, delegating more over time.">Único técnico en una base de camiones blindados. Mi jefe al teléfono, delegándome cada vez más.</span>
     </li>
-    <li class="rc-paso rc-gire">
-      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-persona" transform="translate(20 86) scale(1.0) translate(-20 -86)"><circle cx="20" cy="30" r="8"/><path d="M8 62 Q8 44 20 44 Q32 44 32 62 L32 64 L8 64 Z"/><line x1="14" y1="64" x2="13" y2="86"/><line x1="26" y1="64" x2="27" y2="86"/><line class="rc-brazo" x1="30" y1="50" x2="39" y2="60"/></g><g class="rc-prop"><rect x="38" y="44" width="24" height="42" rx="2"/><line x1="38" y1="54" x2="62" y2="54"/><line x1="38" y1="64" x2="62" y2="64"/><line x1="38" y1="74" x2="62" y2="74"/><g class="an-led"><circle cx="57" cy="49" r="1"/><circle cx="57" cy="59" r="1"/><circle cx="57" cy="69" r="1"/><circle cx="57" cy="79" r="1"/></g><line x1="42" y1="49" x2="50" y2="49"/><line x1="42" y1="59" x2="50" y2="59"/><line x1="42" y1="69" x2="50" y2="69"/><line x1="42" y1="79" x2="50" y2="79"/><rect x="66" y="74" width="16" height="11" rx="1.5"/><circle cx="71" cy="79.5" r="2.2"/><circle cx="77" cy="79.5" r="2.2"/><rect x="68" y="56" width="11" height="9" rx="1.5"/><path d="M70.5 56 v-3 a3 3 0 0 1 6 0 v3"/></g></svg>
+    <li class="rc-paso rc-gire" style="--i:5">
+      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-prop"><rect x="42" y="44" width="22" height="42" rx="2"/><line x1="42" y1="54" x2="64" y2="54"/><line x1="42" y1="64" x2="64" y2="64"/><line x1="42" y1="74" x2="64" y2="74"/><g class="an-led"><circle cx="59" cy="49" r="1"/><circle cx="59" cy="59" r="1"/><circle cx="59" cy="69" r="1"/><circle cx="59" cy="79" r="1"/></g><line x1="46" y1="49" x2="53" y2="49"/><line x1="46" y1="59" x2="53" y2="59"/><line x1="46" y1="69" x2="53" y2="69"/><line x1="46" y1="79" x2="53" y2="79"/><rect x="67" y="74" width="16" height="11" rx="1.5"/><circle cx="72" cy="79.5" r="2.2"/><circle cx="78" cy="79.5" r="2.2"/><rect x="69" y="56" width="11" height="9" rx="1.5"/><path d="M71.5 56 v-3 a3 3 0 0 1 6 0 v3"/></g><g class="rc-persona" style="stroke-width:3.2"><circle cx="15" cy="30" r="7.8"/><path d="M8.2 64 L7 48 Q7 40 15 40 Q23 40 23 48 L21.8 64 Z"/><polyline class="rc-brazo" points="11,64 10,86"/><polyline class="rc-brazo" points="19,64 20,86"/><polyline class="rc-brazo" points="9,45 8.5,53.5 8,62"/><polyline class="rc-brazo" points="21,45 32.5,51.5 44,58"/></g></svg>
       <span class="rc-cuando" data-en="2022 – 2026">2022 – 2026</span>
       <b class="rc-titulo" data-en="Critical platforms">Plataformas críticas</b>
       <span class="rc-linea" data-en="AD at scale, SAP Basis and OpenShift under banking compliance.">AD a escala, SAP Basis y OpenShift bajo compliance bancario.</span>
     </li>
-    <li class="rc-paso rc-hoy">
-      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-persona" transform="translate(20 86) scale(1.0) translate(-20 -86)"><circle cx="20" cy="30" r="8"/><path d="M8 62 Q8 44 20 44 Q32 44 32 62 L32 64 L8 64 Z"/><line x1="14" y1="64" x2="13" y2="86"/><line x1="26" y1="64" x2="27" y2="86"/><line class="rc-brazo" x1="30" y1="50" x2="39" y2="60"/></g><g class="rc-prop"><rect x="40" y="58" width="28" height="19" rx="1.5"/><path d="M36 82 L72 82 L69 77 L39 77 Z"/><path d="M54 62 C50.5 62 49 67 49 70 C49 72.8 51.2 74.5 54 74.5 C56.8 74.5 59 72.8 59 70 C59 67 57.5 62 54 62 Z"/><g class="an-chispa"><path d="M75 44 l1.6 4 4 1.6 -4 1.6 -1.6 4 -1.6 -4 -4 -1.6 4 -1.6 Z"/></g><circle cx="77" cy="68" r="5"/><path d="M74.8 68 l1.6 1.7 3 -3.4"/></g></svg>
-      <span class="rc-cuando" data-en="Today">Hoy</span>
-      <b class="rc-titulo" data-en="Own product">Producto propio</b>
-      <span class="rc-linea" data-en="Gaucho Agro, built with AI, rules and tests.">Gaucho Agro, construido con IA, reglas y tests.</span>
+    <li class="rc-paso rc-hoy" style="--i:6" aria-current="step">
+      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-mueble"><line x1="2" y1="70" x2="18" y2="70"/><line x1="4" y1="70" x2="3" y2="86"/><line x1="16" y1="70" x2="17" y2="86"/><line x1="3" y1="70" x2="1" y2="50"/><line x1="29" y1="66" x2="60" y2="66"/><line x1="32" y1="66" x2="32" y2="86"/><line x1="57" y1="66" x2="57" y2="86"/></g><g class="rc-prop"><rect x="36" y="45" width="20" height="18" rx="1.5"/><line x1="33" y1="65" x2="55" y2="65" style="stroke-width:2.4"/><polyline class="an-grafico" points="39,59 43,55.5 47,57 53,49.5"/><path d="M49.8 49.3 h3.4 v3.4"/><path d="M66 72 L64 63 L70 68 C72 66 76 66 78 66 L78 64 C78 60 83 59 83 63 L83 70 C85 76 80 81 73 81 C68 81 65 78 66 72 Z"/><path d="M79 60 q.5 -2.5 2 -1.5 q1 -2 2 .5"/><path d="M83 62 l2.4 1 -2.4 1"/><path d="M70 73 q4 3 8 0"/><line x1="72" y1="81" x2="72" y2="86"/><line x1="77" y1="81" x2="77" y2="86"/><g class="an-huevo"><path d="M63 79 C61.2 79 60.2 81.7 60.2 83.3 C60.2 84.9 61.4 86 63 86 C64.6 86 65.8 84.9 65.8 83.3 C65.8 81.7 64.8 79 63 79 Z"/></g></g><g class="rc-persona" style="stroke-width:3.2"><circle cx="12" cy="38" r="7.4"/><path d="M5 69 L5 54 Q5 47 12 47 Q19 47 19 54 L16.9 69 Z"/><polyline class="rc-brazo" points="10,69 26,69 26,86"/><polyline class="rc-brazo" points="16,51 23.9,58.7 34,63"/></g></svg>
+      <span class="rc-cuando" data-en="Today · Sep 2026">Hoy · sep 2026</span>
+      <b class="rc-titulo">Gaucho Aves <span class="rc-beta">BETA</span></b>
+      <span class="rc-linea" data-en="Query engine done; custom export next. A 400-hen farmer is testing it.">Motor de consultas listo; falta exportar a medida. Lo prueba un productor de 400 gallinas.</span>
     </li>
-    <li class="rc-paso rc-proximo">
-      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-persona" transform="translate(20 86) scale(1.0) translate(-20 -86)"><circle cx="20" cy="30" r="8"/><path d="M8 62 Q8 44 20 44 Q32 44 32 62 L32 64 L8 64 Z"/><line x1="14" y1="64" x2="13" y2="86"/><line x1="26" y1="64" x2="27" y2="86"/></g><g class="rc-prop"><rect x="42" y="60" width="28" height="15" rx="6"/><rect x="68" y="53" width="11" height="12" rx="4"/><path d="M69.5 54 l-2.5 -3.5 M77.5 54 l2.5 -3.5"/><circle cx="72" cy="58" r=".8"/><circle cx="76" cy="58" r=".8"/><line x1="47" y1="75" x2="47" y2="86"/><line x1="53" y1="75" x2="53" y2="86"/><line x1="60" y1="75" x2="60" y2="86"/><line x1="66" y1="75" x2="66" y2="86"/><path d="M42 64 q-4 3 -3 9"/><circle cx="52" cy="66" r="2.6"/><circle cx="61" cy="69" r="1.8"/></g></svg>
+    <li class="rc-paso rc-proximo" style="--i:7">
+      <svg class="rc-dibujo" viewBox="0 0 84 90" aria-hidden="true"><line class="rc-piso" x1="0" y1="86.5" x2="84" y2="86.5"/><g class="rc-prop"><rect x="42" y="60" width="28" height="15" rx="6"/><rect x="68" y="53" width="11" height="12" rx="4"/><path d="M69.5 54 l-2.5 -3.5 M77.5 54 l2.5 -3.5"/><circle cx="72" cy="58" r=".8"/><circle cx="76" cy="58" r=".8"/><line x1="47" y1="75" x2="47" y2="86"/><line x1="53" y1="75" x2="53" y2="86"/><line x1="60" y1="75" x2="60" y2="86"/><line x1="66" y1="75" x2="66" y2="86"/><path d="M42 64 q-4 3 -3 9"/><circle cx="52" cy="66" r="2.6"/><circle cx="61" cy="69" r="1.8"/></g><g class="rc-persona" style="stroke-width:1.6"><circle cx="20" cy="30" r="8"/><path d="M13.2 64 L12 48 Q12 40 20 40 Q28 40 28 48 L26.8 64 Z"/><polyline class="rc-brazo" points="15,64 14,86"/><polyline class="rc-brazo" points="24,64 25,86"/><polyline class="rc-brazo" points="26,45 33.3,54.5 44,60"/></g></svg>
       <span class="rc-cuando" data-en="Next">Próximo</span>
       <b class="rc-titulo" data-en="Gaucho Bovinos">Gaucho Bovinos</b>
       <span class="rc-linea" data-en="The same system, taken to cattle farming. In planning.">El mismo sistema, llevado a la ganadería. En planificación.</span>
@@ -1966,6 +2017,33 @@ html[data-perfil="general"] .navdot[data-ir="general"]{color:#d9a441}
       if(b) b.click();
     });
   });
+
+  /* ---- el recorrido se enciende cuando se ve, y en el celu termina mostrando hoy ---- */
+  (function(){
+    var lista = document.querySelector('.rc-lista');
+    if(!lista) return;
+    /* la estrella se para en el centro real de "hoy", aunque la lista se deslice de costado */
+    function medir(){
+      var hoy = lista.querySelector('.rc-hoy');
+      if(!hoy) return;
+      lista.style.setProperty('--rc-x', (hoy.offsetLeft + hoy.offsetWidth / 2) + 'px');
+      lista.style.setProperty('--rc-ancho', (lista.scrollWidth - 40) + 'px');
+    }
+    medir();
+    window.addEventListener('resize', medir);
+    if(!('IntersectionObserver' in window)) return;
+    var obs = new IntersectionObserver(function(es){
+      if(!es[0].isIntersecting) return;
+      obs.disconnect();
+      lista.classList.add('rc-anda');
+      setTimeout(function(){
+        var hoy = lista.querySelector('.rc-hoy');
+        if(!hoy || lista.scrollLeft > 0 || lista.scrollWidth <= lista.clientWidth) return;
+        lista.scrollTo({ left: hoy.offsetLeft - (lista.clientWidth - hoy.offsetWidth) / 2, behavior: 'smooth' });
+      }, 3300);
+    }, { threshold: .3 });
+    obs.observe(lista);
+  })();
 </script>
 </body>
 </html>
