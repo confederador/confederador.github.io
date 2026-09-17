@@ -1119,6 +1119,27 @@ html.perfil-elegido .h2o-perf .perfil::before,html.perfil-elegido .h2o-perf .per
   .rc-paso.rc-activo .rc-dibujo{animation:rc-vive 2.8s ease-in-out infinite}
 }
 @keyframes rc-vive{0%,100%{transform:translateY(0)} 50%{transform:translateY(-1.5px)}}
+/* ── Ficha abierta: cambiar de perfil sin cerrarla ────────────────────── */
+.carta-perfiles{display:grid; grid-template-columns:repeat(4, 1fr); gap:5px; margin:0 44px 12px 0}
+.cp-btn{display:flex; align-items:center; justify-content:center; gap:5px; min-height:32px; padding:4px 6px; border-radius:999px; cursor:pointer;
+  border:1px solid var(--line); background:color-mix(in srgb, var(--tx) 4%, transparent); color:var(--tx-dim);
+  font:600 10.5px/1.1 var(--sans); white-space:nowrap; transition:border-color .2s, color .2s, background .2s}
+.cp-btn i{flex:none; width:9px; height:9px; border-radius:50%; background:var(--c)}
+.cp-btn[data-ir="infra"]{--c:#34d399} .cp-btn[data-ir="sap"]{--c:#3d9bff} .cp-btn[data-ir="ia"]{--c:#a78bfa} .cp-btn[data-ir="general"]{--c:#d9a441}
+.cp-btn:hover,.cp-btn:focus-visible{color:var(--tx); border-color:var(--c); outline:none}
+html[data-perfil="infra"] .cp-btn[data-ir="infra"],html[data-perfil="sap"] .cp-btn[data-ir="sap"],
+html[data-perfil="ia"] .cp-btn[data-ir="ia"],html[data-perfil="general"] .cp-btn[data-ir="general"]{
+  color:var(--tx); border-color:var(--c); background:color-mix(in srgb, var(--c) 16%, transparent); box-shadow:0 0 12px color-mix(in srgb, var(--c) 30%, transparent)}
+@media (max-width:420px){ .carta-perfiles{grid-template-columns:repeat(2, 1fr); margin-right:40px} }
+
+/* ── Infraestructura: OpenShift → Red Hat → API, uno por vez ──────────── */
+.perfil.infra .pico{background:#fff !important; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.pico-rota{position:relative; width:26px; height:26px; display:block}
+.pico-rota svg{position:absolute; inset:0; width:26px !important; height:26px !important; stroke:none !important; opacity:0;
+  animation:pico-rota 7.5s ease-in-out infinite}
+.pico-rota .pr-2{animation-delay:2.5s} .pico-rota .pr-3{animation-delay:5s}
+@keyframes pico-rota{0%{opacity:0; transform:scale(.8)} 5%,30%{opacity:1; transform:scale(1)} 36%,100%{opacity:0; transform:scale(.8)}}
+@media (prefers-reduced-motion: reduce){ .pico-rota svg{animation:none} .pico-rota .pr-1{opacity:1} }
 </style>
 </head>
 <body>
@@ -1294,7 +1315,7 @@ html.perfil-elegido .h2o-perf .perfil::before,html.perfil-elegido .h2o-perf .per
   <div class="h2o-perf"><span data-en="Which profile are you looking for?">¿Qué perfil buscás?</span>
   <div class="perfiles" role="group" aria-label="Perfil">
     <button class="perfil infra" type="button" data-perfil="infra" aria-pressed="false">
-      <span class="pico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3.5" width="18" height="7" rx="1.8"/><rect x="3" y="13.5" width="18" height="7" rx="1.8"/><circle cx="7" cy="7" r=".9" fill="currentColor"/><circle cx="7" cy="17" r=".9" fill="currentColor"/><path d="M11 7h6M11 17h6"/></svg></span>
+      <span class="pico" aria-hidden="true"><span class="pico-rota"><svg class="pr-1" viewBox="0 0 24 24"><use href="#i-redhatopenshift"></use></svg><svg class="pr-2" viewBox="0 0 24 24"><use href="#i-redhat"></use></svg><svg class="pr-3" viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="12" rx="3" fill="#0f7a52" stroke="none"/><text x="12" y="15.1" text-anchor="middle" font-size="8.2" font-weight="800" fill="#fff" stroke="none" font-family="ui-monospace,Consolas,monospace">API</text></svg></span></span>
       <span><b data-en="Infrastructure">Infraestructura</b><small data-en="IT Platform Administrator">Administrador de Plataformas IT</small></span>
     </button>
     <button class="perfil sap" type="button" data-perfil="sap" aria-pressed="false">
@@ -1688,6 +1709,12 @@ html.perfil-elegido .h2o-perf .perfil::before,html.perfil-elegido .h2o-perf .per
 <div class="pj-panel" id="pj-panel" role="dialog" aria-modal="true" aria-label="Ficha de personaje"><div class="pj-fondo" data-cerrar></div><aside class="carta expandida" aria-label="Ficha de personaje"><button type="button" class="pj-cerrar" data-cerrar aria-label="Cerrar">✕</button>
   <div class="carta-in">
     <p class="carta-top" data-en="Character sheet">Ficha de personaje</p>
+    <div class="carta-perfiles" role="group" aria-label="Cambiar de perfil" data-en-aria="Switch profile">
+      <button type="button" class="cp-btn" data-ir="infra"><i></i><span data-en="Infrastructure">Infraestructura</span></button>
+      <button type="button" class="cp-btn" data-ir="sap"><i></i><span>SAP Basis</span></button>
+      <button type="button" class="cp-btn" data-ir="ia"><i></i><span data-en="IT + AI">IT + IA</span></button>
+      <button type="button" class="cp-btn" data-ir="general"><i></i><span>General</span></button>
+    </div>
     <p class="carta-nom">Martín Contreras</p>
     <p class="carta-clase" id="carta-clase"></p>
     <p class="carta-desc" id="carta-desc"></p>
@@ -2524,6 +2551,16 @@ html.perfil-elegido .h2o-perf .perfil::before,html.perfil-elegido .h2o-perf .per
     }
     document.addEventListener('visibilitychange', function(){ document.hidden ? frenar() : arrancar(); });
   })();
+
+  /* ---- los perfiles dentro de la ficha abierta usan los mismos botones de la página ---- */
+  [].slice.call(document.querySelectorAll('.cp-btn')).forEach(function(b){
+    b.addEventListener('click', function(){
+      var destino = b.getAttribute('data-ir');
+      if(document.documentElement.getAttribute('data-perfil') === destino) return;
+      var real = document.querySelector('.perfil[data-perfil="' + destino + '"]');
+      if(real) real.click();
+    });
+  });
 </script>
 </body>
 </html>
