@@ -1048,7 +1048,9 @@ body.pj-abierta .pj-panel .carta{transform:none}
 /* en una sola columna, el papel de los CVs deja de seguir al scroll: se encimaba sobre las tarjetas */
 @media (max-width:1040px){
   .board{position:static !important; top:auto !important; padding:8px 0 0 !important; align-items:center}
-  .cvdock{margin:0 auto}
+  .cvdock{margin:0 auto !important; width:100% !important; max-width:460px !important; display:grid; grid-template-columns:1fr 1fr; gap:8px}
+  .cvdock-h,.cvdock-pie{grid-column:1 / -1}
+  .board > *{max-width:100%}
 }
 /* la presentación con el mismo ancho que el resto, así los bordes quedan alineados en pantallas grandes */
 .h2o{max-width:var(--maxw) !important}
