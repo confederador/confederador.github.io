@@ -317,6 +317,19 @@ html[data-perfil="infra"] .cvcard.sap,html[data-perfil="sap"] .cvcard.infra{opac
 .block p{margin:0 0 9px; color:var(--tx-dim); font-size:.94rem; line-height:1.7}
 .block p:last-child{margin-bottom:0}
 .block .kw{color:var(--tx); font-weight:600}
+.creds{margin:14px 0 4px; border-top:1px solid var(--line); padding-top:12px}
+.creds summary{cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:10px; font:600 13px/1.4 var(--mono); color:var(--accent); user-select:none}
+.creds summary::-webkit-details-marker{display:none}
+.creds summary::after{content:"▾"; transition:transform .25s}
+.creds[open] summary::after{transform:rotate(180deg)}
+.creds ul{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:9px}
+.creds li{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 12px; align-items:baseline; padding:9px 11px; border-radius:8px; background:var(--surface2); border:1px solid var(--line)}
+.creds .cn{color:var(--tx); font-size:.9rem; line-height:1.45}
+.creds .cm{grid-column:1; font:500 11.5px/1.4 var(--mono); color:var(--tx-faint)}
+.creds a{grid-row:1 / span 2; grid-column:2; align-self:center; font:600 12px/1 var(--mono); white-space:nowrap; text-decoration:none; border:1px solid var(--accent-dim); border-radius:999px; padding:6px 10px}
+.creds a:hover{background:var(--accent); color:#0e1014}
+.creds .grp-t{font:600 10.5px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--tx-faint); margin:14px 0 2px}
+@media (max-width:480px){ .creds li{grid-template-columns:1fr} .creds a{grid-row:auto; grid-column:1; justify-self:start; margin-top:4px} }
 
 /* ---------- contacto ---------- */
 footer{padding:52px 0 64px; border-top:1px solid var(--line)}
@@ -505,7 +518,7 @@ footer{padding:52px 0 64px; border-top:1px solid var(--line)}
             <li data-en="Installation and deployment of [[bo]] 4.3 on [[rhel]] across three environments, backend and frontend, <b>entirely from the console, with no internet access</b>.">Instalación y despliegue de [[bo]] 4.3 sobre [[rhel]] en tres ambientes, backend y frontend, <b>íntegramente por consola y sin salida a internet</b>.</li>
             <li data-en="Designed and coordinated <b>~20 connectivity rules</b> across two firewall platforms — app nodes, [[oracle]] and [[sqlserver]] backends, SMTP and the [[f5]] VIP — <b>requested through the Networking team instead of changing them directly</b>.">Diseñé y coordiné <b>~20 reglas de conectividad</b> sobre dos plataformas de firewall —nodos, backends [[oracle]] y [[sqlserver]], SMTP y la VIP del [[f5]]—, <b>pedidas por el circuito de Redes en lugar de cambiarlas yo directo</b>.</li>
             <li data-en="Integrated [[ldap]] / [[ad]] authentication with the [[tomcat]] launchpad, and managed TLS certificates in the [[java]] keystore.">Integré la autenticación [[ldap]] / [[ad]] con el launchpad de [[tomcat]] y gestioné los certificados TLS en el keystore de [[java]].</li>
-            <li data-en="Fixed an HTTP 500 by finding an <b>SSL-offloading mismatch</b> at the load balancer, confirmed against an SAP Note. Diagnosed recurring APS node crashes and <b>presented node separation to BI management</b>.">Resolví un HTTP 500 encontrando un <b>desajuste de SSL offloading</b> en el balanceador, confirmado con una nota SAP. Diagnostiqué las caídas recurrentes del nodo APS y <b>presenté la separación de nodos a la gerencia de BI</b>.</li>
+            <li data-en="Diagnosed recurring APS node crashes and <b>presented node separation to BI management</b>.">Diagnostiqué las caídas recurrentes del nodo APS y <b>presenté la separación de nodos a la gerencia de BI</b>.</li>
             <li data-en="[[openshift]] operations with [[yaml]] — monitoring, users, access and group permissions, on a two-administrator team. The platform ran the APIs of Rapipago and of GIRE’s client banks.">Operación de [[openshift]] con [[yaml]] —monitoreo, usuarios, accesos y permisos por grupo— en un equipo de dos administradores. Sobre la plataforma corrían las APIs de Rapipago y de los bancos clientes de GIRE.</li>
             <li data-en="Worked with <b>APIs and [[ibmapi]]</b>, including the response to an API incident with critical impact on banking transactions.">Trabajo con <b>APIs e [[ibmapi]]</b>, incluida la respuesta a un incidente de API con impacto crítico en transacciones bancarias.</li>
             <li data-en="SNMP monitoring and backup policy: daily for production, weekly for lower environments, 30-day retention.">Monitoreo SNMP y política de backup: diaria en producción, semanal en ambientes inferiores, retención de 30 días.</li>
@@ -647,14 +660,38 @@ footer{padding:52px 0 64px; border-top:1px solid var(--line)}
     <div class="block">
       <h3 data-en="Teaching">Docencia</h3>
       <p data-en="<span class='kw'>Computer science teacher</span> at a secondary school (DGCyE, Province of Buenos Aires), since January 2025 — 4th year: binary, electricity, resistors, control structures and robotics."><span class='kw'>Profesor de informática</span> en secundaria (DGCyE, Provincia de Buenos Aires), desde enero de 2025 — 4to año: binario, electricidad, resistencias, estructuras de control y robótica.</p>
+      <p data-en="About 20 students per class.">Unos 20 alumnos por curso.</p>
+      <p data-en="<span class='kw'>Tutor at Junior Achievement Argentina</span> (2023): mentored three young people who wanted to break into IT — in one day, taking a PC apart, swapping a disk and installing Windows, plus LinkedIn."><span class='kw'>Tutor en Junior Achievement Argentina</span> (2023): acompañé a tres chicos que querían entrar a IT — en un día, desarmar una PC, cambiar un disco e instalar Windows, y LinkedIn.</p>
+      <p data-en="<span class='kw'>Guest speaker</span> at the first gathering of Merlo's Cultural Center (Merlo Science and Technology Office, 2024), telling kids about my path."><span class='kw'>Orador invitado</span> en el primer encuentro del Centro Cultural de Merlo (Subsecretaría de Ciencia e Innovación Tecnológica de Merlo, 2024), contándoles mi recorrido a chicos.</p>
       <p data-en="Teaching forces me to actually understand, and to explain clearly under pressure.">Enseñar me obliga a entender de verdad, y a explicar claro bajo presión.</p>
     </div>
     <div class="block">
       <h3 data-en="Education">Formación</h3>
       <p data-en="<span class='kw'>SAP TADM10 and TADM12</span> — training (Buffa Sistemas, 2024)"><span class='kw'>SAP TADM10 y TADM12</span> — capacitación (Buffa Sistemas, 2024)</p>
-      <p data-en="<span class='kw'>Google IT Support Professional Certificate</span> — systems and infrastructure"><span class='kw'>Google IT Support Professional</span> — sistemas e infraestructura</p>
-      <p data-en="<span class='kw'>BSc in Information Technology Management</span> — UADE (in progress)"><span class='kw'>Licenciatura en Gestión de TI</span> — UADE (en curso)</p>
+      <p data-en="<span class='kw'>Information Technology Management</span> (B.S. program) and <span class='kw'>Computer Science Engineering</span> coursework — UADE, 2022–2023"><span class='kw'>Licenciatura en Gestión de las TI</span> y <span class='kw'>Ingeniería en Computer Science</span> (cursadas) — UADE, 2022–2023</p>
       <p data-en="English: fluent written · functional spoken. Daily use of SAP documentation and international support.">Inglés: escrito fluido · oral funcional. Uso diario de documentación y soporte internacional de SAP.</p>
+      <details class="creds">
+        <summary><span data-en="See all certificates and credentials">Ver todas las certificaciones y credenciales</span></summary>
+      <p class="grp-t" data-en="Google · IT Support">Google · Soporte de TI</p>
+      <ul>
+        <li><span class="cn" data-en="Google IT Support Professional Certificate">Programa especializado Google IT Support</span><span class="cm" data-en="Google · Coursera · May 2020">Google · Coursera · may 2020</span><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/23AJSC6KNMQK" target="_blank" rel="noopener"><span data-en="Credential ↗">Credencial ↗</span></a></li>
+        <li><span class="cn" data-en="Google IT Support specialization (Spanish track)">Programa especializado Soporte de TI de Google</span><span class="cm" data-en="Google · Coursera · Jul 2020">Google · Coursera · jul 2020</span><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/L79HQQDST5ZF" target="_blank" rel="noopener"><span data-en="Credential ↗">Credencial ↗</span></a></li>
+        <li><span class="cn" data-en="System Administration and IT Infrastructure Services">Administración de sistemas y servicios de infraestructura de TI</span><span class="cm" data-en="Google · Coursera · Jul 2020">Google · Coursera · jul 2020</span><a href="https://www.coursera.org/account/accomplishments/certificate/4MFU8ZFUE7ZJ" target="_blank" rel="noopener"><span data-en="Credential ↗">Credencial ↗</span></a></li>
+        <li><span class="cn" data-en="The Bits and Bytes of Computer Networking">Los bits y bytes de las redes informáticas</span><span class="cm" data-en="Google · Coursera · Jun 2020">Google · Coursera · jun 2020</span><a href="https://www.coursera.org/account/accomplishments/certificate/EDR2WWEW2K5E" target="_blank" rel="noopener"><span data-en="Credential ↗">Credencial ↗</span></a></li>
+        <li><span class="cn" data-en="IT Security: Defense against the Digital Dark Arts">Seguridad informática: defensa contra las artes oscuras digitales</span><span class="cm" data-en="Google · Coursera · Jul 2020">Google · Coursera · jul 2020</span><a href="https://www.coursera.org/account/accomplishments/certificate/D8TBKTT9QMZX" target="_blank" rel="noopener"><span data-en="Credential ↗">Credencial ↗</span></a></li>
+        <li><span class="cn" data-en="Operating Systems and You: Becoming a Power User">Sistemas operativos y tú: convertirse en un usuario avanzado</span><span class="cm" data-en="Google · Coursera · Jul 2020">Google · Coursera · jul 2020</span><a href="https://www.coursera.org/account/accomplishments/certificate/NHR4372JFVEY" target="_blank" rel="noopener"><span data-en="Credential ↗">Credencial ↗</span></a></li>
+        <li><span class="cn" data-en="Technical Support Fundamentals">Aspectos básicos de la asistencia técnica</span><span class="cm" data-en="Google · Coursera · May 2020">Google · Coursera · may 2020</span><a href="https://www.coursera.org/account/accomplishments/certificate/65EK69VN33VG" target="_blank" rel="noopener"><span data-en="Credential ↗">Credencial ↗</span></a></li>
+      </ul>
+      <p class="grp-t" data-en="Other training">Otras capacitaciones</p>
+      <ul>
+        <li><span class="cn" data-en="SAP Basis — TADM10 and TADM12">SAP Basis — TADM10 y TADM12</span><span class="cm" data-en="Buffa Sistemas · Dec 2024 · training">Buffa Sistemas · dic 2024 · capacitación</span></li>
+        <li><span class="cn" data-en="AWS Cloud Practitioner course">Curso AWS Cloud Practitioner</span><span class="cm" data-en="IT College · Jul 2021 · prep course">IT College · jul 2021 · curso preparatorio</span></li>
+        <li><span class="cn" data-en="PC assembly and repair">Armado y reparación de PC</span><span class="cm" data-en="UTN (National Technological University)">UTN</span></li>
+        <li><span class="cn" data-en="Training and Work Program">Programa de Formación y Trabajo</span><span class="cm" data-en="Forge Foundation · Dec 2020">Forge Foundation · dic 2020</span></li>
+        <li><span class="cn" data-en="Socio-emotional skills">Habilidades socioemocionales</span><span class="cm" data-en="Potrero Digital · Dec 2020">Potrero Digital · dic 2020</span></li>
+        <li><span class="cn" data-en="E-commerce — Mercado Libre sales assistant">Comercio electrónico — asistente de ventas en Mercado Libre</span><span class="cm" data-en="Potrero Digital · Dec 2020">Potrero Digital · dic 2020</span></li>
+      </ul>
+      </details>
     </div>
   </div>
 </section>
@@ -734,8 +771,8 @@ footer{padding:52px 0 64px; border-top:1px solid var(--line)}
      k:['openshift','ibmapi','yaml','linux']},
 
     {id:'net', ic:G_BAL, t:'Redes, balanceo y certificados', en:'Networking, load balancing and certificates',
-     d:'Dise\u00f1\u00e9 y coordin\u00e9 ~20 reglas de conectividad sobre dos plataformas de firewall \u2014nodos, bases, SMTP y la VIP del balanceador\u2014, pedidas por el circuito de Redes en lugar de cambiarlas yo directo. Certificados TLS en el keystore de Java, y un HTTP 500 resuelto encontrando un desajuste de SSL offloading.',
-     den:'I designed and coordinated ~20 connectivity rules across two firewall platforms \u2014nodes, databases, SMTP and the balancer VIP\u2014 requested through the Networking team instead of changing them myself. TLS certificates in the Java keystore, and an HTTP 500 solved by finding an SSL offloading mismatch.',
+     d:'Dise\u00f1\u00e9 y coordin\u00e9 ~20 reglas de conectividad sobre dos plataformas de firewall \u2014nodos, bases, SMTP y la VIP del balanceador\u2014, pedidas por el circuito de Redes en lugar de cambiarlas yo directo. Certificados TLS en el keystore de Java.',
+     den:'I designed and coordinated ~20 connectivity rules across two firewall platforms \u2014nodes, databases, SMTP and the balancer VIP\u2014 requested through the Networking team instead of changing them myself. TLS certificates in the Java keystore.',
      k:['f5','fw','tls']},
 
     {id:'id', ic:G_ID, t:'Identidad y accesos', en:'Identity and access',
